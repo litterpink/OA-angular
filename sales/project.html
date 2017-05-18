@@ -1,0 +1,31 @@
+<!--<div class="col-xs-12 col-sm-2 left">-->
+    <!--<ul class="leftBar">-->
+        <!--<li><a><i class="fa fa-list"></i> 项目列表</a>-->
+            <!--<ul class="leftSubBar">-->
+                <!--<li><a class="canSelectedBar" ui-sref="project.list({status: 0})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 0})']}"><i class="fa fa-list" style="visibility:hidden;"></i> 所有</a></li>-->
+                <!--<li style="position: relative;"><a class="canSelectedBar" ui-sref="project.list({status: 1})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 1})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 未提交评估<span ng-if="project_num.assessment != 0" style="border-radius: 8px;width: 16px;height: 16px;line-height:16px;font-size:12px;text-align: center;text-indent:0px;background-color: blue;color:white;position: absolute;right: 18px;top: 7px;">{{project_num.assessment}}</span></a></li>-->
+                <!--<li><a class="canSelectedBar" ui-sref="project.list({status: 2})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 2})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 评估中</a></li>-->
+                <!--<li style="position: relative"><a class="canSelectedBar" ui-sref="project.list({status: 3})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 3})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 待签约<span ng-if="project_num.sign != 0" style="border-radius: 8px;width: 16px;height: 16px;line-height:16px;font-size:12px;text-align: center;text-indent:0px;background-color: blue;color:white;position: absolute;right: 18px;top: 7px;">{{project_num.sign}}</span></a></li>-->
+                <!--<li><a class="canSelectedBar" ui-sref="project.list({status: 4})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 4})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 督办中</a></li>-->
+                <!--<li><a class="canSelectedBar" ui-sref="project.list({status: 5})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 5})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 已结束</a></li>-->
+                <!--<li style="position: relative"><a class="canSelectedBar" ui-sref="project.list({status: 6})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 6})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 退回补充材料<span ng-if="project_num.return != 0" style="border-radius: 8px;width: 16px;height: 16px;line-height:16px;font-size:12px;text-align: center;text-indent:0px;background-color: blue;color:white;position: absolute;right: 18px;top: 7px;">{{project_num.return}}</span></a></li>-->
+                <!--<li><a class="canSelectedBar" ui-sref="project.list({status: 7})" ui-sref-opts="{reload: true, notify: true}" ui-sref-active="{'selectedBar': ['project.list({status: 7})', 'project.detail.**']}"><i class="fa fa-list" style="visibility:hidden;"></i> 搁置项目</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li><a class="canSelectedBar" ui-sref="project.new.client" ui-sref-active="{'selectedBar': 'project.new.**'}"><i class="fa fa-plus"></i> 新建项目</a></li>-->
+        <!--<li><a data-toggle="modal" data-target="#feedback" style="cursor: pointer" class="canSelectedBar"><i class="fa fa-file-text"></i>&nbsp;意见反馈</a></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<div class="col-xs-12 col-sm-2 left">
+    <elegant-menu options="menuOptions"></elegant-menu>
+</div>
+<div class="col-xs-12 col-sm-10 right">
+    <ui-view>
+        <!--<div ng-include="'projectList.html'"></div>-->
+    </ui-view>
+</div>
+
+
+<!--&lt;!&ndash; 模态框（Modal） 意见反馈 &ndash;&gt;-->
+<!--<user-feedback></user-feedback>-->

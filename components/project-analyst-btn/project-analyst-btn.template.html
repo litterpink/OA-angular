@@ -1,0 +1,54 @@
+<!-- 模态框（Modal） 分析 -->
+<div class="modal fade" id="analyst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="analystLabel">评估意见</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal w5c-form demo-form" role="form"
+                      w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+                    <p>
+                        <input ng-model="dispute" type="text" class="form-control" placeholder="案由" maxlength="1000">
+                    </p>
+                    <p id="disputesColor" style="border: 1px solid #fff">
+                        <trix-editor input="party_info" name="party_info" placeholder="当事人信息" angular-trix ng-model="party_info" required count-num></trix-editor>
+                    </p>
+                    <p>
+                        <input ng-model="money" name="" type="number" class="form-control" placeholder="争议标的(单位:万元)" maxlength="11">
+                    </p>
+                    <p id="disputes" style="border: 1px solid #fff">
+                        <trix-editor input="disputes_basis" name="disputes_basis" placeholder="争议焦点及法律依据" angular-trix ng-model="disputes_basis" required count-num></trix-editor>
+                    </p>
+                    <p>
+                    <div class="col-12">
+                        <input type="text" placeholder="管辖法院" class="form-control court" ng-model="court"
+                               ng-click="showList()"  name="court" maxlength="20"/>
+                        <div class="resultList">
+                            <input type="text" class="form-control search" ng-model="searchVal" select-court maxlength="20" placeholder="请输入法院名"/>
+                            <ul ng-show="errorInfo">
+                                <li ng-repeat="item in searchData" ng-click="changeVal(item.name, item.province)"><a
+                                        href="javascript:;">{{item.name}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </p>
+                    <p>
+                        <input name="limitation" ng-model="limitation" type="text" class="form-control" placeholder="时效情况" maxlength="100" required>
+                    </p>
+                    <p id="result" style="border: 1px solid white">
+                        建议: <input ng-model="result" value="1" type="radio" name="agree" required="true">&nbsp;收项<input ng-model="result" value="2" type="radio" name="agree" required="true" style="margin-left: 10px;"> 拒项
+                    </p>
+                    <p>
+                        <textarea ng-model="suggestion" name="suggestion" required="true" rows="5" class="form-control" placeholder="综合意见如下" maxlength="1000"></textarea>
+                    </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveDraft(dispute,party_info,money,disputes_basis,court,limitation,result,suggestion)">保存为草稿</button>
+                        <button type="button" class="btn btn-primary" ng-click="changeColor()"  w5c-form-submit="submitAnalyst(dispute,party_info,money,disputes_basis,court,limitation,result,suggestion)">已经完成,提交风控</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

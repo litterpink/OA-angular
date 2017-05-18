@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮 | 忘记密码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <script src="common/js/service.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <script src="js/myRoute.js"></script>
+    <script src="../common/js/common.js"></script>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" ng-controller="updatePassCtrl">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom active"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div class="container" style="position: relative">
+        <div id="contain">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 col-xs-12">
+                  <!--  <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="#ios" data-toggle="tab"><b>修改密码</b></a></li>
+                    </ul>-->
+                    <br/>
+                    <form name="form">
+                        <h4>初始密码不安全，请修改密码。</h4>
+                        <p>
+                            <input type="password" name="newPass" ng-model="newPass" class="form-control" placeholder="新密码"
+                                   ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,20}$/" required />
+                        </p>
+                        <p class="red" ng-show="form.newPass.$dirty && form.newPass.$invalid">
+                            大于8位的数字和字母组合</p>
+                        <p>
+                        <p>
+                            <input type="password" name="confirmPass" ng-model="confirmPass" class="form-control" placeholder="确认新密码" />
+                        </p>
+                        <p>
+                            <input type="button" name="updatePass" ng-click="updatePass()" value="修改密码" class="btn btn-primary btn-block"/>
+                        </p>
+                        <p class="red">
+                          {{warning}}
+                        </p>
+                        <br/>
+<!--
+                        <p class="text-right"><a href="javascript:;" ng-click="removeLater()" style="color: #999">以后</a></p>
+-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'footer.html'"></div>
+<script type="text/javascript">
+    $(function () {
+        var height = $(window).height() - 452;
+        $("#contain").css("min-height", height);
+    })
+</script>
+</body>
+</html>

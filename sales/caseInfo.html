@@ -1,0 +1,94 @@
+<style>
+    .blueSolid1,.blueSolid2{
+        background-color: #3085f1;
+    }
+    .spanEle1,.spanEle2,.spanEle3{
+        background-color: #3085f1;
+    }
+    .liEle{
+        color: #3085f1;
+    }
+</style>
+<form class="form-horizontal w5c-form demo-form" role="form"
+      w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div>
+                <p>
+                    <input name="caseName" required type="text" ng-model="case.name" class="form-control" placeholder="案件名称" maxlength="33"/>
+                </p>
+                <p>
+                    <input name="money" type="number" required ng-model="case.money" class="form-control"
+                           placeholder="标的额 (单位: 万元)" ng-pattern="/^([0-9]+)$/" maxlength="11"/>
+                </p>
+                <!--<p>-->
+                    <!--<input type="text" ng-model="case.opposite" class="form-control" placeholder="对方当事人" maxlength="20"/>-->
+                <!--</p>-->
+                <p>
+                    <input name="dispute" type="text" ng-model="case.dispute" class="form-control" placeholder="案由" maxlength="1000" required/>
+                </p>
+                <!--<p>-->
+                    <!--<input type="text" ng-model="case.third" class="form-control" placeholder="其他当事人" maxlength="20"/>-->
+                <!--</p>-->
+                <p>
+                <ul class="list-group text-left">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                渠道律师是否申请继续代理此案:
+                            </div>
+                            <div class="col-xs-2" ng-click="selectMiddleType(1)">
+                                <input type="radio" value="1" ng-model="case.middle_apply" name="checkUser"/>
+                                <span style="margin: 5px">是</span>
+                            </div>
+                            <div class="col-xs-2" ng-click=selectMiddleType(0)>
+                                <input type="radio" value="0" ng-model="case.middle_apply" name="checkUser"/>
+                                <span style="margin: 5px">否</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </p>
+            </div>
+
+            <div>
+                <p id="partyInfoP" style="border: 1px solid #fff">
+                    <trix-editor input="party_info" name="party_info" placeholder="请输入当事人信息" angular-trix ng-model="case.party_info" count-num></trix-editor>
+                </p>
+                <p id="caseGoals" style="border: 1px solid #fff">
+                    <trix-editor input="goals" name="goals" placeholder="请输入客户目标" angular-trix ng-model="case.goals" required count-num></trix-editor>
+                    <input id="goals" ng-model="case.goals" name="goals" required type="hidden" class="form-control" placeholder="案件名称"/>
+                </p>
+                <p>
+                    <trix-editor placeholder="请输入案情描述" angular-trix ng-model="case.brief" count-num></trix-editor>
+                </p>
+                <p>
+                    <input type="text" ng-model="case.property" class="form-control" placeholder="请输入初步财产线索" maxlength="1000"/>
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    <input type="text" ng-model="case.attitude" class="form-control" placeholder="各方态度" maxlength="1000"/>
+                </p>
+                <!--<p>是否采取救济手段: <input type="checkbox" ng-model="means" ng-checked="true"/></p>-->
+                <!--<p>-->
+                <!--<input type="text" class="form-control" ng-show="means==true" placeholder="具体途径、所处阶段、效果"/>-->
+                <!--</p>-->
+                <p>
+                    <input name="relief_info" type="text" ng-model="case.relief_info" class="form-control"
+                           placeholder="救济情况,救济的途径、所处阶段及效果(如果没有,请填:无)" maxlength="1000" required/>
+                </p>
+                <p>
+                    <input type="text" ng-model="case.attention" class="form-control"
+                           placeholder="提请注意的地方,如是否为老客户、是否为央企、社会影响等" maxlength="1000"/>
+                </p>
+            </div>
+            <br>
+            <p class="text-right">
+                <a ui-sref="project.new.middle"class="btn btn-default" >上一步</a>
+                <a class="btn btn-primary" w5c-form-submit="complete(case)" ng-click="changeColor()">完成</a>
+            </p>
+        </div>
+    </div>
+</form>

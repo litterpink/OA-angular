@@ -1,0 +1,85 @@
+<style>
+    #pro0 {
+        background: #d95952;
+    }
+
+    #pro1 {
+        background: #ec6b27;
+    }
+
+    #pro2 {
+        background: #25b38b;
+    }
+
+    #pro3 {
+        background: #33cc33;
+    }
+
+    #pro4 {
+        background: #515f9e;
+    }
+
+    #pro5 {
+        background: #468dcc;
+    }
+</style>
+
+<div id="container">
+    <br/>
+    <div class="section" id="section0">
+        <div class="intro">
+            <h1 style="text-align: center">客户地域统计</h1>
+            <br/>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-sm-7 col-sm-offset-1 col-xs-12 ">
+
+                    <div class="regionMap" id="chinaMap" style="height:400px;"></div>
+
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    <div class="rightMsg" style="overflow: hidden; padding-top: 10px;">
+                        <table width="100" class="table table-responsive">
+                            <tr>
+                                <td style="">
+                                    序号
+                                </td>
+                                <td>
+                                    地区
+                                </td>
+                                <td width="50">
+                                    比例
+                                </td>
+                                <td>
+                                    人数
+                                </td>
+                            </tr>
+                            <tr ng-repeat="info in zw" id={{"tr"+$index}}>
+                                <td>
+                                    {{$index+1}}
+                                </td>
+                                <td>
+                                    {{info.province}}
+                                </td>
+                                <td>
+                                    <div class="progress progress-striped" id={{"pro"+$index}}
+                                         style="{{'width:'+(info.value/total)*100+'%'+';'}}margin: 0;">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    {{info.value}}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

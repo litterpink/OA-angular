@@ -1,0 +1,149 @@
+<div ng-if="type == 2 || type == undefined">
+    <div class="form-horizontal">
+        <div class="row">
+            <label class="col-sm-2 control-label">客户类型: </label>
+            <div class="col-sm-10">
+                <select ng-model="client.type" class="form-control">
+                    <option value="">请选择客户类型</option>
+                    <option value="个人客户">个人</option>
+                    <option value="机构客户">机构</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <form class="form-horizontal w5c-form demo-form" role="form"
+          w5c-form-validate="vm.validateOptions" novalidate name="validateForm" ng-if="client.type == '个人客户'">
+        <div class="person">
+            <p>
+                <select class="form-control" ng-model="client.level">
+                    <option value="">选择客户级别</option>
+                    <option value="普通客户">普通客户</option>
+                    <option value="重点客户">重点客户</option>
+                    <option value="核心客户">核心客户</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" name="name" ng-model="client.name" required class="form-control"
+                       placeholder="输入姓名" maxlength="10">
+            </p>
+            <p>
+                <select class="form-control" ng-model="client.sex">
+                    <option value="">请选择性别</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" name="phone" ng-model="client.phone" class="form-control" required
+                       placeholder="手机" maxlength="11" phone-limit ng-pattern="/\d{11}/"/>
+            </p>
+            <p>
+                <input type="text" name="telephone" ng-model="client.tel" class="form-control"
+                       placeholder="电话" maxlength="13" ng-pattern="/^[0-9\-()]+$/"/>
+            </p>
+            <p>
+                <input type="email" name="email" ng-model="client.email" class="form-control"
+                       placeholder="输入邮箱" max="30">
+            </p>
+            <p>
+                <input type="text" ng-model="client.firm" class="form-control" placeholder="单位" maxlength="16"/>
+            </p>
+            <p>
+                <input type="text" ng-model="client.position" class="form-control" placeholder="职务" maxlength="16"/>
+            </p>
+            <p>
+                <select ng-model="client.province" class="form-control" ng-change="provinceChange()">
+                    <option value="">请选择省份</option>
+                    <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}
+                    </option>
+                </select>
+            </p>
+            <p>
+                <select ng-model="client.city" class="form-control">
+                    <option value="">请选择城市</option>
+                    <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" ng-model="client.address" class="form-control" placeholder="联系地址" maxlength="100"/>
+            </p>
+            <!--<p>
+                &lt;!&ndash;<trix-editor placeholder="备注" angular-trix ng-model="client.remarks" maxlength="1000"></trix-editor>&ndash;&gt;
+                <textarea placeholder="备注" class="form-control"  ng-model="client.remarks" rows="5" maxlength="1000"></textarea>
+            </p>-->
+            <p ng-if="type != 2">
+                <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="client.remarks" placeholder="备注" count-num></trix-editor>
+            </p>
+
+        </div>
+    </form>
+    <form class="form-horizontal w5c-form demo-form" role="form"
+          w5c-form-validate="vm.validateOptions" novalidate name="validateForm" ng-if="client.type == '机构客户'">
+        <div class="person">
+            <p>
+                <select class="form-control" ng-model="client.level">
+                    <option value="">请选择客户级别</option>
+                    <option value="普通客户">普通客户</option>
+                    <option value="重点客户">重点客户</option>
+                    <option value="核心客户">核心客户</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" name="firm" ng-model="client.firm" required class="form-control"
+                       placeholder="机构名称" maxlength="16">
+            </p>
+            <p>
+                <input type="text" name="name" ng-model="client.name" required class="form-control"
+                       placeholder="联系人姓名" maxlength="10">
+            </p>
+            <p>
+                <select class="form-control" ng-model="client.sex">
+                    <option value="">请选择性别</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" name="phone" ng-model="client.phone" class="form-control" required
+                       placeholder="联系人手机" phone-limit ng-pattern="/\d{11}/"/>
+            </p>
+            <p>
+                <input type="text" name="telephone" ng-model="client.tel" class="form-control"
+                       placeholder="联系人电话" maxlength="13" ng-pattern="/^[0-9\-()]+$/"/>
+            </p>
+            <p>
+                <input type="email" name="email" ng-model="client.email" class="form-control"
+                       placeholder="联系人邮箱" maxlength="30">
+            </p>
+            <p>
+                <input type="text" ng-model="client.position" class="form-control" placeholder="联系人职务" maxlength="16"/>
+            </p>
+            <p>
+                <select ng-model="client.province" class="form-control" ng-change="provinceChange()">
+                    <option value="">请选择省份</option>
+                    <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}
+                    </option>
+                </select>
+            </p>
+            <p>
+                <select ng-model="client.city" class="form-control">
+                    <option value="">请选择城市</option>
+                    <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                </select>
+            </p>
+            <p>
+                <input type="text" ng-model="client.address" class="form-control" placeholder="联系地址" maxlength="100"/>
+            </p>
+            <p ng-if="type != 2">
+                <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="client.remarks" placeholder="备注" count-num></trix-editor>
+            </p>
+        </div>
+    </form>
+</div>
+<div ng-if="type == 3">
+    <p>
+        <span>测试看看</span>
+        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="client.remarks" placeholder="备注" count-num></trix-editor>
+    </p>
+</div>

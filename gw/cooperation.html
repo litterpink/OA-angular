@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮 | 合作</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <script src="../common/js/common.js"></script>
+    <script src="common/js/service.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+
+    <script src="js/myRoute.js"></script>
+
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" ng-controller="aboutCtrl">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom active"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+                <script>
+                    $("span.menu").click(function () {
+                        $("ul.nav1").slideToggle(300, function () {
+                            // Animation complete.
+                        });
+                    });
+                    $(function () {
+                        $("#myNav").affix({
+                            offset: {
+                                top: 200
+                            }
+                        });
+                    });
+
+                    $(function () {
+                        $('.sky-carousel').carousel({
+                            itemWidth: 201,
+                            itemHeight: 351,
+                            distance: -10,
+                            selectedItemDistance: 35,
+                            selectedItemZoomFactor: 0.9,
+                            unselectedItemZoomFactor: 0.6,
+                            unselectedItemAlpha: 0.6,
+                            motionStartDistance: 140,
+                            topMargin: 30,
+                            gradientStartPoint: 0.36,
+                            gradientOverlayColor: "#f5f5f5",
+                            gradientOverlaySize: 190,
+                            selectByClick: true
+                        });
+
+                        var height = $(window).height() - 552;
+                        $("#contain").css("min-height", height);
+                    })
+                </script>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div class="container" style="position: relative;">
+        <br/>
+        <br/>
+        <div class="row" id="contain">
+            <div class="col-sm-5 col-xs-12 col-sm-offset-1">
+                <p class="text-center">
+                    <img src="images/user1.png" width="110"/>
+                </p>
+                <h4 class="text-center">
+                    我是客户
+                </h4>
+                <p class="text-center">
+                    我正面临500万以上标的诉讼
+                </p>
+                <br/>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <p>
+                        <a href="client.html" class="btn btn-warning btn-block">联系帮帮</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-5 col-xs-12">
+                <p class="text-center">
+                    <img src="images/lawyer2.png" width="110"/>
+                </p>
+                <h4 class="text-center">
+                    我是律师
+                </h4>
+                <p class="text-center">
+                    我想从帮帮获得案源
+                </p>
+                <br/>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <p>
+                        <a href="lawyerRegister.html" class="btn btn-primary btn-block">入驻帮帮</a>
+                    </p>
+                </div>
+            </div>
+            <!--<div class="col-sm-4 col-xs-12">-->
+            <!--<p class="text-center">-->
+            <!--<img src="images/middle.png" width="110"/>-->
+            <!--</p>-->
+            <!--<br/>-->
+            <!--<h4 class="text-center" style="margin: 25px 0">-->
+            <!--我可以为帮帮提供案源-->
+            <!--</h4>-->
+            <!--<p>-->
+            <!--<a href="javascript:;" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">成为帮帮事业合伙人</a>-->
+            <!--</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+<br/>
+<br/>
+<div ng-include="'footer.html'"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    请选择您的身份类型：
+                </h4>
+            </div>
+            <div class="modal-body">
+                <h4 style="line-height: 30px" class="text-primary">如果您能为帮帮提供案源，在案件执行完毕后，帮帮将为您提供帮帮收取的服务费的<span
+                        class="text-danger">12%~15%</span>。</h4>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <p class="text-center">
+                            <a href="middleRegister.html" class="thumbnail">
+                                <img src="images/person.png" width="70%"/>
+                            </a>
+                            <b>我是个人</b>
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <p class="text-center">
+                            <a href="middleRegister.html" class="thumbnail">
+                                <img src="images/mechanism.png" width="70%"/>
+                            </a>
+                            <b>我是机构</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

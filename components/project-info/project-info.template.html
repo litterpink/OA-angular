@@ -1,0 +1,249 @@
+<style>
+    /*.changeHeight{
+        display: inline;
+    }
+    .changeHeight div {
+        display: inline;
+    }
+    .changeHeight ul,.changeHeight ol{
+        display: inline;
+        width: 100%;
+    }
+    .changeHeight ul li,.changeHeight ol li{
+        display: inline;
+        width: 100%;
+    }*/
+    .targetHeight{
+        position: absolute;
+        bottom: -18px;
+        right: 30px;
+    }
+    .local{
+        position: relative;
+    }
+    .changeHeight ul,.changeHeight ol{
+        padding-left: 16px;
+    }
+</style>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 23px;">当事人</b>
+            </div>
+            <div class="col-sm-7 local">
+                <span class="changeHeight" ng-bind-html="project.party_info | toHtml"></span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+                <span ng-show="canEditeProject" class="fa fa-edit" data-toggle="modal" data-target="#caseInfo" style="cursor: pointer"></span>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">争议标的</b>
+            </div>
+            <div class="col-sm-7">
+                {{project.money | formatMoney}}
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">争议领域</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight">{{project.dispute}}</span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">处理阶段</b>
+            </div>
+            <div class="col-sm-7">
+                {{project.status}}
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">各方态度</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight">{{project.attitude}}</span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div style="border-top: 1px solid #ccc;margin: 0 -20px"></div>
+        <div class="row">
+            <br/>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">客户目标</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight" ng-bind-html="project.goals | toHtml"></span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">案情概述</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight" ng-bind-html="project.brief | toHtml"></span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b>初步财产线索</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight" ng-bind-html="project.property | toHtml"></span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <br/>
+        <div style="border-top:1px solid #ccc;margin:0 -20px"></div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b style="letter-spacing: 10px;">救济情况</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight" ng-bind-html="project.relief_info | toHtml"></span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-sm-1">
+            </div>
+            <div class="col-sm-3">
+                <b>其他注意事项</b>
+            </div>
+            <div class="col-sm-7">
+                <span class="changeHeight">{{project.attention}}</span>
+                <a class="targetHeight" style="color: blue;z-index: 10" href="">显示全部</a>
+
+            </div>
+            <div class="col-sm-1">
+            </div>
+        </div>
+
+<!-- 模态框（Modal）修改项目信息 -->
+<div class="modal fade" id="caseInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="caseInfoLabel">修改项目信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal w5c-form demo-form" role="form"
+                      w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <div>
+                                <p>
+                                    <input name="caseName" required type="text" ng-model="case.name"
+                                           class="form-control" placeholder="案件名称" maxlength="33"/>
+                                </p>
+                                <p>
+                                    <trix-editor name="party_info" placeholder="当事人信息" angular-trix
+                                                 ng-model="case.party_info" count-num></trix-editor>
+                                </p>
+                                <p>
+                                    <input name="money" type="number" required ng-model="case.money" class="form-control"
+                                           placeholder="争议标的(单位: 万元)" maxlength="11"/>
+                                </p>
+                                <p>
+                                    <input type="text" ng-model="case.dispute" class="form-control" placeholder="争议领域" maxlength="1000"/>
+                                </p>
+                                <p>
+                                    <input type="text" ng-model="case.attitude" class="form-control"
+                                           placeholder="各方态度" maxlength="1000"/>
+                                </p>
+                            </div>
+
+                            <div>
+                                <p>
+                                    <trix-editor name="goals" required placeholder="客户目标" angular-trix
+                                                 ng-model="case.goals" count-num></trix-editor>
+                                </p>
+                                <p>
+                                    <trix-editor placeholder="案情描述" angular-trix trix-initialize="trixInitialize(e, editor);" ng-model="case.brief" count-num></trix-editor>
+                                </p>
+                                <p>
+                                    <trix-editor placeholder="初步财产线索" angular-trix
+                                                 ng-model="case.property" trix-initialize="trixInitialize(e, editor)"
+                                                 trix-blur="trixBlur(e, editor)" count-num></trix-editor>
+                                </p>
+                            </div>
+
+                            <div>
+                                <p>
+                                    <input type="text" ng-model="case.relief_info" class="form-control"
+                                           placeholder="救济情况,救济的途径、所处阶段及效果" maxlength="1000"/>
+                                </p>
+                                <p>
+                                    <input type="text" ng-model="case.attention" class="form-control"
+                                           placeholder="提请注意的地方,如是否为老客户、是否为央企、社会影响等" maxlength="1000"/>
+                                </p>
+                            </div>
+                            <br>
+
+                            <p class="text-right">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary"
+                                        w5c-form-submit="submitUpdate(case)">提交更改
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

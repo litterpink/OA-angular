@@ -1,0 +1,167 @@
+<style>
+    #pro0 {
+        background: #d95952;
+    }
+
+    #pro1 {
+        background: #ec6b27;
+    }
+
+    #pro2 {
+        background: #25b38b;
+    }
+
+    #pro3 {
+        background: #33cc33;
+    }
+
+    #pro4 {
+        background: #515f9e;
+    }
+
+    #pro5 {
+        background: #468dcc;
+    }
+    .clearWidth{
+        margin-right: -20px;
+        margin-left: -20px;
+    }
+    .count-add{
+        margin-top: 50px;
+    }
+    .count-add p{
+        font-size: 20px;
+    }
+    .count-add p span{
+        color: blue;
+        margin: 0px 10px;
+    }
+</style>
+<div class="clearWidth">
+    <top-menu type="2"
+              name="lawyerInfo"
+              select="selectIndex(selectedIndex)"
+              selected-index="selectedIndex"
+              options="menuOptions">
+    </top-menu>
+
+</div>
+<div ng-show="selectedIndex == 0">
+    <div class="col-sm-6 col-sm-offset-1 col-xs-12">
+        <div class="count-add">
+            <p>今日新增律师<span>{{countDay.lawyer}}</span>名 其中大律师<span>{{countDay.big_lawyer}}</span>名</p>
+            <p>今日与律师互动<span>{{countDay.interact}}</span>次</p>
+        </div>
+        <div class="count-add">
+            <p>第<span>{{countWeek.page_week}}</span>周新增律师<span>{{countWeek.lawyer}}</span>名 其中大律师<span>{{countWeek.big_lawyer}}</span>名</p>
+            <p>本周与律师互动<span>{{countWeek.interact}}</span>次</p>
+        </div>
+        <div class="count-add">
+            <p>第<span>{{countMonth.page_month}}</span>月新增律师<span>{{countMonth.lawyer}}</span>名 其中大律师<span>{{countMonth.big_lawyer}}</span>名</p>
+            <p>本月与律师互动<span>{{countMonth.interact}}</span>次</p>
+        </div>
+    </div>
+</div>
+<div ng-show="selectedIndex == 1">
+    <h2 style="text-align: center">全部律师地域统计</h2>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-1 col-xs-12 ">
+
+            <div id="chinaMap" style="height:400px;"></div>
+
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <div class="rightMsg" style="overflow: hidden; padding-top: 10px;">
+                <table width="100" class="table table-responsive">
+                    <tr>
+                        <td style="">
+                            序号
+                        </td>
+                        <td>
+                            地区
+                        </td>
+                        <td width="50">
+                            比例
+                        </td>
+                        <td>
+                            人数
+                        </td>
+                    </tr>
+                    <tr ng-repeat="info in zw" id={{"tr"+$index}}>
+                        <td>
+                            {{$index+1}}
+                        </td>
+                        <td>
+                            {{info.province}}
+                        </td>
+                        <td>
+                            <div class="progress progress-striped" id={{"pro"+$index}}
+                                 style="{{'width:'+(info.value/total)*100+'%'+';'}}margin: 0;">
+
+                            </div>
+                        </td>
+                        <td>
+                            {{info.value}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="selectedIndex == 2">
+    <h2 style="text-align: center">大律师地域统计</h2>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-1 col-xs-12 ">
+
+            <div id="chinaMap2" style="height:400px;"></div>
+
+        </div>
+        <div class="col-sm-4 col-xs-12">
+            <div class="rightMsg" style="overflow: hidden; padding-top: 10px;">
+                <table width="100" class="table table-responsive">
+                    <tr>
+                        <td style="">
+                            序号
+                        </td>
+                        <td>
+                            地区
+                        </td>
+                        <td width="50">
+                            比例
+                        </td>
+                        <td>
+                            人数
+                        </td>
+                    </tr>
+                    <tr ng-repeat="info in zw2" id={{"tr"+$index}}>
+                        <td>
+                            {{$index+1}}
+                        </td>
+                        <td>
+                            {{info.province}}
+                        </td>
+                        <td>
+                            <div class="progress progress-striped" id={{"pro"+$index}}
+                                 style="{{'width:'+(info.value/total2)*100+'%'+';'}}margin: 0;">
+
+                            </div>
+                        </td>
+                        <td>
+                            {{info.value}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,236 @@
+<ui-view>
+    <style>
+        .input-group {
+            margin: 10px 20px;
+        }
+        .input-special {
+            background-color: white;
+            text-align: left;
+        }
+        .input-special.input-group-addon {
+            border-left: 1px solid rgb(193, 193, 193);
+        }
+        .input-special.input-group-addon.error {
+            border-left: 1px solid rgb(255, 0, 0);
+        }
+    </style>
+<br/>
+<p ng-show="projectList.length == 0" class="no-data">暂无信息</p>
+<div class="row" ng-repeat="subArray in projectList">
+    <div class="col-xs-4 col-sm-4" ng-repeat="project in subArray">
+        <div class="panel panel-default">
+
+            <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{project.name}}</b>
+            </div>
+
+            <div style="position: relative" class="panel-body"><!--background-color: #00a0e9;-->
+                <div style="line-height: 180px" ng-click="$parent.clickProject(project)" class="listHover">查看详情</div>
+                <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                <a class="listA" style="cursor: pointer">
+                    <p class="noWrap"><span class="sub-title spacing-2-word">编号</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.num}}</p>
+                    <p class="noWrap"><span class="sub-title spacing-3-word">标的额</span><span style="margin-left: -14px">:&nbsp;&nbsp;&nbsp;&nbsp;{{project.money | formatMoney}}</span> </p>
+                    <p class="noWrap"><span class="sub-title spacing-2-word">状态</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.status}}</p>
+                    <p class="noWrap"><span class="sub-title spacing-4-word">创建时间</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.create_time}}</p>
+                    <p class="noWrap" ng-if="project.miss_material"><span class="sub-title" style="margin-right: 4px">补充材料清单</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.miss_material}}</p>
+                    <p style="height: 60px;overflow: hidden" ng-if="project.shelve == '已搁置'"><span class="sub-title spacing-4-word">搁置原因</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.detail}}</p>
+
+                    <p style="visibility: hidden" ng-hide="project.miss_material"><span class="sub-title">占位</span>:&nbsp;&nbsp;&nbsp;&nbsp;{{project.miss_material}}</p>
+                </a>
+            </div>
+            <table class="table table-striped">
+                <tr id="listStyle">
+                    <td class="textCenter" data-toggle="modal" data-target="#analyst"
+                        ng-if="project.num_status == 1 && project.shelve=='未搁置'" ng-click="operateProject(project, 1)">提交分析师</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#sign"
+                        ng-if="project.num_status == 14 && project.shelve=='未搁置'" ng-click="operateProject(project, 2)">签约</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#appeal"
+                        ng-if="project.is_appeal" ng-click="operateProject(project, 3)">申诉</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#uploadFile"
+                        ng-if="project.miss_material != ''&& project.shelve=='未搁置'" ng-click="operateProject(project, 4)">补充材料</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#uploadFile"
+                        ng-if="project.num_status == 1 && project.shelve=='未搁置'" ng-click="operateProject(project, 5)">上传材料</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#submitAnalystAgain"
+                        ng-if="(project.num_status == 19 || project.num_status == 20 || project.num_status == 21)&& project.shelve=='未搁置'" ng-click="operateProject(project, 6)">重新提交</td>
+                    <td class="textCenter" data-toggle="modal" data-target="#stopProject"
+                        ng-if="(project.num_status == 14 || project.num_status == 1 || project.num_status == 19 || project.num_status == 20 || project.num_status == 21)&& project.shelve=='未搁置'" ng-click="operateProject(project, 7)">搁置项目</td>
+                    <td class="textCenter" data-toggle="modal" ng-click="canleSelve(project.num)"
+                        ng-if="project.shelve=='已搁置'" ng-click="operateProject(project, 8)">恢复项目</td>
+                    <td style="color: #ccc;text-align: center" ng-if="(project.num_status == 2 && project.miss_material == '') || project.num_status == 3 || (project.num_status == 4&& project.miss_material == '') || project.num_status == 6 ||(project.num_status == 8 && project.miss_material == '') || project.num_status == 10 || project.num_status == 12|| project.num_status == 17 || project.num_status == 18 || project.num_status == 11 ||project.num_status == 13 || project.num_status == 16 || project.num_status == 15">暂无处理事项</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="totalItems"
+                            ng-model="$ctrl.currentPage"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged($ctrl.currentPage)"
+                            boundary-links="true"
+                            boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>
+</ui-view>
+<!-- 模态框（Modal） 上传材料/补充材料 -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myUploadModalLabel">{{uploadModalTitle}}</h4>
+            </div>
+            <div class="modal-body">
+                <form name="form">
+                    <upload-progress id="1" upload-urls="uploadUrls" show-time="{{true}}" project-id="{{projectId}}"></upload-progress>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in files">
+                            {{item.name}}
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button class="btn btn-primary" ng-click="submitAddMaterial(uploadUrls, effectTime)">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） 提交分析师 -->
+<div class="modal fade" id="analyst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="analystLabel">提交分析师</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" style="margin-bottom: 0;">
+                    <li class="list-group-item" ng-repeat="analyst in analystList" ng-click="clickSelectAnalyst(analyst.id)">
+                        <input type="radio" name="analyst" value="{{analyst.id}}" ng-model="$parent.selectAnalystId"
+                               ng-checked="$index == 0"/> {{analyst.name}}
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="submitToAnalyst()">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal） 签约 -->
+<div class="modal fade" id="sign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form class="form-horizontal demo-form" role="form"
+          w5c-form-validate="validateOptions" novalidate name="validateForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="signLabel">签约</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span class="input-group-addon">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间</span>
+                        <!--<input type="date" name="signDate" error-after-parent required placeholder="签约日期" class="form-control"-->
+                               <!--ng-model="signDate"/>-->
+                        <input type="text" name="signDate" ng-model="signDate" required class="input-group-addon form-control input-special" datetimepicker options="dateOptions" placeholder="请点击选择签约时间">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">签约标的</span>
+                        <!--show-parent 意思是错误信息显示在父元素后面-->
+                        <input type="number" name="money" required class="form-control" ng-model="money"
+                               placeholder="请输入签约标的"/>
+                        <span class="input-group-addon">万元</span>
+                    </div>
+                    <!--<input type="hidden" required name="money" class="form-control" ng-model="money"-->
+                           <!--placeholder="请输入签约标的"/>-->
+
+                    <div class="input-group">
+                        <span class="input-group-addon">前期收益</span>
+                        <input type="number" name="preProfit" class="form-control" ng-model="preProfit"
+                               placeholder="请输入前期收益"/>
+                        <span class="input-group-addon">万元</span>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">后期收益</span>
+                        <input type="number" ng-model="finalProfit" class="form-control" placeholder="请输入后期预计收益"/>
+                        <span class="input-group-addon">万元</span>
+                    </div>
+                    <div style="margin-top: 40px; ">
+                        <span style="font-size: 18px;">协议文本</span>
+                        <upload-progress id="3" upload-urls="uploadUrls" project-id="{{projectId}}"></upload-progress>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" w5c-form-submit="submitSign(uploadUrls)">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </form>
+</div>
+<br/>
+<!-- 模态框（Modal） 申诉 -->
+<div style="margin-top: 150px;" class="modal fade" id="appeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="appealModalLabel">确认申诉</h4>
+            </div>
+            <div class="modal-body">
+                <span>提交申诉后风控总监或者风控委员会会重新评估案件,每个案件只能申诉一次,确定申诉吗?</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="submitAppeal()">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） 重新提交分析师 -->
+<div class="modal fade" id="submitAnalystAgain" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="submitAnalystAgainLabel">确认提交</h4>
+            </div>
+            <div class="modal-body" style="font-size: 20px">确认材料已经补充齐全,重新提交吗?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="reSubmitToAnalyst()">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal） 终止项目 -->
+<div class="modal fade" id="stopProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">搁置项目</h4>
+            </div>
+            <form class="form-horizontal w5c-form demo-form" role="form"
+                  w5c-form-validate="validateOptions" novalidate name="validateForm2">
+                <div class="modal-body">
+                    <ul class="list-group" style="margin-bottom: 0;">
+                        <textarea name="reason" ng-model="reason" rows="7" class="form-control" placeholder="请填写搁置原因" required maxlength="333"></textarea>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" w5c-form-submit="submitStopProject(reason)">提交</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

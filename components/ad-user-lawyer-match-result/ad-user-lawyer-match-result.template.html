@@ -1,0 +1,65 @@
+<ui-view>
+    <br/>
+    <p ng-if="infos.length==0" class="no-data">没有查询到相关信息</p>
+    <div class="row">
+        <div class="col-xs-4 col-sm-4" ng-repeat="info in infos">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="box-header">
+                        <div class="pull-right box-tools lawyerInfo">
+                            <!--大律师图片-->
+                            <img ng-show="info.judicial_type =='1'" src="../common/images/seniorLeft.png" width="50" style="position: absolute; left: 17px; top: 5px; z-index: 999999">
+                            <!--单击传递lid-->
+                            <!--判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示-->
+                        <span ng-if="info.is_collection != 0">
+                        <i accordion="1" class="fa fa-star" style="cursor: pointer; color: #ffb70a" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}"  cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.is_collection == 0">
+                        <i accordion="1" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                            <!--<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                               style="cursor: pointer"></i>-->
+                        </div>
+                    </div>
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <p class="text-right" style="margin: 0"></p>
+                    <a href="#/lawyerInfo/{{info.user_id}}/info">
+                        <p style="width: 150px;display: inline-block" class="borderBottom noWrap">
+                            <span style="font-size: 20px;">{{info.name}}</span>
+                        </p>
+                        <p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;width: 100px"><span
+                                class="glyphicon glyphicon-home"></span> {{info.firm}}</p>
+                        <p><span class="glyphicon glyphicon-phone"></span> {{info.phone}}</p>
+                        <!--分数圆形-->
+                        <radial-directive></radial-directive>
+                        <div class="circle" style="position: absolute; top: 25px; right: 60px;">
+                            <div class="pie_left">
+                                <div class="left_circle"></div>
+                            </div>
+                            <div class="pie_right">
+                                <div class="right_circle"></div>
+                            </div>
+                            <div class="mask"><span id="{{info.score}}" radial-directive>{{info.score}}</span>%
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- 功能按钮 -->
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(bigCurrentPage)" boundary-links="true" boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+            </div>
+        </div>
+    </div>
+</ui-view>

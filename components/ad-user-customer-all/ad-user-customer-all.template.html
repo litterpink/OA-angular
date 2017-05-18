@@ -1,0 +1,69 @@
+<br/>
+<div class="row">
+    <div class="col-sm-4">
+        <p>
+            <input type="text" ng-model="name" placeholder="输入姓名或机构名进行搜索" class="form-control" maxlength="10"/>
+        </p>
+    </div>
+</div>
+<p ng-if="infos.length==0" class="no-data">暂无信息</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <!--<div class="box-header" ng-show="{{collectionButton}}">
+                    &lt;!&ndash;收藏&ndash;&gt;
+                    <div class="pull-right box-tools lawyerInfo">
+                        &lt;!&ndash;单击传递lid&ndash;&gt;
+                        &lt;!&ndash;判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示&ndash;&gt;
+                        <span ng-if="info.is_collection != 0">
+                        <i accordion="2" class="fa fa-star" style="cursor: pointer; color: #ffb70a"
+                           id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.is_collection == 0">
+                        <i accordion="2" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                        &lt;!&ndash;<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                           style="cursor: pointer"></i>&ndash;&gt;
+                    </div>
+                </div>-->
+                <a href="{{parentHref}}/{{info.id}}/info">
+                    <div class="row">
+                        <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                             style="width: 110px; position: absolute; left: 35px; top: 18px; border: 1px solid #ddd"/>
+                        <div class="col-xs-6">
+
+                        </div>
+                        <div class="col-xs-6">
+                            <p ng-show="info.type=='个人客户'" style="text-align: right;font-size: 20px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.name}}</p>
+                            <p ng-show="info.type=='机构客户' && info.firm !=''" style="text-align: right;font-size: 20px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.firm}}</p>
+                            <p ng-show="info.type=='个人客户' && info.firm !=''" style="text-align: right;margin-top: 0px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.firm}}</p>
+                            <p ng-show="info.type=='机构客户'" style="text-align: right;margin-top: 0px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.name}}</p>
+                            <p ng-show="info.firm==''" style="visibility: hidden">占位符</p>
+                            <p ng-show="info.phone==''" style="visibility: hidden">占位符</p>
+                            <p style="text-align: right;margin-top: 20px"> {{info.phone}}</p>
+                        </div>
+                    </div>
+
+
+
+                </a>
+            </div>
+            <!-- 功能按钮 -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(bigCurrentPage,name,province)"
+                            boundary-links="true" boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>

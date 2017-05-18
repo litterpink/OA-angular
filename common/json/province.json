@@ -1,0 +1,143 @@
+[{  
+    "ProID": 1,  
+    "name": "北京",
+    "ProSort": 1
+}, {
+    "ProID": 2,
+    "name": "天津",
+    "ProSort": 2
+}, {
+    "ProID": 3,
+    "name": "河北",
+    "ProSort": 5
+}, {
+    "ProID": 4,
+    "name": "山西",
+    "ProSort": 6
+}, {
+    "ProID": 5,
+    "name": "内蒙古",
+    "ProSort": 32,
+    "ProRemark": ""
+}, {
+    "ProID": 6,
+    "name": "辽宁",
+    "ProSort": 8
+}, {
+    "ProID": 7,
+    "name": "吉林",
+    "ProSort": 9
+}, {
+    "ProID": 8,
+    "name": "黑龙江",
+    "ProSort": 10
+}, {
+    "ProID": 9,
+    "name": "上海",
+    "ProSort": 3
+}, {
+    "ProID": 10,
+    "name": "江苏",
+    "ProSort": 11
+}, {
+    "ProID": 11,
+    "name": "浙江",
+    "ProSort": 12
+}, {
+    "ProID": 12,
+    "name": "安徽",
+    "ProSort": 13
+}, {
+    "ProID": 13,
+    "name": "福建",
+    "ProSort": 14
+}, {
+    "ProID": 14,
+    "name": "江西",
+    "ProSort": 15
+}, {
+    "ProID": 15,
+    "name": "山东",
+    "ProSort": 16
+}, {
+    "ProID": 16,
+    "name": "河南",
+    "ProSort": 17
+}, {
+    "ProID": 17,
+    "name": "湖北",
+    "ProSort": 18
+}, {
+    "ProID": 18,
+    "name": "湖南",
+    "ProSort": 19
+}, {
+    "ProID": 19,
+    "name": "广东",
+    "ProSort": 20
+}, {
+    "ProID": 20,
+    "name": "海南",
+    "ProSort": 24
+}, {
+    "ProID": 21,
+    "name": "广西",
+    "ProSort": 28,
+    "ProRemark": ""
+}, {
+    "ProID": 22,
+    "name": "甘肃",
+    "ProSort": 21
+}, {
+    "ProID": 23,
+    "name": "陕西",
+    "ProSort": 27
+}, {
+    "ProID": 24,
+    "name": "新疆",
+    "ProSort": 31,
+    "ProRemark": ""
+}, {
+    "ProID": 25,
+    "name": "青海",
+    "ProSort": 26
+}, {
+    "ProID": 26,
+    "name": "宁夏",
+    "ProSort": 30,
+    "ProRemark": ""
+}, {
+    "ProID": 27,
+    "name": "重庆",
+    "ProSort": 4,
+    "ProRemark": ""
+}, {
+    "ProID": 28,
+    "name": "四川",
+    "ProSort": 22
+}, {
+    "ProID": 29,
+    "name": "贵州",
+    "ProSort": 23
+}, {
+    "ProID": 30,
+    "name": "云南",
+    "ProSort": 25
+}, {
+    "ProID": 31,
+    "name": "西藏",
+    "ProSort": 29,
+    "ProRemark": ""
+}, {
+    "ProID": 32,
+    "name": "台湾",
+    "ProSort": 7
+}, {  
+    "ProID": 33,  
+    "name": "澳门",
+    "ProSort": 33
+}, {  
+    "ProID": 34,  
+    "name": "香港",
+    "ProSort": 34
+}] 

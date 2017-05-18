@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="channelApp">
+<head>
+    <title>渠道端</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <!--bootstrap图标扩展库-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/font-awesome.min.css"/>
+    <!--界面中公用的css 例如: class="red" 警告文字的颜色-->
+    <link rel="stylesheet" href="../common/css/common.css"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <!--一些公用的js方法, 统一的url, 处理url地址等方法-->
+    <script src="../common/js/common.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <!--路由插件--><!--文件上传插件-->
+    <script src="../vendor/angularJS/ng-file-upload-shim.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <!--分页插件-->
+    <script src="../vendor/angularJS/ui-bootstrap.js"></script>
+    <!--公共的 服务 指令 过滤-->
+    <script src="../common/js/mix.service.js"></script>
+    <script src="../common/js/mix.directive.js"></script>
+    <script src="../common/js/mix.filter.js"></script>
+    <!--<script type="text/javascript" src="http://ueditor.baidu.com/ueditor/ueditor.all.js"></script>-->
+
+    <script type="text/javascript" src="../vendor/angularJS/angular-ueditor.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 控制市场端的路由,控制器 -->
+    <script src="js/channel.js"></script>
+    <!--低版本浏览器支持h5的一些特性-->
+    <!--[if lt IE 9]
+    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    <!--<![endif]-->
+</head>
+<body>
+<section class="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-xs-12 text-center">
+                            <p class=" text-primary" style="font-size: 20px">您好,您在既是合作律师又是事业合伙人,请选择您需要的登陆端口</p>
+                        </div>
+                        <div class="col-xs-12">
+                            <br/>
+                            <br/>
+                            <a href="#/inputLawyer" class="btn btn-primary btn-block btn-lg">
+                                律师端
+                            </a>
+                            <br/>
+                            <a href="#/excel" class="btn btn-warning btn-block btn-lg">
+                                渠道端
+                            </a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    /* 查询框居中显示 */
+    $(function () {
+        var height = ($(window).height() - 500) / 2;
+        $(".content").css({"margin-top": height});
+    })
+</script>
+</body>
+</html>

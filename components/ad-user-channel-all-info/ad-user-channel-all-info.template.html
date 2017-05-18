@@ -1,0 +1,448 @@
+<style>
+    .boColor{
+        border-bottom: 5px solid #2d6dbb
+    }
+    .name {
+        font-size: 18px;
+    }
+    .bottom_line {
+        margin-left: -20px;
+    }
+    .right-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        /*border-right: 1px solid #d0d0d0;*/
+        /*margin-left: 50px;*/
+        /*margin-right: 200px;*/
+        padding: 20px;
+        padding-right: 0;
+    }
+    .top_box {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .left_gap {
+        margin-left: 50px;
+    }
+    /*修改顶部菜单的左边*/
+    .topMenu div:first-child{
+        margin-left: 50px;
+    }
+    .spacing {
+        letter-spacing: 1px;
+    }
+    .spacing-5 {
+        letter-spacing: 5px;
+    }
+    .spacing-10 {
+        letter-spacing: 10px;
+    }
+    .spacing-11 {
+        letter-spacing: 15px;
+        margin-right: -1px;
+    }
+    .spacing-24 {
+        letter-spacing: 24px;
+    }
+    .moveLeft{
+        margin-left: -18px;
+    }
+    .address {
+        display: inline-block;
+        width: 500px;
+    }
+    .address-title {
+        vertical-align: top
+    }
+    /*富文本中的样式*/
+    .rich-text ul {
+        margin-left: 20px;
+    }
+    .rich-text ol {
+        margin-left: 15px;
+    }
+</style>
+
+<div class="top_box left_gap">
+    <p>
+        <span class="name" ng-if="middle.type == '个人渠道' || middle.type == '律师渠道'">{{middle.name}}</span>
+        <span class="name" ng-if="middle.type == '机构渠道'">{{middle.firm}}</span>
+        &nbsp;&nbsp;&nbsp;
+        <span class="text-primary">{{middle.type}}</span>
+    </p>
+    <p>
+        <span class="text-primary">{{middle.supervise}}个项目督办中,{{middle.supervise}}个项目签约中</span>
+    </p>
+</div>
+
+<top-menu type="1"
+          name="clientInfo"
+          select="selectIndex(selectedIndex)"
+          selected-index="selectedIndex"
+          options="menuOptions">
+</top-menu>
+
+<div style="padding-left: 50px">
+    <!--基本信息-->
+    <div ng-if="selectedIndex == 0">
+        <div class="col-sm-12 info_box">
+            <div style="margin-left: -35px" class="col-sm-3">
+                <img ng-src="{{file.url}}" ngf-select ng-model="file"
+                     ng-change="uploadUser(file)"
+                     ngf-max-size="20MB"
+                     style="width: 180px; height: auto;"/>
+            </div>
+            <div class="col-sm-9" ng-if="middle.type == '个人渠道' || middle.type == '律师渠道'">
+                <div>
+                    <p><b class="spacing-10">性别:</b> {{middle.sex}}</p>
+                    <p><b class="spacing-10">手机:</b> {{middle.phone}}</p>
+                    <p><b class="spacing-10">电话:</b>{{middle.tel}}</p>
+                    <p><b class="spacing-10">邮箱:</b> {{middle.email}}</p>
+                    <p><b class="spacing-10">单位:</b><span>{{middle.firm}}</span></p>
+                    <p><b class="spacing-10 address-title">地址:</b><span class="address">{{middle.province}} {{middle.city}} {{middle.address}}</span></p>
+                </div>
+            </div>
+            <div class="col-sm-9" ng-if="middle.type == '机构渠道'">
+                <div>
+                    <p><b class="spacing-10">性别:</b> {{middle.sex}}</p>
+                    <p><b class="spacing-10">手机:</b> {{middle.phone}}</p>
+                    <p><b class="spacing-10">电话:</b>{{middle.tel}}</p>
+                    <p><b class="spacing-10">邮箱:</b> {{middle.email}}</p>
+                    <p><b class="spacing-10">单位:</b><span>{{middle.firm}}</span></p>
+                    <p><b class="spacing-10 address-title">地址:</b><span class="address"> {{middle.province}} {{middle.city}}&nbsp;{{middle.address}}</span></p>
+                </div>
+            </div>
+            <span class="center fa fa-edit pull-right" ng-click="showUpdateModal(2)"
+                  style="cursor: pointer;position: absolute;top: 25px;right: 10px">
+            </span>
+        </div>
+
+        <div class="info_box col-sm-12">
+            <div class="row">
+                <div style="margin-left: -20px" class="col-xs-2">
+                    <b class="spacing-24">备注:</b>
+                </div>
+                <div style="margin-left: -58px;" class="col-xs-10">
+                    <span class="rich-text" ng-bind-html="middle.remarks | toHtml"></span>
+                </div>
+            </div>
+
+            <span class="center fa fa-edit pull-right" data-toggle="modal" ng-click="clickEditMarks()"
+                  style="cursor: pointer;position: absolute;top: 25px;right: 10px">
+            </span>
+        </div>
+        <div class="info_box col-sm-12 moveLeft" style="border-bottom: none">
+            <p><b class="spacing-11">建档人</b><b style="margin-left: -10px">:</b> <span style="margin-left: 14px">{{middle.sales_name}}</span></p>
+            <p><b class="spacing-5">创建时间:</b> <span style="margin-left: 12px">{{middle.create_time}}</span></p>
+        </div>
+
+        <!--<div class="info_box col-sm-12">-->
+            <!--<p><b class="spacing-24">备注:</b> <span style="display: inline-block" ng-bind-html="middle.remarks | toHtml"></span></p>-->
+            <!--<span class="center fa fa-edit pull-right" ng-click="clickEditMarks()"-->
+                  <!--style="cursor: pointer;position: absolute;top: 25px;right: 10px">-->
+            <!--</span>-->
+        <!--</div>-->
+        <!--<div class="info_box col-sm-12" style="border-bottom: none">-->
+            <!--<p><b class="spacing-11">建档人:</b> {{middle.sales_name}}</p>-->
+            <!--<p><b class="spacing-5">创建时间:</b> {{middle.create_time}}</p>-->
+        <!--</div>-->
+    </div>
+
+    <!--项目信息-->
+    <div ng-if="selectedIndex == 1" class="right-content">
+        <p style="text-align: center;font-size: 30px;color: #ccc;margin-top: 15px" ng-if="byMiddleCase.length == 0">暂无合作信息</p>
+        <div class="col-xs-12 col-sm-4" ng-repeat="project in byMiddleCase">
+            <div class="panel panel-default">
+                <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                    <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{project.name}}</b>
+                </div>
+
+                <div style="position: relative" class="panel-body"><!--background-color: #00a0e9;-->
+                    <div style="line-height: 150px" ng-click="clickProject(project.num)" class="listHover">查看详情
+                    </div>
+                    <a class="listA" style="cursor: pointer">
+                        <p><span style="letter-spacing: 14px;margin-right: -14px;" class="sub-title">编号</span>:&nbsp;{{project.num}}号
+                        </p>
+                        <p><span style="margin-right: 14px" class="sub-title">标的额</span><span
+                                style="margin-left: -14px">:&nbsp;{{project.money | formatMoney}}</span></p>
+                        <p class="noWrap"><span style="letter-spacing: 14px;margin-right: -14px;" class="sub-title">状态</span>:&nbsp;{{project.status}}
+                        </p>
+                        <p><span class="sub-title">创建时间</span>:&nbsp;{{project.create_time}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--互动信息-->
+    <div ng-if="selectedIndex == 2" class="right-content">
+        <ul class="list-group">
+            <li class="list-group-item" style="text-align: center;margin-bottom: 0px;">
+                <b data-toggle="modal" data-target="#addInteract" style="font-size: 20px;margin: 0 auto;cursor: pointer">
+                        <span class="fa fa-plus" >
+                        </span>添加互动情况</b>
+            </li>
+            <li style="border: 1px solid transparent;border-bottom: 1px solid #ccc;margin-bottom: 0px;" class="list-group-item" ng-repeat="info in byMiddleInteract">
+                <div style="margin-top: 16px;" class="trix-content" ng-bind-html="info.details | toHtml">
+                </div>
+                <p style="text-align: right;margin: 0;margin-top: 20px;font-size: 12px">{{info.name}}&nbsp;&nbsp;&nbsp;于&nbsp;&nbsp;&nbsp;{{info.time}}&nbsp;&nbsp;&nbsp;记录</p>
+
+                        <span class="center fa fa-edit pull-right" data-toggle="modal"
+                              data-target="#editInteration" ng-click="interactParams(info.interact_id,info.details,$index)" style="cursor: pointer;position: absolute;top: 30px;right: 10px"></span>
+            </li>
+        </ul>
+        <p style="text-align: center;font-size: 30px;color: #ccc" ng-if="byMiddleInteract.length == 0">暂无互动信息</p>
+    </div>
+</div>
+
+
+<!-- 修改备注 -->
+<div class="modal fade" id="editRemarks" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">修改备注</h4>
+            </div>
+            <form role="form" w5c-form-validate="vm.validateOptions" novalidate name="validateForm5">
+            <div class="modal-body">
+            <p>
+            <trix-editor name="remarks" angular-trix trix-change="trixChange(editor)" ng-model="updateMiddle.remarks" required count-num></trix-editor>
+            </p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" w5c-form-submit="editRemarks(updateMiddle.remarks)">修改</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+    <!--修改基本信息-->
+    <div class="modal fade" id="editBaseinfo" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title text-center" id="myModalLabel">
+                        修改{{middle.type}}信息
+                    </h4>
+                </div>
+                <form class="" role="form"
+                      w5c-form-validate="vm.validateOptions" novalidate name="validateForm1">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="请输入姓名" name="name"
+                                           ng-model="updateMiddle.name" required maxlength="10"/>
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" ng-model="updateMiddle.sex" name="sex" required>
+                                        <option value="">请选择性别</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="请输入手机号码" name="phone"
+                                           ng-model="updateMiddle.phone" required phone-limit ng-pattern="/\d{11}/"/>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="请输入单位名称" name="firm"
+                                           ng-model="updateMiddle.firm" maxlength="16"/>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="请输入邮箱" name="email"
+                                           ng-model="updateMiddle.email" maxlength="30"/>
+                                </div>
+                                <div class="form-group">
+                                    <select ng-model="updateMiddle.province" class="form-control" ng-change="provinceChange()">
+                                        <option value="">请选择省份</option>
+                                        <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select ng-model="updateMiddle.city" class="form-control">
+                                        <option value="">请选择城市</option>
+                                        <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" class="form-control" placeholder="请输入联系地址" name="address"
+                                               ng-model="updateMiddle.address" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="modal-footer form-group">
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" w5c-form-submit="editBaseInfo()">
+                                        修改
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- 添加互动信息 -->
+<div class="modal fade" id="addInteract" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title text-center">
+                    添加互动信息
+                </h4>
+            </div>
+            <form class="" role="form"
+                  w5c-form-validate="vm.validateOptions" novalidate name="validateForm3">
+                <div class="modal-body">
+                    <div class="col-xs-12">
+
+                        <div class="form-group">
+                            <!--<div>
+                                <textarea class="form-control addInteractionMore" rows="10" placeholder="请输入互动详情"
+                                          name="interactionMore" ng-model="interactInfo"
+                                          required maxlength="333"></textarea>
+                            </div>-->
+                            <p>
+                                <trix-editor angular-trix ng-model="interactInfo" class="trix-content" required
+                                             placeholder="请输入互动详情" count-num></trix-editor>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" w5c-form-submit="addInteract(interactInfo)">
+                        新增
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 修改互动信息 -->
+<div class="modal fade" id="editInteration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">修改互动信息</h4>
+            </div>
+            <form role="form" w5c-form-validate="vm.validateOptions" novalidate name="validateForm4">
+                <div class="modal-body">
+                    <p>
+                        <trix-editor name="interactionMore" angular-trix trix-change="trixChange(editor)"
+                                     ng-model="interact" required count-num></trix-editor>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" w5c-form-submit="editInteract(interact)">修改</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--修改机构基本信息-->
+<div class="modal fade" id="editOrgBaseinfo" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title text-center">
+                    修改{{middle.type}}信息
+                </h4>
+            </div>
+            <form role="form"
+                  w5c-form-validate="vm.validateOptions" novalidate name="validateForm2">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" class="form-control" placeholder="请输入单位名称" name="firm"
+                                           ng-model="updateMiddle.firm" maxlength="16"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="请输入姓名" name="name"
+                                       ng-model="updateMiddle.name" required maxlength="10"/>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" class="form-control" placeholder="请输入手机号码" name="phone"
+                                           ng-model="updateMiddle.phone" required phone-limit ng-pattern="/\d{11}/"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="请输入邮箱" name="email"
+                                       ng-model="updateMiddle.email" maxlength="30"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="请输入电话" name="telephone"
+                                       ng-model="updateMiddle.tel" maxlength="13" ng-pattern="/^[0-9\-()]+$/"/>
+                            </div>
+                            <div class="form-group">
+                                <select ng-model="updateMiddle.province" class="form-control" ng-change="provinceChange()">
+                                    <option value="">请选择省份</option>
+                                    <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select ng-model="updateMiddle.city" class="form-control">
+                                    <option value="">请选择城市</option>
+                                    <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" class="form-control" placeholder="请输入联系地址" name="address"
+                                           ng-model="updateMiddle.address" maxlength="100"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" w5c-form-submit="editOrgBaseInfo()">
+                        修改
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

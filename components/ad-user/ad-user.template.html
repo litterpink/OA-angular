@@ -1,0 +1,160 @@
+<!--<style>-->
+    <!--* {-->
+        <!--margin: 0;-->
+        <!--padding: 0;-->
+        <!-- -webkit-box-sizing: border-box;-->
+        <!-- -moz-box-sizing: border-box;-->
+        <!--box-sizing: border-box;-->
+    <!--}-->
+    <!--.none-style-ul {-->
+        <!--list-style-type: none;-->
+    <!--}-->
+
+
+
+    <!--/** =======================-->
+     <!--* Contenedor Principal-->
+     <!--===========================*/-->
+    <!--h1 a {-->
+        <!--color: #c12c42;-->
+        <!--font-size: 16px;-->
+    <!--}-->
+
+    <!--.accordion {-->
+        <!--width: 100%;-->
+        <!--max-width: 360px;-->
+        <!--margin: 30px auto 20px;-->
+        <!--background: #FFF;-->
+        <!-- -webkit-border-radius: 4px;-->
+        <!-- -moz-border-radius: 4px;-->
+        <!--border-radius: 4px;-->
+    <!--}-->
+
+    <!--.accordion .link {-->
+        <!--cursor: pointer;-->
+        <!--display: block;-->
+        <!--padding: 15px;-->
+        <!--text-indent: 25px;-->
+        <!--color: rgb(60, 60, 60);-->
+        <!--font-size: 16px;-->
+        <!--/*font-weight: 700;*/-->
+        <!--border-bottom: 1px solid #ddd;-->
+        <!--position: relative;-->
+        <!-- -webkit-transition: all 0.4s ease;-->
+        <!-- -o-transition: all 0.4s ease;-->
+        <!--transition: all 0.4s ease;-->
+    <!--}-->
+
+    <!--.accordion li:last-child .link {-->
+        <!--border-bottom: 0;-->
+    <!--}-->
+
+    <!--.accordion li i {-->
+        <!--position: absolute;-->
+        <!--top: 16px;-->
+        <!--left: 12px;-->
+        <!--font-size: 36px;-->
+        <!--color: #595959;-->
+        <!-- -webkit-transition: all 0.4s ease;-->
+        <!-- -o-transition: all 0.4s ease;-->
+        <!--transition: all 0.4s ease;-->
+    <!--}-->
+
+    <!--.accordion li i.fa-chevron-down {-->
+        <!--right: 12px;-->
+        <!--left: auto;-->
+        <!--font-size: 10px;-->
+        <!--margin-top: 5px;-->
+        <!--color: rgb(200, 200, 200);-->
+        <!--text-indent: 0;-->
+    <!--}-->
+
+    <!--/*.accordion li.open .link {*/-->
+        <!--/*color: #b63b4d;*/-->
+    <!--/*}*/-->
+
+    <!--/*.accordion li.open i {*/-->
+        <!--/*color: #b63b4d;*/-->
+    <!--/*}*/-->
+    <!--.accordion li.open i.fa-chevron-down {-->
+        <!-- -webkit-transform: rotate(180deg);-->
+        <!-- -ms-transform: rotate(180deg);-->
+        <!-- -o-transform: rotate(180deg);-->
+        <!--transform: rotate(180deg);-->
+    <!--}-->
+
+    <!--/**-->
+     <!--* Submenu-->
+     <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;*/-->
+    <!--.submenu {-->
+        <!--display: none;-->
+        <!--background: rgb(242, 242, 242);-->
+        <!--color: rgb(60, 60, 60);-->
+        <!--font-size: 14px;-->
+    <!--}-->
+
+    <!--.submenu li {-->
+        <!--border-bottom: 1px solid #ddd;-->
+    <!--}-->
+
+    <!--.submenu a {-->
+        <!--display: block;-->
+        <!--text-decoration: none;-->
+        <!--padding: 12px;-->
+        <!--text-indent: 30px;-->
+        <!-- -webkit-transition: all 0.25s ease;-->
+        <!-- -o-transition: all 0.25s ease;-->
+        <!--transition: all 0.25s ease;-->
+    <!--}-->
+
+    <!--.submenu a:hover {-->
+        <!--background: #e9e9e9;-->
+        <!--color: rgb(21, 108, 187)-->
+        <!--/*color: rgb(60, 60, 60);*/-->
+    <!--}-->
+<!--</style>-->
+<!--<div class="col-xs-12 col-sm-2 left">-->
+    <!--<ul id="accordion" class="accordion none-style-ul">-->
+        <!--<li>-->
+            <!--<div class="link" ui-sref="user.person"><a ui-sref-active="{'text-primary': 'user.person.**'}">内部人员</a></div>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="link">-->
+                <!--<a ui-sref-active="{'text-primary': 'user.lawyer.**'}">律师</a>-->
+                <!--<i class="fa fa-chevron-down"></i>-->
+            <!--</div>-->
+            <!--<ul class="submenu none-style-ul">-->
+                <!--<li><a ui-sref="user.lawyer.match" ui-sref-active="{'text-primary': 'user.lawyer.match.**'}">律师匹配</a></li>-->
+                <!--<li><a ui-sref="user.lawyer.all" ui-sref-active="{'text-primary': 'user.lawyer.all.**'}">全部律师</a></li>-->
+                <!--<li><a ui-sref="user.lawyer.gw" ui-sref-active="{'text-primary':'user.lawyer.gw.**'}">官网入驻律师</a></li>-->
+                <!--<li><a ui-sref="user.lawyer.archive" ui-sref-active="{'text-primary': 'user.lawyer.archive.**'}">大律师档案</a></li>-->
+                <!--<li><a ui-sref="user.lawyer.add" ui-sref-active="{'text-primary': 'user.lawyer.add.**'}">添加律师</a></li>-->
+                <!--<li><a ui-sref="user.lawyer.collect" ui-sref-active="{'text-primary': 'user.lawyer.collect.**'}">我的收藏</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="link">-->
+                <!--<a ui-sref-active="{'text-primary': 'user.customer.**'}">客户</a>-->
+                <!--<i class="fa fa-chevron-down"></i>-->
+            <!--</div>-->
+            <!--<ul class="submenu none-style-ul">-->
+                <!--<li><a ui-sref="user.customer.all.list" ui-sref-active="{'text-primary': 'user.customer.all.**'}">所有客户</a></li>-->
+                <!--<li><a ui-sref="user.customer.add" ui-sref-active="{'text-primary': 'user.customer.add.**'}">添加客户</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<div class="link">-->
+                <!--<a ui-sref-active="{'text-primary': 'user.channel.**'}">渠道</a>-->
+                <!--<i class="fa fa-chevron-down"></i>-->
+            <!--</div>-->
+            <!--<ul class="submenu none-style-ul">-->
+                <!--<li><a ui-sref="user.channel.all.list" ui-sref-active="{'text-primary': 'user.channel.all.**'}">所有渠道</a></li>-->
+                <!--<li><a ui-sref="user.channel.add" ui-sref-active="{'text-primary': 'user.channel.add.**'}">添加渠道</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
+<div class="col-xs-12 col-sm-12 right">
+    <ui-view>
+    </ui-view>
+</div>

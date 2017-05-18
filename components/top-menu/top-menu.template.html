@@ -1,0 +1,82 @@
+<style>
+    .topMenu {
+        text-align: left;
+        /*width: 100%;*/
+        height: 50px;
+        background-color: white;
+        border-bottom: 1px solid #d0d0d0;
+        /*margin: 50px 0 0 0;*/
+        padding: 0;
+    }
+    .topMenuItem {
+        text-align: center;
+        display: inline-block;
+        margin-top: 20px;
+        margin-bottom: 0;
+        width: 100px;
+        font-size: 14px;
+        color: rgb(60, 60, 60);
+        height: 30px;
+    }
+    .topMenuItemNum {
+        border-radius: 10px;
+        width: 20px;
+        height: 20px;
+        line-height:20px;
+        font-size:10px;
+        text-align: center;
+        background-color: rgb(39, 109, 237);
+        color:white;
+        position: absolute;
+        right: -20px;
+        top: -14px;
+    }
+    .selectedTopMenuItem {
+        border-bottom: 3px solid rgb(39, 109, 237);
+    }
+    .topMenuItem:hover {
+        border-bottom: 3px solid rgb(160, 160, 160);
+    }
+    .topMenuItem.selectedTopMenuItem:hover {
+        border-bottom: 3px solid rgb(39, 109, 237);
+    }
+    .topMenuItem a {
+        cursor: pointer;
+    }
+</style>
+<div class="topMenu" ng-if="!$ctrl.type">
+    <div ng-repeat="item in $ctrl.options"
+         class="topMenuItem"
+         ui-sref-active="selectedTopMenuItem"
+         ui-sref="{{item.uiSref}}"
+    >
+        <a style="position: relative;">
+            {{item.name}}
+            <span class="topMenuItemNum" ng-if="item.num > 0">{{item.num}}</span>
+        </a>
+    </div>
+</div>
+<div class="topMenu" ng-if="$ctrl.type == 1">
+    <div ng-repeat="item in $ctrl.options"
+         class="topMenuItem"
+         ng-click="selectIndex($index)"
+         ng-class="{selectedTopMenuItem: $ctrl.selectedIndex == $index}"
+    >
+        <a style="position: relative;">
+            {{item.name}}
+            <span class="topMenuItemNum" ng-if="item.num > 0">{{item.num}}</span>
+        </a>
+    </div>
+</div>
+<div class="topMenu" ng-if="$ctrl.type == 2">
+    <div ng-repeat="item in $ctrl.options"
+         class="topMenuItem"
+         ng-click="selectIndex($index)"
+         ng-class="{selectedTopMenuItem: $ctrl.selectedIndex == $index}"
+    >
+        <a style="position: relative;">
+            {{item.name}}
+            <span class="topMenuItemNum" ng-if="item.num > 0">{{item.num}}</span>
+        </a>
+    </div>
+</div>

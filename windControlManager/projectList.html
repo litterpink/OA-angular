@@ -1,0 +1,153 @@
+<div class="right-content">
+    <div class="row">
+        <p ng-show="infos.length == 0" class="no-data">暂无信息</p>
+        <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+            <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+            <div class="panel panel-default">
+
+                <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                    <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.name}}</b>
+                </div>
+
+                <div style="position: relative" class="panel-body"><!--background-color: #00a0e9;-->
+                    <div  class="clickProject listHover" data-url="#/project/detail/{{info.num}}/info" ng-click="clickProject(info)">查看详情</div>
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <a class="listA" style="cursor: pointer">
+                        <p><span class="sub-title spacing-2-word">编号</span>:&nbsp;&nbsp;&nbsp;{{info.num}}</p>
+                        <p><span class="sub-title spacing-3-word">标的额</span><span style="margin-left: -14px">:&nbsp;&nbsp;&nbsp;{{info.money | formatMoney}}</span> </p>
+                        <p class="noWrap"><span class="sub-title spacing-2-word">状态</span>:&nbsp;&nbsp;&nbsp;{{info.status}}</p>
+                        <p><span class="sub-title spacing-6-word">评估开始时间</span>:&nbsp;&nbsp;&nbsp;{{info.to_controller_time}}</p>
+                    </a>
+                </div>
+                <table class="table table-striped">
+                    <tr id="listStyle">
+                        <td class="textCenter" data-toggle="modal" data-target="#assessment"
+                            ng-if="info.status=='风控经理评估中'" ng-click="assessment(info.num)">评估</td>
+                        <td class="textCenter" data-toggle="modal" data-target="#return"
+                            ng-if="info.status=='风控经理评估中'" ng-click="return(info.num)">退回补充材料</td>
+                        <td style="text-align: center;color: #ccc" ng-if="info.status != '风控经理评估中'">暂无处理事项</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(currentPage)" boundary-links="true" boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+            </div>
+        </div>
+    </div>
+    <!-- 模板 -->
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul>
+                <li ng-repeat="item in $ctrl.items">
+                    <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ $ctrl.selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+    <!-- 模态框（Modal） 评估 -->
+    <div class="modal fade" id="assessment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="signLabel">风控经理评估意见</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal w5c-form demo-form" role="form"
+                          w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+                        <p>
+                            <input tabindex="1" ng-model="money" name="money" ng-required="true" type="number" class="form-control" placeholder="实际争议标的(单位:万元)" maxlength="11">
+                        </p>
+                        <p>
+                            <trix-editor tabindex="2" angular-trix trix-change="trixChange(editor)" ng-model="risk" placeholder="风险点归纳" count-num="30000"></trix-editor>
+                        </p>
+                        <p>
+                            <input tabindex="3" ng-model="property" type="text" class="form-control" placeholder="有效财产线索" maxlength="1000">
+                        </p>
+                        <p>
+                            <!--<input ng-model="client_ability" type="text" class="form-control" placeholder="客户履约能力" maxlength="1000">-->
+                            <trix-editor tabindex="4" angular-trix trix-change="trixChange(editor)" ng-model="client_ability" placeholder="客户履约能力" count-num></trix-editor>
+                        </p>
+                        <!--<p>
+                            <textarea ng-model="lawyers" name="" rows="5" class="form-control" placeholder="律师团队构成建议" maxlength="1000"></textarea>
+                        </p>-->
+                        <p>
+                            <trix-editor tabindex="5" angular-trix trix-change="trixChange(editor)" ng-model="lawyers" placeholder="律师团队构成建议" count-num></trix-editor>
+                        </p>
+                        <p>
+                            <input tabindex="6" ng-model="lawyer_fee" type="number" class="form-control" placeholder="律师费预计(单位:万元)" maxlength="10">
+                        </p>
+                        <p>
+                            <input tabindex="7" ng-model="official_fee" type="number" class="form-control" placeholder="官费预计(单位:万元)" maxlength="10">
+                        </p>
+                        <p>
+                            <input tabindex="8" ng-model="travel_expense" type="number" class="form-control" placeholder="差旅费预计(单位:万元)" maxlength="10">
+                        </p>
+                        <p>
+                            <input tabindex="9" ng-model="payment_money" type="text" class="form-control" placeholder="回款数额预计(单位:万元)" maxlength="11">
+                        </p>
+                        <p>
+                            <input tabindex="10" ng-model="payment_time" type="text" class="form-control" placeholder="回款周期预计" maxlength="100">
+                        </p>
+                        <p>
+                            <input tabindex="11" ng-model="judicial" type="text" class="form-control" placeholder="司法环境" maxlength="100">
+                        </p>
+                        <p id="result" style="border: 1px solid #fff">
+                            建议: <input  tabindex="12" ng-model="result" value="1" ng-required="true" type="radio" name="result">&nbsp;收项
+                            <input  tabindex="13" ng-model="result" value="2" ng-required="true" type="radio" name="result" style="margin-left: 10px;"> 拒项
+                        </p>
+                        <!--<p>
+                            <textarea ng-model="suggestion" ng-required="true" name="suggestion" rows="5" class="form-control" placeholder="综合意见如下" maxlength="1000"></textarea>
+                        </p>-->
+                        <p id="suggestionColor" style="border: 1px solid #fff">
+                            <trix-editor tabindex="14" angular-trix trix-change="trixChange(editor)" ng-model="suggestion" placeholder="综合意见如下" required count-num></trix-editor>
+                        </p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveDraft(money,risk,property,client_ability,lawyers,lawyer_fee,official_fee,travel_expense,payment_time,payment_money,judicial,result,suggestion)">保存为草稿</button>
+                            <button type="button" class="btn btn-primary" ng-click="changeColor()" w5c-form-submit="submitAssessment(money,risk,property,client_ability,lawyers,lawyer_fee,official_fee,travel_expense,payment_time,payment_money,judicial,result,suggestion)">完成评估,提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!-- 模态框（Modal） 退回补充材料 -->
+    <div style="margin-top: 150px" class="modal fade" id="return" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="signLabel">退回补充材料</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal w5c-form demo-form" role="form"
+                          w5c-form-validate="vm.validateOptions" novalidate name="validateForm2">
+                        <p>
+                            <textarea ng-model="detail" name="detail" ng-required="true" rows="5" placeholder="请填写补充材料清单" style="width: 100%" maxlength="2000"></textarea>
+                        </p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-default" w5c-form-submit="submitBack(detail)">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>

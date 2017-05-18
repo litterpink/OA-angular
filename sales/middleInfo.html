@@ -1,0 +1,61 @@
+<style>
+    .blueSolid1{
+        background-color: #3085f1;
+    }
+    .spanEle1,.spanEle2{
+        background-color: #3085f1;
+    }
+    .liEle1{
+        color: #3085f1;
+    }
+</style>
+<div class="row no-margin">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <div class="btn-group col-sm-12 by-tab">
+            <button type="button" class="btn btn-default by-tab-item col-sm-6" ng-class="{'by-tab-item-selected': selectedIndex == 0}" ng-click="selectIndex(0)">填写渠道信息</button>
+            <button type="button" class="btn btn-default by-tab-item col-sm-6" ng-class="{'by-tab-item-selected': selectedIndex == 1}" ng-click="selectIndex(1)">从数据库中选择渠道</button>
+        </div>
+
+        <div ng-show="selectedIndex == 0">
+            <br/>
+            <br/>
+            <br/>
+            <add-middle next-step="nextStep()" middle-id="newMiddleId" skip-step="skipStep()"></add-middle>
+        </div>
+        <div ng-show="selectedIndex == 1">
+            <br/>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12 col-sm-5">
+                    <input type="text" ng-model="$parent.$parent.name" placeholder="输入姓名和机构名进行搜索" class="form-control" maxlength="10"/>
+                </div>
+            </div>
+            <br/>
+            <ul class="list-group text-left">
+                <li class="list-group-item" ng-repeat="user in userList">
+                    <div class="row" ng-click="selectUser(user.user_id)">
+                        <div class="col-xs-1">
+                            <input type="radio" value="{{user.user_id}}" ng-model="$parent.middleId" name="checkUser" ng-checked="$index == 0"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <sapn ng-show="user.type == 3 || user.type == 6">{{user.name}}</sapn>
+                            <sapn ng-show="user.type == 7">{{user.firm}}</sapn>
+                        </div>
+                        <div class="col-xs-5">
+                            <sapn ng-show="user.type == 3 || user.type == 6">{{user.firm}}</sapn>
+                            <sapn ng-show="user.type == 7">{{user.name}}</sapn>
+                        </div>
+                        <div class="col-xs-3">
+                            {{user.phone}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <p class="text-right">
+                <a ui-sref="project.new.client"class="btn btn-default" >上一步</a>
+                <a class="btn btn-primary" ng-click="nextStep()">下一步</a>
+            </p>
+        </div>
+    </div>
+</div>

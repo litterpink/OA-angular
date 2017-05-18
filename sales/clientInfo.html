@@ -1,0 +1,63 @@
+<div class="row" style="margin: 0">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="btn-group col-sm-12 by-tab">
+            <button type="button" class="btn btn-default by-tab-item col-sm-6" ng-class="{'by-tab-item-selected': selectedIndex == 0}" ng-click="selectIndex(0)">录入客户信息</button>
+            <button type="button" class="btn btn-default by-tab-item col-sm-6" ng-class="{'by-tab-item-selected': selectedIndex == 1}" ng-click="selectIndex(1)">从数据库中选择客户</button>
+        </div>
+        <div ng-show="selectedIndex == 0">
+            <br/>
+            <br/>
+            <br/>
+            <add-client next-step="nextStep()" client-id="newClientId"></add-client>
+        </div>
+        <div ng-show="selectedIndex == 1">
+            <br/>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <input type="text" ng-model="$parent.$parent.name" placeholder="输入姓名或机构名搜索" class="form-control" maxlength="10"/>
+                </div>
+            </div>
+            <br/>
+            <ul class="list-group text-left">
+                <li class="list-group-item" ng-repeat="client in clientList">
+                    <div class="row" ng-click="selectClient(client.user_id)">
+                        <div class="col-xs-1">
+                            <input type="radio" value="{{client.user_id}}" ng-model="$parent.clientId" name="checkClient" ng-checked="$index == 0"/>
+                        </div>
+                        <div class="col-xs-3">
+                            <span ng-show="client.type == 4">{{client.name}}</span>
+                            <span ng-show="client.type == 5">{{client.firm}}</span>
+                        </div>
+                        <div class="col-xs-5">
+                            <span ng-show="client.type == 5">{{client.name}}</span>
+                            <span ng-show="client.type == 4">{{client.firm}}</span>
+                        </div>
+                        <div class="col-xs-3">
+                            {{client.phone}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--分页-->
+                    <div class="page">
+                        <uib-pagination total-items="totalItems"
+                                        ng-model="currentPage"
+                                        max-size="maxSize"
+                                        class="pagination-sm pull-left"
+                                        ng-change="pageChanged(currentPage)"
+                                        boundary-links="true"
+                                        boundary-links-numbers="true"
+                                        rotate="false"></uib-pagination>
+                    </div>
+                </div>
+            </div>
+            <p class="text-right">
+                <a class="btn btn-primary" ng-click="nextStep()">下一步</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+<style>
+    .itemRole {
+        padding-bottom:5px;
+        border-bottom: 1px solid #ccc;
+        display:block;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+    .subItem {
+        margin-right: 5px;
+        font-size: 12px;
+    }
+    .panel-body {
+        padding: 0 15px;
+        padding-top: 15px;
+    }
+
+</style>
+<div class="row">
+    <p class="no-data" ng-if="personInfoArray.length == 0">暂无信息</p>
+    <div class="col-xs-3 col-sm-3" ng-repeat="person in personInfoArray">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <b class="itemRole">{{person.role}}<span ng-if="canChangePerson && person.canChange" class="pull-right main-color cursor-touch" ng-click="changePerson(person)">更换</span></b>
+            </div>
+            <div style="position: relative" class="panel-body">
+                <a class="listA">
+                    <p class="noWrap"><span class="sub-title subItem">姓名:</span>{{person.name}}</p>
+                    <p class="noWrap"><span class="sub-title subItem">手机:</span>{{person.phone}}</p>
+                    <p class="noWrap"><span class="sub-title subItem">单位:</span>{{person.firm}}</p>
+                    <p class="noWrap"><span class="sub-title subItem">职务:</span>{{person.position}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePersonModal" tabindex="-1" role="dialog"
+     aria-labelledby="changePersonLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    更换{{changeRole}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <p>
+                        <input type="input" class="form-control" ng-model="searchName" placeholder="姓名或单位名"/>
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>选择</th>
+                            <th>姓名</th>
+                            <th>单位</th>
+                            <th>手机</th>
+                        </tr>
+                        <tr ng-repeat="person in personList" ng-click="selectPerson($index)">
+                            <td>
+                                <input type="radio"
+                                       name="person"
+                                       value="{{$index}}"
+                                       ng-model="$ctrl.selectedPersonIndex"
+                                />
+                            </td>
+                            <td>
+                                {{person.name}}
+                            </td>
+                            <td>
+                                {{person.firm}}
+                            </td>
+                            <td>
+                                {{person.phone}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--分页-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--分页-->
+                        <div class="page">
+                            <uib-pagination total-items="totalItems"
+                                            ng-model="currentPage"
+                                            max-size="maxSize"
+                                            class="pagination-sm pull-left"
+                                            ng-change="pageChanged(currentPage)"
+                                            boundary-links="true"
+                                            boundary-links-numbers="true"
+                                            rotate="false">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="submitSelectPerson()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

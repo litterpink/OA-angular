@@ -1,0 +1,37 @@
+<ui-view>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4" ng-repeat="user in users">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <a ng-href="#/data/windcontrol/{{user.user_id}}/info" ng-click="userType(user.type)">
+                        <p> {{user.name}}</p>
+                        <p style="visibility: hidden">1</p>
+                        <p> {{user.type}}</p>
+                        <img ng-src="{{user.head_img_url}}" class="img-responsive img-circle"
+                             style="width: 100px; position: absolute; right: 30px; top: 10px; border: 1px solid #ddd"/>
+                    </a>
+                </div>
+                <!-- 功能按钮 -->
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(bigCurrentPage)" boundary-links="true" boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+</ui-view>

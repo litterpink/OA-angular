@@ -1,0 +1,76 @@
+<ui-view>
+    <br/>
+    <div class="row">
+        <div class="col-lg-4 col-xs-12">
+            <p>
+                <input type="text" class="form-control" placeholder="姓名" ng-model="lawyer.name"/>
+            </p>
+        </div>
+        <div class="col-lg-4 col-xs-12">
+            <p>
+                <input type="text" class="form-control" placeholder="律所" ng-model="lawyer.firm"/>
+            </p>
+        </div>
+        <div class="col-lg-4 col-xs-12">
+            <p>
+                <select ng-model="lawyer.province" class="form-control">
+                    <option value="">所有省份</option>
+                    <option ng-repeat="item in provinceData">{{item.name}}</option>
+                </select>
+            </p>
+        </div>
+    </div>
+    <!-- 循环显示数据 -->
+    <p ng-if="infos.length==0" class="no-data">暂无信息</p>
+    <div class="row">
+        <div class="col-xs-4 col-sm-4" ng-repeat="info in infos">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="box-header">
+                        <div class="pull-right box-tools lawyerInfo">
+                            <img ng-show="info.judicial_type=='法院'" src="../common/images/seniorLeft.png" width="50" style="position: absolute; left: 17px; top: 5px; z-index: 999999">
+                            <!--单击传递lid-->
+                            <!--判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示-->
+                        <span ng-if="info.is_collection != 0">
+                        <i accordion="1" class="fa fa-star" style="cursor: pointer; color: #ffb70a" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}"  cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.is_collection == 0">
+                        <i accordion="1" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                            <!--<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                               style="cursor: pointer"></i>-->
+                        </div>
+                    </div>
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <p class="text-right" style="margin: 0"></p>
+                    <a ui-sref="lawyerInfo({id: info.user_id})">
+                        <p class="borderBottom">
+                            <span style="font-size: 20px;display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.name}}</span>
+                        </p>
+                        <p style="display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span
+                                class="glyphicon glyphicon-home"></span> {{info.firm}}</p>
+                        <p style="display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="glyphicon glyphicon-phone"></span> {{info.phone}}</p>
+                        <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                             style="width: 80px; position: absolute; right: 30px; top: 35px; border: 1px solid #ddd"/>
+                    </a>
+                </div>
+                <!-- 功能按钮 -->
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(bigCurrentPage,name,firm,province)" boundary-links="true" boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+            </div>
+        </div>
+    </div>
+</ui-view>
+

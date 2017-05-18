@@ -1,0 +1,100 @@
+<style>
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        padding: 20px;
+        padding-right: 0;
+    }
+    .bottom-box {
+        padding: 20px;
+        padding-right: 0;
+    }
+    .left_gap {
+        margin-left: 50px;
+    }
+    .spacing {
+        letter-spacing: 1px;
+    }
+    .spacing-5 {
+        letter-spacing: 5px;
+    }
+    .spacing-10 {
+        letter-spacing: 10px;
+    }
+    .spacing-11_5 {
+        letter-spacing: 11.5px;
+    }
+    .spacing-15 {
+        letter-spacing: 15px;
+    }
+    .spacing-18 {
+        letter-spacing: 18px;
+    }
+    .spacing-24 {
+        letter-spacing: 24px;
+    }
+    .spacing-48 {
+        letter-spacing: 50px;
+    }
+    .align-top {
+        vertical-align: top
+    }
+    /*富文本样式*/
+    .rich-text div {
+        margin-left: 150px;
+        padding-right: 20px;
+    }
+    .rich-text div:first-child {
+        margin-top: -20px;
+    }
+    .rich-text ul, ol {
+        margin-left: 150px;
+        padding-left: 30px;
+        padding-right: 40px;
+    }
+    .gap-left {
+        margin-left: 5px;
+    }
+    .content-block {
+        display: inline-block;
+        width: 700px;
+    }
+</style>
+
+<!--市场分析师评估模板-->
+<div ng-show="analyst == undefined && (type != '92' || status != '2')">
+    <p class="no-data">暂无信息</p>
+</div>
+<div style="margin-right: 10px" class="text-right" ng-show="type == '92' && status == '2'">
+    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#analyst">分析</button>
+</div>
+
+
+<div ng-show="analyst">
+    <div class="info_box">
+        <p><b class="spacing-48 align-top">案由</b><b class="spacing-18 align-top">:</b><span class="content-block">{{analyst.dispute}}</span></p>
+        <p><b class="spacing-11_5">当事人信息</b><b class="spacing-18">:</b><span class="rich-text" ng-bind-html="analyst.party_info | toHtml"></span></p>
+        <p><b class="spacing-18">争议标的</b><b class="spacing-18">:</b>{{analyst.money | formatMoney}}</p>
+    </div>
+
+    <div class="info_box">
+        <p><b>争议焦点及法律依据</b><b class="spacing-24 gap-left">:</b><span class="rich-text" ng-bind-html="analyst.disputes_basis | toHtml"></span></p>
+        <p><b class="spacing-18">管辖法院:</b>{{analyst.court}}</p>
+        <p><b class="spacing-18 align-top">时效情况:</b><span class="content-block">{{analyst.limitation}}</span></p>
+    </div>
+    <div class="info_box">
+        <p>
+            <b class="spacing-48">建议</b><b class="spacing-18">:</b>
+            <input type="checkbox" disabled="disabled" ng-checked="analyst.result == 1" /> 收项
+            <input type="checkbox" disabled="disabled" ng-checked="analyst.result == 2" /> 拒项
+        </p>
+        <p>
+            <b class="spacing-18 align-top">综合意见:</b><span class="content-block">{{analyst.suggestion}}</span>
+        </p>
+    </div>
+    <div class="bottom-box">
+        <p><b class="spacing-11_5">市场分析师</b><b class="spacing-18">:</b>{{analyst.analyst}}</p>
+        <p><b class="spacing-18">分析时间</b><b class="spacing-18">:</b>{{analyst.time}}</p>
+    </div>
+</div>
+<!-- 模态框（Modal） 分析 -->
+<project-analyst-btn project-id="{{project_id}}"></project-analyst-btn>

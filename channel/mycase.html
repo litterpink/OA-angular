@@ -1,0 +1,32 @@
+<br/>
+<div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <b style="display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.num}}</b>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                <a href="#/mycase/info/1">
+                    <p>标的额: 2000万 </p>
+                    <p>状态: <span class="text-primary">待签约</span></p>
+                    <p>预计收益: 28.3万</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(bigCurrentPage)" boundary-links="true" boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>
+

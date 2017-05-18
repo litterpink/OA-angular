@@ -1,0 +1,184 @@
+<!-- 模态框(type=3 填写律师信息) -->
+<!-- 模态框(type=3 填写律师信息) -->
+<div class="modal fade" id="selectLawyerModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    遴选律师
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <p>
+                        <input type="input" class="form-control" ng-model="lawyerName" placeholder="律师姓名或律所"/>
+                    </p>
+                    <table class="table">
+                        <tr>
+                            <th>选择</th>
+                            <th>姓名</th>
+                            <th>律所</th>
+                            <th>手机</th>
+                        </tr>
+                        <tr ng-repeat="lawyer in lawyerList" ng-click="selectLawyer($index)">
+                            <td>
+                                <input type="radio"
+                                       name="lawyer"
+                                       value="{{$index}}"
+                                       ng-model="$ctrl.selectedLawyerIndex"
+                                />
+                            </td>
+                            <td>
+                                {{lawyer.name}}
+                            </td>
+                            <td>
+                                {{lawyer.firm}}
+                            </td>
+                            <td>
+                                {{lawyer.phone}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--分页-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--分页-->
+                        <div class="page">
+                            <uib-pagination total-items="totalItems"
+                                            ng-model="currentPage"
+                                            max-size="maxSize"
+                                            class="pagination-sm pull-left"
+                                            ng-change="pageChanged(currentPage)"
+                                            boundary-links="true"
+                                            boundary-links-numbers="true"
+                                            rotate="false">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" ng-if="$ctrl.type == 0">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="submitSelectLawyer()">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="modal fade" id="selectLawyerModal" tabindex="-1" role="dialog"-->
+     <!--aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close"-->
+                        <!--data-dismiss="modal" aria-hidden="true">-->
+                    <!--&times;-->
+                <!--</button>-->
+                <!--<h4 class="modal-title">-->
+                    <!--遴选律师-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<ul id="lawyerTab" class="nav nav-tabs">-->
+                    <!--<li class="active">-->
+                        <!--<a href="/#changeLawyer" data-toggle="tab" ng-click="selectTabEvent(0)">-->
+                            <!--选择律师-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="/#inputLawyer" data-toggle="tab" ng-click="selectTabEvent(1)">-->
+                            <!--填写律师信息-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<br/>-->
+
+                <!--<div id="lawyerTabContent" class="tab-content">-->
+                    <!--<div class="tab-pane fade in active" id="changeLawyer">-->
+                        <!--<div class="table-responsive">-->
+                            <!--<p>-->
+                                <!--<input type="input" class="form-control" ng-model="lawyerName" placeholder="名字"/>-->
+                            <!--</p>-->
+                            <!--<table class="table">-->
+                                <!--<tr>-->
+                                    <!--<th>选择</th>-->
+                                    <!--<th>姓名</th>-->
+                                    <!--<th>律所</th>-->
+                                    <!--<th>手机</th>-->
+                                <!--</tr>-->
+                                <!--<tr ng-repeat="lawyer in lawyerList" ng-click="selectLawyer($index)">-->
+                                    <!--<td>-->
+                                        <!--<input type="radio"-->
+                                               <!--name="lawyer"-->
+                                               <!--value="{{$index}}"-->
+                                               <!--ng-model="$ctrl.selectedLawyerIndex"-->
+                                        <!--/>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{lawyer.name}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{lawyer.firm}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{lawyer.phone}}-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;分页&ndash;&gt;-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-xs-12">-->
+                                <!--&lt;!&ndash;分页&ndash;&gt;-->
+                                <!--<div class="page">-->
+                                    <!--<uib-pagination total-items="totalItems"-->
+                                                    <!--ng-model="currentPage"-->
+                                                    <!--max-size="maxSize"-->
+                                                    <!--class="pagination-sm pull-left"-->
+                                                    <!--ng-change="pageChanged(currentPage)"-->
+                                                    <!--boundary-links="true"-->
+                                                    <!--boundary-links-numbers="true"-->
+                                                    <!--rotate="false">-->
+                                    <!--</uib-pagination>-->
+                                        <!--<span style="position: relative; top: 25px; margin-left: 10px">-->
+                                            <!--总共:-->
+                                            <!--<b class="text-primary">{{maxItems}}</b>-->
+                                            <!--{{totalItems}}条-->
+                                        <!--</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="tab-pane fade in" id="inputLawyer">-->
+                        <!--<ad-user-lawyer-add-input embed-modal='1'-->
+                                                  <!--cancel="cancelSubmit()"-->
+                                                  <!--lawyer-id="newLawyerId"-->
+                                                  <!--complete="addLawyerComplete(newLawyerId)"-->
+                        <!--&gt;-->
+
+                        <!--</ad-user-lawyer-add-input>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer" ng-if="$ctrl.type == 0">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">-->
+                    <!--关闭-->
+                <!--</button>-->
+                <!--<button type="button" class="btn btn-primary" ng-click="submitSelectLawyer()">-->
+                    <!--提交-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

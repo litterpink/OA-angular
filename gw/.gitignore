@@ -1,0 +1,6 @@
+.idea/*
+./DS_Store
+./api/session/*
+api/session
+api/application/config/config.php
+page/js/myRoute.js

@@ -1,0 +1,54 @@
+<style>
+    .supervisionContainer {
+        padding: 0 10px;
+        margin: 0;
+    }
+    .supervisionItem {
+        padding: 5px;
+        margin: 0;
+    }
+    .supervisionContent {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        position: relative;
+        border: 1px solid rgb(210, 210, 210);
+    }
+    .supervisionModule {
+        display: block;
+        height: 100px;
+        line-height: 100px;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+    .supervisionContent:hover {
+        background-color: rgb(245, 245, 245);
+    }
+    .selected-module {
+        background-color: rgb(230, 230, 230);
+    }
+    .long-button {
+        width: 200px;
+        margin: 0 50px;
+    }
+    .button-group {
+        padding-top: 50px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+</style>
+<div class="row supervisionContainer">
+    <div class="col-xs-3 col-sm-3 supervisionItem" ng-repeat="info in moduleList">
+        <div class="supervisionContent">
+            <a class="supervisionModule" ng-click="selectModule($index)" ng-class="{'selected-module': $index == selectedIndex}">
+                {{info.name}}
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 button-group">
+        <!--取消,返回上个页面-->
+        <a type="button" class="btn btn-default long-button" href="javascript:history.go(-1)">取消</a>
+        <button type="button" class="btn btn-primary long-button" ng-click="confirmAddModule()">确定</button>
+    </div>
+</div>

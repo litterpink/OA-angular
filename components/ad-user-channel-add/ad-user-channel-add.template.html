@@ -1,0 +1,35 @@
+<ui-view>
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-xs-12 text-center">
+                            <h2 class="fa fa-plus text-primary" style="font-size: 28px"> 添加渠道</h2>
+                        </div>
+                        <div class="col-xs-12">
+                            <br/>
+                            <br/>
+                            <a ui-sref="user.channel.add.person" class="btn btn-primary btn-block btn-lg" style="color: #fff">
+                                录入个人 / 律师渠道信息
+                            </a>
+                            <br/>
+                            <a ui-sref="user.channel.add.mechanism" class="btn btn-warning btn-block btn-lg" style="color: #fff">
+                                录入机构渠道信息
+                            </a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ui-view>
+<script type="text/javascript">
+    /* 查询框居中显示 */
+    $(function () {
+        var height = ($(window).height() - 500) / 2;
+        $(".content").css({"margin-top": height});
+    })
+</script>

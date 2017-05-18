@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+            <p class="text-right" style="margin: 0"></p>
+            <h3> {{user.name}}</h3>
+            <p> {{user.type}}</p>
+            <p>督办案件共{{user.project_num}}个</p>
+        </div>
+        <!-- 功能按钮 -->
+    </div>
+</div>
+
+<div ng-if="user.project_num == 0">
+    <p class="no-data">无数据</p>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+        <div class="panel panel-default">
+
+            <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.name}}</b>
+            </div>
+
+            <div style="position: relative" class="panel-body">
+                <!--<div  class="listHover" ui-sref="project.detail.supervision({id: info.num})">查看详情</div>-->
+                <a>
+                    <p><span class="sub-title spacing-2-word">编号</span>:&nbsp;&nbsp;&nbsp;{{info.num}}</p>
+                    <p><span class="sub-title spacing-3-word">标的额</span><span style="margin-left: -14px">:&nbsp;&nbsp;&nbsp;{{info.money | formatMoney}}</span> </p>
+                    <p class="noWrap"><span class="sub-title spacing-2-word">状态</span>:&nbsp;&nbsp;&nbsp;{{info.status}}</p>
+                    <p><span class="sub-title spacing-4-word">创建时间</span>:&nbsp;&nbsp;&nbsp;{{info.sign_time}}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(bigCurrentPage)" boundary-links="true" boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>
+

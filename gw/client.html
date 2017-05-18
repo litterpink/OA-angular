@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮 | 客户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+    <script src="../common/js/common.js"></script>
+    <script src="common/js/service.js"></script>
+    <script src="js/myRoute.js"></script>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom active"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+                <script>
+                    $("span.menu").click(function () {
+                        $("ul.nav1").slideToggle(300, function () {
+                            // Animation complete.
+                        });
+                    });
+
+                    $(function () {
+                        $("#myNav").affix({
+                            offset: {
+                                top: 250
+                            }
+                        });
+                    })
+                </script>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div class="container" style="position: relative" ng-controller="clientCtrl">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+                <h4 class="text-primary" style="line-height: 25px">如果您正面临着标的在500万以上的诉讼，如果您的案件通过帮帮的分控审核，帮帮可以为您垫钱打官司。您可以通过以下途径联系帮帮：</h4>
+                <br/>
+                <blockquote>1、添加帮帮大管家微信</blockquote>
+                <p class="text-center">
+                    <img src="images/beyondWx.jpg" width="200"/>
+                </p>
+                <blockquote>2、拨打帮帮400热线：<span class="text-primary">400-167-8680</span></blockquote>
+                <blockquote>3、将案件材料发送至帮帮邮箱，<span class="text-primary">info@beyondwinlaw.com</span>，帮帮工作人员会在24小时内给您回信</blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'footer.html'"></div>
+</body>
+</html>

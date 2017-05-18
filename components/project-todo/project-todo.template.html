@@ -1,0 +1,78 @@
+<div id="myTabContent" class="tab-content">
+    <h4 class="text-theme">
+        {{moduleName}}
+        &nbsp;
+        <button style="font-size: 8px; padding: 3px 5px; border-radius: 0.25em" type="button"
+                class="btn btn-primary btn-lg" data-toggle="modal" ng-click="completeProject()" ng-if="projectManager == 1 && is_finished == 2">
+            完成
+        </button>
+        <span class="text-primary" style="font-size: 8px" ng-if="projectManager == 1 && is_finished == 1">已经完成</span>
+    </h4>
+    <div class="row" style="height:400px">
+        <div class="col-sm-4 col-xs-12" ng-repeat="data in dataList" ng-init="pIndex=$index">
+            <div class="well">
+                <h5 class="text-center text-theme">{{data.title}}</h5>
+                <div style="overflow: auto; border-bottom: 1px dashed red; margin-bottom: 10px;">
+                    <div ng-repeat="item in data.itemList" style="border-top: 1px dashed #aaa; padding-bottom: 10px">
+                        <input type="checkbox"
+                               ng-click="selectItem(item, pIndex)"
+                               ng-checked="item.item_status == 2"
+                               ng-model="checked[item.project_module_item_id]"
+                        >
+                        <ul style="padding: 5px 20px">
+                            <li ng-repeat="msg in item.item_detail | splitArr">
+                                {{msg}}
+                            </li>
+                        </ul>
+                        <p class="text-right">
+                            <span class="text-theme">{{item.time}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <assign-lawyer complete="assignLawyerComplete()"></assign-lawyer>
+
+    <!-- 模态框(type=1上传文件) -->
+    <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form name="uploadForm">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        上传文件 <span style="color: red">*</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <!--<p>选择文件类型</p>-->
+                        <!--<p>-->
+                            <!--<select class="form-control" ng-model="uploadFileType" required>-->
+                                <!--<option value="1">案件材料</option>-->
+                                <!--<option value="2">律师工作与成果</option>-->
+                                <!--<option value="3">官方文件</option>-->
+                            <!--</select>-->
+                        <!--</p>-->
+                        <upload-progress upload-urls="uploadFiles" project-id="{{projectId}}"></upload-progress>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="submitUpload(uploadFileType, uploadFiles)" ng-disabled="uploadForm.$invalid">
+                        提交
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

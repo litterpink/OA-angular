@@ -1,0 +1,24 @@
+<div class="content">
+    <div class="row">
+        <div class="container no-data">
+            暂无合作信息
+        </div>
+        <div class="col-xs-12" ng-repeat="info in result">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{info.name}}</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>标<span style="margin: 0px 3px"></span>的<span style="margin: 0px 4px"></span>额:</b> {{info.money | formatMoney}}</p>
+                    <p><b>项目状态:</b> {{info.status}}</p>
+                    <div>
+                        <b>案情简介:</b>
+                        <p style="position: relative; top: -20px; margin-left: 64px;">
+                            {{info.brief}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

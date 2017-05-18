@@ -1,0 +1,79 @@
+<style>
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        padding: 20px;
+        padding-right: 0;
+    }
+    .bottom-box {
+        padding: 20px;
+        padding-right: 0;
+    }
+    .spacing-18 {
+        letter-spacing: 18px;
+    }
+    /*富文本样式*/
+    .rich-text div {
+        margin-left: 150px;
+        padding-right: 20px;
+    }
+    .rich-text div:first-child {
+        margin-top: -20px;
+    }
+    .rich-text ul, ol {
+        margin-left: 150px;
+        padding-left: 30px;
+        padding-right: 40px;
+    }
+</style>
+<!--风控总监评估模板-->
+<div ng-if="director == undefined && type != '94'">
+    <p class="no-data">暂无信息</p>
+</div>
+<div style="margin-right: 10px" class="text-right" ng-show="director == undefined && type == '94'">
+    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#assessment">评估</button>
+</div>
+
+<div ng-show="director">
+    <div class="info_box">
+        <p>
+            <b class="spacing-18">评价结果</b><b class="spacing-18">:</b>
+            <input type="checkbox" disabled="disabled" ng-checked="director.result == 1" /> 收项
+            <input type="checkbox" disabled="disabled" ng-checked="director.result == 2" /> 拒项
+        </p>
+        <p><b class="spacing-18">综合意见</b><b class="spacing-18">:</b><span class="rich-text" ng-bind-html="director.suggestion | toHtml"></span></p>
+    </div>
+    <div class="bottom-box">
+        <p><b class="spacing-18">风控总监</b><b class="spacing-18">:</b>{{director.cd}}</p>
+        <p><b class="spacing-18">评估时间</b><b class="spacing-18">:</b>{{director.time}}</p>
+    </div>
+</div>
+
+
+
+<!-- 模态框（Modal） 评估 -->
+<div style="margin-top: 150px" class="modal fade" id="assessment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="signLabel">风控总监评估结论及签约建议</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal w5c-form demo-form" role="form"
+                      w5c-form-validate="vm.validateOptions" novalidate name="validateForm1">
+                    <p id="result2" style="border: 1px solid white">
+                        评估结论为: <input ng-model="result" value="1" type="radio" name="agree" ng-required="true">&nbsp;收项
+                        <input ng-model="result" value="2" type="radio" name="agree" ng-required="true" style="margin-left: 10px;"> 拒项
+                    </p>
+                    <p id="suggestionColor" style="border: 1px solid #fff">
+                        <trix-editor title="综合意见" angular-trix trix-change="trixChange(editor)" ng-model="suggestion" placeholder="综合意见" required count-num></trix-editor>
+                    </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-default" ng-click="changeColor()" w5c-form-submit="submitAssessment(suggestion,result)">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<style>
+    .right-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .padding-content {
+        padding: 20px 0px 20px 20px;
+    }
+    .table-responsive tr > td, tr > th {
+        text-align: center;
+        vertical-align: middle;
+        max-width: 500px;
+        /*min-width: 150px;*/
+        /*强制换行*/
+        word-break:break-all;
+    }
+    .table > tbody > tr > th {
+        vertical-align: middle;
+    }
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+    .text_on_left {
+        text-align: left;
+    }
+</style>
+<div class="padding-content">
+    <h5 style="margin-bottom: 10px;">退回补充材料记录</h5>
+    <div ng-show="back_record.length == 0" class="no-data">无相关记录</div>
+    <div class="table-responsive" ng-show="back_record.length > 0">
+        <table class="table table-bordered" style="margin-bottom: 0">
+            <tr class="active">
+                <td>退回人</td>
+                <td>退回时间</td>
+                <td>要求材料清单</td>
+                <td>类型</td>
+            </tr>
+            <tr ng-repeat="record in back_record">
+                <td>{{record.pusher}}</td>
+                <td>{{record.push_time}}</td>
+                <td><p class="text_on_left">{{record.detail}}<p></p></td>
+                <td>{{record.type}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br/>
+<top-menu options="menuOptions"></top-menu>
+<div class="padding-content" ui-view></div>

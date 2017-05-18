@@ -1,0 +1,129 @@
+<style>
+    #pro0 {
+        background: #d95952;
+    }
+
+    #pro1 {
+        background: #ec6b27;
+    }
+
+    #pro2 {
+        background: #25b38b;
+    }
+
+    #pro3 {
+        background: #33cc33;
+    }
+
+    #pro4 {
+        background: #515f9e;
+    }
+
+    #pro5 {
+        background: #468dcc;
+    }
+</style>
+
+<h2 style="text-align: center">渠道地域统计成功</h2>
+<br/>
+<br/>
+<br/>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-1 col-xs-12 ">
+
+        <div class="regionMap" id="chinaMap" style="height:400px;"></div>
+
+    </div>
+    <div class="col-sm-4 col-xs-12">
+        <div class="rightMsg" style="overflow: hidden; padding-top: 10px;">
+            <table width="100" class="table table-responsive">
+                <tr>
+                    <td style="">
+                        序号
+                    </td>
+                    <td>
+                        地区
+                    </td>
+                    <td width="50">
+                        比例
+                    </td>
+                    <td>
+                        人数
+                    </td>
+                </tr>
+                <tr ng-repeat="info in zw" id={{"tr"+$index}}>
+                    <td>
+                        {{$index+1}}
+                    </td>
+                    <td>
+                        {{info.province}}
+                    </td>
+                    <td>
+                        <div class="progress progress-striped" id={{"pro"+$index}}
+                             style="{{'width:'+(info.value/total)*100+'%'+';'}}margin:0;">
+
+                        </div>
+                    </td>
+                    <td>
+                        {{info.value}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</br>
+</br>
+</br>
+<!--<h2 style="text-align: center">渠道类型统计</h2>
+</br>
+</br>
+</br>
+
+<div class="section active">
+    <div class="intro">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                <div id="container" style="margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<script>
+    var dom = document.getElementById("chinaMap");
+
+    var myChart = echarts.init(dom);
+
+    var app = {};
+    option = null;
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}'
+        },
+        series: [
+            {
+                name: '中国',
+                type: 'map',
+                mapType: 'china',
+                selectedMode : 'multiple',
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data:[
+                    {name:'广东', selected:true},
+                    {name:'北京', selected:true}
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>

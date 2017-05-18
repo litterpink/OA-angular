@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮法务</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <script src="common/js/service.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+    <script src="js/myRoute.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <script src="../common/js/common.js"></script>
+    <style>
+        /* Custom Styles */
+        ul.nav-tabs {
+            width: 140px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+        ul.nav-tabs li {
+            margin: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        ul.nav-tabs li:first-child {
+            border-top: none;
+        }
+
+        ul.nav-tabs li a {
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 0;
+        }
+
+        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+            color: #fff;
+            background: #337ab7;
+            border: 1px solid #0088cc;
+        }
+
+        ul.nav-tabs li:first-child a {
+            border-radius: 4px 4px 0 0;
+        }
+
+        ul.nav-tabs li:last-child a {
+            border-radius: 0 0 4px 4px;
+        }
+
+        ul.nav-tabs.affix {
+            top: 30px; /* Set the top position of pinned element */
+        }
+
+        .nav li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20" style="position: relative" ng-controller="commonCtrl">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom active"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+                <script>
+                    $("span.menu").click(function () {
+                        $("ul.nav1").slideToggle(300, function () {
+                            // Animation complete.
+                        });
+                    });
+
+                    $(function () {
+                        $("#myNav").affix({
+                            offset: {
+                                top: 200
+                            }
+                        });
+                    })
+                </script>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div>
+        <div class="container" style="position: relative">
+            <div class="row">
+                <div class="col-sm-2 hidden-xs " id="myScrollspy">
+                    <ul class="nav nav-tabs nav-stacked" id="myNav">
+                        <li class="active" style="position: relative">
+                            <a href="#section-1">律师中介及诉讼融资</a>
+                            <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                               ng-click="goto('section-1')">
+                            </p>
+                        </li>
+                        <li style="position: relative">
+                            <a href="#section-2">帮帮大数据</a>
+                            <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                               ng-click="goto('section-2')">
+                            </p>
+                        </li>
+                        <li style="position: relative">
+                            <a href="#section-3">模拟法庭</a>
+                            <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                               ng-click="goto('section-3')">
+                            </p>
+                        </li>
+                        <li style="position: relative">
+                            <a href="#section-4">帮帮云助理</a>
+                            <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                               ng-click="goto('section-4')">
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-10">
+                    <div id="section-1">
+                        <h2 class="text-primary">律师中介及诉讼融资</h2>
+
+                        <blockquote>
+                            <p>帮帮，居于当事人和律师之间，处理客户与律师之间的专业事务。 <br/>区别于传统“自由贸易”式的电商平台，帮帮法务中介服务与客户、律师三方更紧密协作。<br/>
+                            </p>
+                        </blockquote>
+                        <img src="images/zhongjie.jpg" class="img-responsive"/>
+                        <br/>
+                        <blockquote>
+                            <p>凭借多年法律专业服务经验和风险评估能力，依托帮帮大数据分析和自主研发的软件工具， 帮帮将替客户遴选最适合的律师、与律师进行专业平等的沟通，并以无需偿还的方式替客户支付所有前期律师费用!</p>
+                        </blockquote>
+                    </div>
+                    <div id="section-2">
+                        <h2 class="text-primary" style="padding-top: 30px">帮帮大数据</h2>
+                        <blockquote>
+                            <p>帮帮建立了一个大数据库，目前大数据库已有相当数量的、在诉讼方面很厉害的律师，通过帮帮大数据库对众多律师的不同出处、不同业绩、不同执业特点等要件，做出更深入的研究
+                                分析后选择的律师，肯定比普通当事人自己选更加精准。</p>
+                        </blockquote>
+                        <img src="images/big-data2.jpg" class="img-responsive"/>
+                        <br/>
+                        <blockquote>
+                            <p>我们坚信全新的帮帮模式一定能够给客户和律师带来一种全新的服务体验，同时我们也更加坚信，帮帮模式必将推动中国法律服务业持续创新和蓬勃发展!</p>
+                        </blockquote>
+                    </div>
+                    <div id="section-3">
+                        <h2 class="text-primary" style="padding-top: 30px">模拟法庭</h2>
+                        <blockquote>
+                            <p>帮帮完全参照真实的法庭/仲裁庭，打造了一个原装模拟法庭，通过实战的方式模拟真实庭审，在项目评估阶段、律师遴选阶段、项目承办阶段对案件进行实战对抗。
+                            </p>
+                        </blockquote>
+                        <img src="images/company4.jpg" class="img-responsive"/>
+                        <br/>
+                        <blockquote>
+                            <p>为承办律师起到演练预判、复盘的作用，同时也为当事人评估代理律师 、确定争议解决策略，提供更富体验感的决策参考。</p>
+                        </blockquote>
+                    </div>
+                    <div id="section-4">
+                        <h2 class="text-primary" style="padding-top: 30px">帮帮云助理</h2>
+                        <blockquote>
+                            <p>
+                                帮帮基于运营团队曾经丰富的诉讼业务经历，甚至诉讼案件审判经历，自主研发了云助理App软件。<br/>将整个诉讼案件的一审、二审、再审和执行，甚至过程中涉及到的财产保全程
+                                序、鉴定程序等，分解规范成了17个环节、99个节点。
+                            </p>
+                        </blockquote>
+                        <img src="images/by1.jpg" class="img-responsive"/>
+                        <br/>
+                        <blockquote>
+                            <p>
+                                云帮帮助理-客户端，当事人可清楚的了解整个诉讼流程、各个环节，轻松掌控承办律师在 各阶段的进展状况，使非法律专业的当事人也能对案件进程一目了然。
+                            </p>
+                        </blockquote>
+                        <img src="images/by2.jpg" class="img-responsive"/>
+                        <br/>
+                        <blockquote>
+                            <p>
+                                帮帮云助理-律师端，有助承办律师为当事人提供专业法律服务的同时，提升律师规范化作 业水平及诉讼专业技能。<br/>在迅速提高工作效率的同时学会知识管理，提升专业技能。
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'footer.html'"></div>
+</body>
+</html>

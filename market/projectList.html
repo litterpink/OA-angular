@@ -1,0 +1,180 @@
+<br/>
+<style>
+    a:hover {
+        color: #3a87ad;
+    }
+    .resultList {
+        margin-top: -35px;
+        display: none;
+        background: #fff;
+        z-index: 999;
+        position: relative;
+    }
+    .resultList ul {
+        max-height: 200px;
+        overflow: auto;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+    }
+    .resultList ul li {
+        padding: 5px;
+    }
+    .resultList ul li:hover {
+        background: #eee;
+    }
+    .resultList ul li a {
+        color: #333;
+    }
+</style>
+<div class="right-content">
+    <p ng-if="infos.length == 0" class="no-data">暂无信息</p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+            <div class="panel panel-default">
+
+                <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                    <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.name}}</b>
+                </div>
+
+                <div style="position: relative" class="panel-body"><!--background-color: #00a0e9;-->
+                    <div style="line-height: 210px" class="clickProject listHover" data-url="#/project/detail/{{info.num}}/info" ng-click="clickProject(info)" class="listHover">查看详情</div>
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <a class="listA" style="cursor: pointer">
+                        <p><span class="sub-title spacing-2-word">编号</span>:&nbsp;&nbsp;&nbsp;{{info.num}}</p>
+                        <p><span class="sub-title spacing-3-word">标的额</span><span style="margin-left: -14px">:&nbsp;&nbsp;&nbsp;{{info.money | formatMoney}}</span> </p>
+                        <p class="noWrap"><span class="sub-title spacing-2-word">状态</span>:&nbsp;&nbsp;&nbsp;{{info.status}}</p>
+                        <p><span class="sub-title spacing-4-word">市场人员</span>:&nbsp;&nbsp;&nbsp;{{info.sales_name}}</p>
+                        <p><span class="sub-title spacing-6-word">提交分析时间</span>:&nbsp;&nbsp;&nbsp;{{info.to_analyst_time}}</p>
+                        <p><span class="sub-title spacing-6-word">分析完成时间</span>:&nbsp;&nbsp;&nbsp;{{info.analyst_time}}</p>
+                    </a>
+                </div>
+                <table class="table table-striped">
+                    <tr id="listStyle">
+                        <td class="textCenter" data-toggle="modal" data-target="#analyst"
+                            ng-if="info.num_status == 2" ng-click="analyst(info.num)">分析</td>
+                        <td class="textCenter" data-toggle="modal" data-target="#uploadfile"
+                            ng-if="info.num_status == 2" ng-click="uploadfile(info.num)">退回补充材料</td>
+                        <td style="text-align: center;color: #ccc" ng-if="info.num_status != 2">暂无处理事项</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--分页-->
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(currentPage,status)" boundary-links="true" boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+            </div>
+        </div>
+    </div>
+    <!-- 模板 -->
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul>
+                <li ng-repeat="item in $ctrl.items">
+                    <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ $ctrl.selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    </script>
+    <!-- 模态框（Modal） 退回补充材料 -->
+    <div style="margin-top: 200px" class="modal fade" id="uploadfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">退回补充材料</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal w5c-form demo-form" role="form"
+                          w5c-form-validate="vm.validateOptions" novalidate name="validateForm2">
+                        <textarea ng-model="detail" name="detail" required="true" cols="" rows="5" style="width: 100%" placeholder="补充材料清单" maxlength="1000"></textarea>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-default" w5c-form-submit="submitMaterial(detail)">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <!-- 模态框（Modal） 分析 -->
+    <project-analyst-btn project-id="{{project_id}}"></project-analyst-btn>
+<!--
+    <div class="modal fade" id="analyst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="analystLabel">评估意见</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal w5c-form demo-form" role="form"
+                          w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+                        <p>
+                            <input ng-model="dispute" type="text" class="form-control" placeholder="案由" maxlength="1000">
+                        </p>
+                        <p id="disputesColor" style="border: 1px solid #fff">
+                            <trix-editor input="party_info" name="party_info" placeholder="当事人信息" angular-trix ng-model="party_info" required count-num></trix-editor>
+                        </p>
+                        <p>
+                            <input ng-model="money" name="" type="number" class="form-control" placeholder="争议标的(单位:万元)" maxlength="11">
+                        </p>
+                        <p id="disputes" style="border: 1px solid #fff">
+                            <trix-editor input="disputes_basis" name="disputes_basis" placeholder="争议焦点及法律依据" angular-trix ng-model="disputes_basis" required count-num></trix-editor>
+                        </p>
+                        <p>
+                        <div class="col-12">
+                            <input type="text" placeholder="管辖法院" class="form-control court" ng-model="court"
+                                   ng-click="showList()"  name="court" maxlength="20"/>
+                            <div class="resultList">
+                                <input type="text" class="form-control search" ng-model="searchVal" select-court maxlength="20"/>
+                                <ul>
+                                    <li ng-if="searchData=='' || searchData==undefined" style="background: #f2e2c0">
+                                        {{errorInfo}}
+                                    </li>
+                                    <li ng-repeat="item in searchData" ng-click="changeVal(item.name, item.province)"><a
+                                            href="javascript:;">{{item.name}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        </p>
+                        <p>
+                            <input name="limitation" ng-model="limitation" type="text" class="form-control" placeholder="时效情况" maxlength="100" required>
+                        </p>
+                        <p id="result" style="border: 1px solid white">
+                            建议: <input ng-model="result" value="1" type="radio" name="agree" required="true">&nbsp;收项<input ng-model="result" value="2" type="radio" name="agree" required="true" style="margin-left: 10px;"> 拒项
+                        </p>
+                        <p>
+                            <textarea ng-model="suggestion" name="suggestion" required="true" rows="5" class="form-control" placeholder="综合意见如下" maxlength="1000"></textarea>
+                        </p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveDraft(dispute,party_info,money,disputes_basis,court,limitation,result,suggestion)">保存为草稿</button>
+                            <button type="button" class="btn btn-primary" ng-click="changeColor()"  w5c-form-submit="submitAnalyst(dispute,party_info,money,disputes_basis,court,limitation,result,suggestion)">已经完成,提交风控</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+</div>
+<br/>
+<br/>
+

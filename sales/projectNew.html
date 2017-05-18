@@ -1,0 +1,67 @@
+<br/>
+<!--<ol class="breadcrumb" style="text-align: center;">-->
+    <!--<li><a ui-sref-active="{'text-primary': 'project.new.client'}" >客户信息</a></li>-->
+    <!--<li><a ui-sref-active="{'text-primary': 'project.new.middle'}">渠道信息</a></li>-->
+    <!--<li><a ui-sref-active="{'text-primary': 'project.new.case'}">案件信息</a></li>-->
+<!--</ol>-->
+<style type="text/css">
+    ul,ol{
+        margin: 0;
+    }
+    .ulEle{
+        position: relative;
+        padding: 0;
+        list-style: none;
+        display: inline-block;
+        /*border: 1px solid #ccc;*/
+        margin-left: 17.1%;
+        margin-bottom: 20px;
+        width: 66%;
+    }
+    .liEle{
+        float: left;
+        height: 50px;
+        line-height: 30px;
+        text-align: center;
+        width: 33.33%;
+        position: relative;
+        color: #ccc;
+        /*border-right: 1px solid #ccc;*/
+    }
+    .spanEle1,.spanEle2,.spanEle3{
+        margin: 0 auto;
+        color: white;
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #ccc;
+    }
+    .spanEle1{
+        background-color: #3085f1;
+    }
+    .blueSolid{
+        position: absolute;
+        width: 21%;
+        height: 8px;
+        background-color: #ccc;
+    }
+    .blueSolid1{
+        left: 23%;
+        top: 10px;
+    }
+    .blueSolid2{
+        left: 56%;
+        top: 10px;
+    }
+</style>
+<ul class="ulEle">
+    <li class="liEle" style="color: #3085f1;"><span class="spanEle1">1</span>客户信息</li>
+    <li class="liEle liEle1"><span class="spanEle2">2</span>渠道信息</li>
+    <li class="liEle"><span class="spanEle3">3</span>案件信息</li>
+
+    <span class="blueSolid blueSolid1"></span>
+    <span class="blueSolid blueSolid2"></span>
+</ul>
+<ui-view>
+</ui-view>

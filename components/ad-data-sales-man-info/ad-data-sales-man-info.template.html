@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+            <p class="text-right" style="margin: 0"></p>
+            <h3> {{salesInfo.name}}</h3>
+            <p> 销售经理</p>
+            <p>
+                共提交{{salesInfo.all_project_num}}个案件，{{salesInfo.controller_eval_num}}个通过风控，{{salesInfo.sign_num}}个已经签约</p>
+            <p>总提交案件标的为：{{salesInfo.all_money | formatMoney}}</p>
+            <p>已签约标的为: {{salesInfo.sign_money | formatMoney}}</p>
+        </div>
+        <!-- 功能按钮 -->
+    </div>
+</div>
+<!--统计图-->
+<div ng-if="salesInfo.all_project_num == 0">
+    <p class="no-data">无数据</p>
+</div>
+<div ng-show="salesInfo.all_project_num > 0">
+    <div class="section" id="section0">
+        <div class="intro" style="text-align: center">
+            <h3 style="text-align: center">案件状态统计</h3>
+            <table class="table table-bordered">
+                <tr class="active">
+                    <td>
+                        状态
+                    </td>
+                    <td>
+                        案件数量
+                    </td>
+                    <td>
+                        占比
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{already_knot.status}}
+                    </td>
+                    <td>
+                        {{already_knot.num}}
+                    </td>
+                    <td>
+                        {{(already_knot.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{contract_in.status}}
+                    </td>
+                    <td>
+                        {{contract_in.num}}
+                    </td>
+                    <td>
+                        {{(contract_in.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{in_evaluated.status}}
+                    </td>
+                    <td>
+                        {{in_evaluated.num}}
+                    </td>
+                    <td>
+                        {{(in_evaluated.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{not_evaluated.status}}
+                    </td>
+                    <td>
+                        {{not_evaluated.num}}
+                    </td>
+                    <td>
+                        {{(not_evaluated.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{not_through.status}}
+                    </td>
+                    <td>
+                        {{not_through.num}}
+                    </td>
+                    <td>
+                        {{(not_through.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{successful_signing.status}}
+                    </td>
+                    <td>
+                        {{successful_signing.num}}
+                    </td>
+                    <td>
+                        {{(successful_signing.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{supervision.status}}
+                    </td>
+                    <td>
+                        {{supervision.num}}
+                    </td>
+                    <td>
+                        {{(supervision.num/salesInfo.all_project_num*100).toFixed(1)}}%
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="section active">
+        <div class="intro">
+            <h3 style="text-align: center">提交案件增长柱状图</h3>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                    <div class="btn-group pull-right" style="margin-bottom: 20px;">
+                        <a class="btn btn-primary week1" ng-class="{active: submitType == 'week'}">周</a>
+                        <a class="btn btn-primary month1" ng-class="{active: submitType == 'month'}">月</a>
+                        <a class="btn btn-primary season1" ng-class="{active: submitType == 'season'}">季度</a>
+                    </div>
+                    <div id="saleman2" style="margin: 0 auto; height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    <div class="section">
+        <div class="intro">
+            <h3 style="text-align: center">签约案件柱状图</h3>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                    <div class="btn-group pull-right" style="margin-bottom: 20px;">
+                        <a class="btn btn-primary week2" ng-class="{active: signType == 'week'}">周</a>
+                        <a class="btn btn-primary month2" ng-class="{active: signType == 'month'}">月</a>
+                        <a class="btn btn-primary season2" ng-class="{active: signType == 'season'}">季度</a>
+                    </div>
+                    <div id="saleman3" style="margin: 0 auto; height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+</div>
+
+<script type="text/javascript">
+    $(".btn-group button").click(function () {
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+    });
+    $(".tabUl li a").click(function () {
+        $(".tabUl li a").attr("id", "");
+        $(this).attr("id", "aHover");
+    });
+</script>
+

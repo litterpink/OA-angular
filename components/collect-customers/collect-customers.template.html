@@ -1,0 +1,50 @@
+<br>
+<p ng-if="infos.length==0" class="no-data">暂无信息</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="box-header">
+                    <!--收藏-->
+                    <div class="pull-right box-tools lawyerInfo">
+                        <!--单击传递lid-->
+                        <!--判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示-->
+                        <span ng-if="info.collection_id != 0">
+                        <i accordion="2" class="fa fa-star" style="cursor: pointer; color: #ffb70a" id="{{info.user_id}}"
+                           collection="{{info.id}}" cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.collection_id == 0">
+                        <i accordion="2" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.id}}" cancelcollection-or-collection></i>
+                        </span>
+                        <!--<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                           style="cursor: pointer"></i>-->
+                    </div>
+                </div>
+                <a href="#/customers/collect/{{info.user_id}}/info">
+                    <p><i class="fa fa-user"></i> {{info.name}}</p>
+                    <p><i class="fa fa-home"></i> {{info.firm}}</p>
+                    <p><i class="fa fa-phone"></i> {{info.phone}}</p>
+                    <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                         style="width: 80px; position: absolute; right: 30px; top: 25px; border: 1px solid #ddd"/>
+                </a>
+            </div>
+            <!-- 功能按钮 -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="totalItems"
+                            ng-model="currentPage"
+                            max-size="maxSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(currentPage)"
+                            boundary-links="true"
+                            boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<br>
+<p ng-if="infos.length==0" class="no-data">暂无信息</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="box-header">
+                    <!--收藏-->
+                    <div class="pull-right box-tools lawyerInfo">
+                        <!--单击传递lid-->
+                        <!--判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示-->
+                        <span ng-if="info.is_collection != 0">
+                        <i accordion="3" class="fa fa-star" style="cursor: pointer; color: #ffb70a" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.is_collection == 0">
+                        <i accordion="3" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                        <!--<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                           style="cursor: pointer"></i>-->
+                    </div>
+                </div>
+                <p class="text-right" style="margin: 0"></p>
+                <a href="{{parentHref}}/{{info.user_id}}/info">
+                    <p class="borderBottom">
+                        <span style="font-size: 20px;"> {{info.name}}</span>
+                    </p>
+                    <p style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span
+                            class="glyphicon glyphicon-home"></span> {{info.firm}}</p>
+                    <p><span class="glyphicon glyphicon-phone"></span> {{info.name}}</p>
+                    <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                         style="width: 80px; position: absolute; right: 30px; top: 35px; border: 1px solid #ddd"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(bigCurrentPage,name,type,province)" boundary-links="true" boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>
+

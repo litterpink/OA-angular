@@ -1,0 +1,184 @@
+<style>
+    .table-bordered tr > td, tr > th {
+        text-align: center;
+        vertical-align: middle;
+        max-width: 180px;
+        /*强制换行*/
+        word-break:break-all;
+    }
+    .table > tbody > tr > th {
+        vertical-align: middle;
+    }
+    .edit_word {
+        font-size: 12px;
+        cursor: pointer;
+    }
+    .table > tbody > tr > td {
+        vertical-align: middle;
+    }
+    .table-bordered tr > td > p {
+        margin: 3px 0;
+        padding: 0;
+    }
+    /*.table-bordered tr > td > p:hover {*/
+        /*color: rgba(21, 108, 187, 0.8)*/
+    /*}*/
+    .text_on_left {
+        text-align: left;
+    }
+    /*.limit-height {*/
+        /*font-size: 12px;*/
+        /*line-height: 18px;*/
+        /*overflow: hidden;*/
+        /*text-overflow: ellipsis;*/
+        /*display: -webkit-box;*/
+        /*-webkit-line-clamp: 3;*/
+        /*-webkit-box-orient: vertical;*/
+        /*max-height:50px;*/
+        /*vertical-align: middle;*/
+    /*}*/
+</style>
+<br/>
+<p>
+    <h4>{{fileTypeTitle}}</h4>
+</p>
+<p class="text-right">
+    <a  data-toggle="modal" data-target="#uploadFile" class="btn btn-primary">上传文件</a>
+</p>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="baseInfo">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th ng-if="fileType == 1">
+                        生效时间
+                    </th>
+                    <th>
+                        文件名称
+                    </th>
+                    <th>
+                        文件简介
+                    </th>
+                    <th>
+                        阶段
+                    </th>
+                    <th>
+                        上传信息
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                <tr ng-if="fileList.length > 0" ng-repeat="info in fileList">
+                    <td ng-if="fileType == 1">
+                        {{info.effect_time}}
+                        <p ng-click="editFile(info, $index, 1)"><a class="edit_word main-color">
+                            修改</a></p>
+                    </td>
+                    <td>
+                        <a>{{info.name}}</a>
+                        <!--<p ng-click="editFile(info, $index, 2)"><a class="edit_word main-color">-->
+                            <!--修改</a></p>-->
+                    </td>
+                    <td>
+                        <p class="text_on_left" ng-if="info.show_all">{{info.file_profile}}
+                            <a ng-if="info.file_profile.length > limitTextNum" class="edit_word main-color" ng-click="closeShowAll(info)">收起</a>
+                        </p>
+                        <p class="text_on_left" ng-if="!info.show_all">{{info.tmp_file_profile}}
+                            <a class="edit_word main-color" ng-click="expandShowAll(info)">全部</a>
+                        </p>
+                        <p ng-click="editFile(info, $index, 3)"><a class="edit_word main-color">
+                            修改</a></p>
+                    <td>
+                        {{info.module_name}}
+                    <td>
+                        <p>{{info.upload_name}}</p>
+                        <p>{{info.upload_time}}</p>
+                    </td>
+                    <td>
+                        <a href="{{info.url}}" download="下载文件" class="cursor-touch">下载</a> |
+                        <a ng-click="deleteFile(info.id, $index)" class="cursor-touch">删除</a>
+                        <a ng-if="projectInfoStatus == '未提交评审'" ng-click="deleteFile(info.id, $index)">|
+                            删除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- 模态框(上传文件) -->
+<div class="modal fade" id="uploadFile" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="uploadForm" novalidate="novalidate">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        上传文件
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <upload-progress upload-urls="uploadUrls" show-time="{{fileType == 1}}" project-id="{{projectId}}"></upload-progress>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="uploadFiles(uploadUrls)" ng-disabled="uploadForm.$invalid">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editFileModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form name="uploadForm" novalidate="novalidate">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" ng-if="editType == 1">
+                        修改生效时间
+                    </h4>
+                    <h4 class="modal-title" ng-if="editType == 2">
+                        修改文件名称
+                    </h4>
+                    <h4 class="modal-title" ng-if="editType == 3">
+                        修改文件简介
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p ng-if="editType == 1">
+                            <input type="text" class="form-control" ng-model="editingFile.effect_time" datetimepicker options="dateOptions">
+                        </p>
+                        <p ng-if="editType == 2">
+                            <input placeholder="文件名称" class="form-control" ng-model="editingFile.name" maxlength="20">
+                        </p>
+                        <p ng-if="editType == 3">
+                            <textarea placeholder="文件简介" class="form-control"  ng-model="editingFile.file_profile" rows="5" maxlength="1000"></textarea>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" ng-click="submitEditFile(editingFile)" ng-disabled="uploadForm.$invalid">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

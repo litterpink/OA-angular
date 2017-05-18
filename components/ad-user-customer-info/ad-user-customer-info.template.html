@@ -1,0 +1,251 @@
+<style>
+    .boColor{
+        border-bottom: 5px solid #2d6dbb
+    }
+    .name {
+        font-size: 18px;
+    }
+    .right-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .content-box {
+        padding: 20px;
+        padding-left: 0px;
+    }
+    .top_box {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        padding: 20px;
+        padding-right: 0;
+    }
+    /*修改顶部菜单的左边*/
+    .topMenu div:first-child{
+        margin-left: 50px;
+    }
+    .left_gap {
+        margin-left: 50px;
+    }
+    .spacing {
+        letter-spacing: 1px;
+    }
+    .spacing-5 {
+        letter-spacing: 5px;
+    }
+    .spacing-10 {
+        letter-spacing: 10px;
+    }
+    .spacing-11 {
+        letter-spacing: 15px;
+        margin-right: -1px;
+    }
+    .spacing-24 {
+        letter-spacing: 24px;
+    }
+    .moveLeft{
+        margin-left: -18px;
+    }
+    .address-title {
+        vertical-align: top
+    }
+    .address {
+        display: inline-block;
+        width: 550px;
+    }
+    /*富文本中的样式*/
+    .rich-text ul {
+        margin-left: 20px;
+    }
+    .rich-text ol {
+        margin-left: 15px;
+    }
+</style>
+
+<div class="top_box left_gap">
+    <p>
+        <span class="name" ng-if="client.type == '个人客户'">{{client.name}}</span>
+        <span class="name" ng-if="client.type == '机构客户'">{{client.firm}}</span>&nbsp;&nbsp;&nbsp;
+        <span class="text-primary">{{client.type}} | {{client.level}}</span>
+    </p>
+    <p>
+        <span class="text-primary">{{client.supervise}}个项目督办中,{{client.sign}}个项目签约中</span>
+    </p>
+</div>
+
+<top-menu type="1"
+          name="clientInfo"
+          select="selectIndex(selectedIndex)"
+          selected-index="selectedIndex"
+          options="menuOptions">
+</top-menu>
+
+<div style="padding-left: 50px">
+    <!--基本信息-->
+    <div ng-if="selectedIndex == 0">
+        <div class="col-sm-12 info_box">
+            <div style="margin-left: -35px" class="col-sm-3">
+                <img ng-src="{{head_file.head_img_url}}" ngf-select ng-model="file"
+                     ng-change="uploadUser(file)"
+                     ngf-max-size="20MB"
+                     style="width: 180px; height: auto;"/>
+            </div>
+            <div class="col-sm-9" ng-if="client.type == '个人客户'">
+                <div>
+                    <p><b class="spacing-10">性别:</b> {{client.sex}}</p>
+                    <p><b class="spacing-10">手机:</b> {{client.phone}}</p>
+                    <p><b class="spacing-10">单位:</b><span>{{client.firm}}</span></p>
+                    <p><b class="spacing-10">职务:</b><span>{{client.position}}</span></p>
+                    <p><b class="spacing-10">电话:</b><span>{{client.tel}}</span></p>
+                    <p><b class="spacing-10">邮箱:</b> {{client.email}}</p>
+                    <p><b class="spacing-10 address-title">地址:</b><span class="address">{{client.province}} {{client.city}} {{client.address}}</span></p>
+                </div>
+            </div>
+            <div class="col-sm-9" ng-if="client.type == '机构客户'">
+                <div>
+                    <p><b class="spacing">联系人姓名:</b> {{client.name}}</p>
+                    <p><b class="spacing">联系人性别:</b> {{client.sex}}</p>
+                    <p><b class="spacing">联系人手机:</b> {{client.phone}}</p>
+                    <p><b class="spacing">联系人职务:</b> {{client.position}}</p>
+                    <p><b class="spacing-24">电话</b><b class="spacing">:</b> {{client.tel}}</p>
+                    <p><b class="spacing">联系人邮箱:</b> {{client.email}}</p>
+                    <p><b class="spacing-24 address-title">地址</b><b class="spacing address-title">:</b><span class="address"> {{client.province}} {{client.city}}&nbsp;{{client.address}}</span></p>
+                </div>
+            </div>
+            <span class="center fa fa-edit pull-right" ng-click="showUpdateModal(2)"
+                  style="cursor: pointer;position: absolute;top: 25px;right: 10px">
+            </span>
+        </div>
+        <div class="info_box col-sm-12">
+            <div class="row">
+                <div style="margin-left: -20px" class="col-xs-2">
+                    <b class="spacing-24">备注:</b>
+                </div>
+                <div style="margin-left: -58px;" class="col-xs-10">
+                    <span class="rich-text" ng-bind-html="client.remarks | toHtml"></span>
+                </div>
+                <div class="col-xs-2"></div>
+            </div>
+
+            <span class="center fa fa-edit pull-right" data-toggle="modal" ng-click="showUpdateModal(3)"
+                  style="cursor: pointer;position: absolute;top: 25px;right: 10px">
+            </span>
+        </div>
+        <div class="info_box col-sm-12 moveLeft" style="border-bottom: none">
+            <p><b class="spacing-11">建档人</b><b style="margin-left: -10px">:</b> <span style="margin-left: 14px">{{client.sales_name}}</span></p>
+            <p><b class="spacing-5">创建时间:</b> <span style="margin-left: 12px">{{client.create_time}}</span></p>
+        </div>
+    </div>
+
+    <!--项目信息-->
+    <div ng-if="selectedIndex == 1" class="content-box">
+        <p class="no-data" ng-if="projectList.length == 0">
+            暂无合作信息</p>
+        <div class="col-xs-12 col-sm-4" ng-repeat="project in projectList">
+            <div class="panel panel-default">
+                <div style="padding: 0px 15px;padding-top: 15px" class="panel-body">
+                    <b style="padding-bottom:15px;border-bottom: 1px solid #ccc;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{project.name}}</b>
+                </div>
+
+                <div style="position: relative" class="panel-body"><!--background-color: #00a0e9;-->
+                    <div style="line-height: 150px" ng-click="$parent.clickProject(project.project_id)" class="listHover">查看详情
+                    </div>
+                    <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                    <a class="listA" style="cursor: pointer">
+                        <p><span style="letter-spacing: 14px;margin-right: -14px;" class="sub-title">编号</span>:&nbsp;{{project.num}}号
+                        </p>
+                        <p><span style="margin-right: 14px" class="sub-title">标的额</span><span
+                                style="margin-left: -14px">:&nbsp;{{project.money | formatMoney}}</span></p>
+                        <p class="noWrap"><span style="letter-spacing: 14px;margin-right: -14px;" class="sub-title">状态</span>:&nbsp;{{project.status}}
+                        </p>
+                        <p><span class="sub-title">创建时间</span>:&nbsp;{{project.create_time}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--互动信息-->
+    <div ng-if="selectedIndex == 2" class="content-box">
+        <ul class="list-group">
+            <li class="list-group-item" style="text-align: center;margin-bottom: 0px;">
+                <b data-toggle="modal" data-target="#interation" style="font-size: 20px;margin: 0 auto;cursor: pointer">
+                        <span class="fa fa-plus">
+                        </span>添加互动情况</b>
+            </li>
+            <li style="border: none;border-bottom: 1px solid #ccc;margin-bottom: 0px;" class="list-group-item"
+                ng-repeat="interact in interactList">
+                <div style="margin-top: 10px;" class="trix-content" ng-bind-html="interact.details | toHtml">
+                </div>
+                <p style="text-align: right;margin: 0;margin-top: 20px;font-size: 12px">{{interact.staff}}&nbsp;&nbsp;&nbsp;于&nbsp;&nbsp;&nbsp;{{interact.time}}&nbsp;&nbsp;&nbsp;记录</p>
+
+                        <span class="center fa fa-edit pull-right" data-toggle="modal"
+                              data-target="#interationUpdate" ng-click="beginUpdateInteract(interact, $index)"
+                              style="cursor: pointer;position: absolute;top: 25px;right: 5px"></span>
+            </li>
+        </ul>
+        <p style="text-align: center;font-size: 30px;color: #ccc" ng-if="interactList.length == 0">暂无互动信息</p>
+    </div>
+</div>
+    <!-- 模态框（Modal）添加互动 -->
+    <div class="modal fade" id="interation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="interationLabel">添加互动信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <trix-editor angular-trix ng-model="content" class="trix-content" placeholder="请输入互动信息" count-num></trix-editor>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="submitInteract(content)">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal）修改互动 -->
+    <div class="modal fade" id="interationUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="interationUpdateLabel">修改互动信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="updateInteract.details" placeholder="请输入互动信息" count-num></trix-editor>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="submitUpdateInteract(updateInteract)">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal）修改客户信息 -->
+    <div class="modal fade" id="clientInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="clientInfoLabel">修改客户信息</h4>
+                </div>
+                <div class="modal-body">
+                    <update-client client="updateClient" type="{{$ctrl.updateClientIndex}}"></update-client>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="submitUpdate(updateClient)">提交更改</button>
+                </div>
+            </div>
+        </div>
+    </div>

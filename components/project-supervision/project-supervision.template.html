@@ -1,0 +1,151 @@
+<style>
+    .supervisionContainer {
+        padding: 0 10px;
+        margin: 0;
+    }
+    .supervisionItem {
+        padding: 5px;
+        margin: 0;
+    }
+    .supervisionContent {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        position: relative;
+        border: 1px solid rgb(210, 210, 210);
+    }
+    .supervisionModule {
+        display: block;
+        height: 100px;
+        line-height: 100px;
+        padding: 0;
+        margin: 0;
+    }
+    .supervisionAdd {
+        border: 1px dashed rgb(210, 210, 210);
+    }
+    .supervisionRemove {
+        position: absolute;
+        padding-left: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        color: rgb(210, 210, 210)
+    }
+    .supervisionStatus {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 12px;
+        padding: 5px;
+    }
+    .statusFinish {
+        color: rgb(60, 60, 60);
+    }
+    .statusDoing {
+        color: rgb(231, 160, 53);
+    }
+    .evaluateButton {
+        background-color: rgb(234, 234, 234);
+        color: rgb(60, 60, 60);
+        border-top: 1px solid rgb(216, 216, 216);
+        width: 100%;
+        font-size: 12px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+    }
+    .evaluateButton:hover {
+        color: rgb(39, 109, 237);
+    }
+    .supervisionRemove:hover {
+        color: rgb(39, 109, 237)
+    }
+    .supervisionContent:hover {
+        background-color: rgb(245, 245, 245);
+    }
+
+</style>
+<div class="row supervisionContainer">
+    <div class="col-sm-12 no-data" ng-if="!canAddModule && moduleArray.length == 0">
+        <p>暂无信息</p>
+    </div>
+    <div class="col-xs-3 col-sm-3 supervisionItem" ng-repeat="info in moduleArray">
+        <div class="supervisionContent">
+            <p class="supervisionRemove" ng-click="selectRemoveModule($index)"
+               ng-if="canRemoveModule"
+               data-toggle="modal"
+               data-target="#removeModuleModal"> ×
+            </p>
+            <a class="supervisionModule" ng-click="saveModule(info)" href="#/project/detail/{{projectId}}/supervision/todo">
+                {{info.module_name}}
+            </a>
+            <p class="supervisionStatus">
+                <span class="statusFinish" ng-if="info.is_finished == 1">已完成</span>
+                <span class="statusDoing" ng-if="info.is_finished == 2">进行中</span>
+            </p>
+            <p class="evaluateButton"
+               data-toggle="modal" data-target="#lawyerEvaluateModal"
+               ng-if="canEvaluateLawyer && info.is_commented == 0 && info.is_finished == 1" ng-click="saveModule(info, $index)"
+            >
+                律师评论
+            </p>
+        </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 supervisionItem" ng-show="moduleArray != undefined && canAddModule">
+        <div class="supervisionContent supervisionAdd">
+            <a class="supervisionModule" href="#/project/detail/{{projectId}}/supervision/addModule">
+                <span style="font-size: 18px">+ </span><span>(添加模块)</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div class="modal fade" id="lawyerEvaluateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">请对<span class="text-primary">{{$ctrl.lawyer.lawyer_name}}</span>律师的表现做出评价</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>评分</p>
+                    <input-stars ng-model="evaluateStar" max="5"></input-stars>
+                    <p>评语</p>
+                    <textarea type="text" class="form-control name" ng-model="evaluateContent" placeholder="不少于50字"
+                              style="height: 100px" minlength="50" maxlength="1000"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="evaluateLawyer()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="removeModuleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="removeModuleModalLabel">确认删除此模块?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" ng-click="removeModule()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

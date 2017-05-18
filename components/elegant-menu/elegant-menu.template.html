@@ -1,0 +1,38 @@
+<ul class="leftBar">
+    <li ng-repeat="data in $ctrl.options" ng-init="superIndex=$index">
+        <a ng-if="!data.uiSref">
+            <img ng-src="{{data.imageName}}" style="padding-bottom: 8px">
+            {{data.name}}
+        </a>
+        <a ng-if="data.uiSref"
+           ng-class="{'canSelectedBar': data.uiSref}"
+           ui-sref="{{data.uiSref}}"
+           ui-sref-opts="{reload: true, notify: true}"
+           ui-sref-active="selectedBar"
+           ng-click="selectMenu($index)"
+        >
+            <img ng-if="selectedIndex != $index" ng-src="{{data.imageName}}" style="padding-bottom: 8px">
+            <img ng-if="selectedIndex == $index" ng-src="{{data.selectedImageName}}" style="padding-bottom: 8px">
+            {{data.name}}
+        </a>
+        <ul class="leftSubBar">
+            <li style="position: relative" ng-repeat="subData in data.options">
+                <a ng-if="subData.uiSref"
+                   class="canSelectedBar"
+                   ui-sref="{{subData.uiSref}}"
+                   ui-sref-active="selectedBar"
+                   ui-sref-opts="{reload: true, notify: true}"
+                   ng-click="selectMenu(superIndex, $index)"
+                >
+                    {{subData.name}}
+                    <span ng-if="subData.num > 0" ui-sref="{{subData.uiSref}}"
+                          ui-sref-active="selectSubBarNum" class="leftSubBarNum">{{subData.num}}</span>
+                </a>
+                <a ng-if="!subData.uiSref" class="canSelectedBar">
+                    {{subData.name}}
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+

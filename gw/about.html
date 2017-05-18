@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮 | 关于我们</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="css/plus/css/skeleton.css" type="text/css" rel="stylesheet"/>
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <script src="common/js/service.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+    <script src="js/myRoute.js"></script>
+    <script src="../common/js/common.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <!--滚动图片插件-->
+    <link href="css/plus/css/default_skin.css" type="text/css" rel="stylesheet"/>
+    <link href="css/plus/css/imagebox.css" type="text/css" rel="stylesheet"/>
+    <script src="js/plus/js/custom.js"></script>
+    <script src="js/plus/js/ender.min.js"></script>
+    <script src="js/plus/js/selectnav.js"></script>
+    <script src="js/plus/js/twitter.js"></script>
+    <script src="js/plus/js/effects.js"></script>
+    <script type="text/javascript" src="js/plus/js/jquery.sky.carousel-1.0.min.js"></script>
+    <style>
+        /* Custom Styles */
+        ul.nav-tabs {
+            width: 140px;
+            margin-top: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+        ul.nav-tabs li {
+            margin: 0;
+            border-top: 1px solid #ddd;
+        }
+
+        ul.nav-tabs li:first-child {
+            border-top: none;
+        }
+
+        ul.nav-tabs li a {
+            margin: 0;
+            padding: 8px 16px;
+            border-radius: 0;
+        }
+
+        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+            color: #fff;
+            background: #337ab7;
+            border: 1px solid #337ab7;
+        }
+
+        ul.nav-tabs li:first-child a {
+            border-radius: 4px 4px 0 0;
+        }
+
+        ul.nav-tabs li:last-child a {
+            border-radius: 0 0 4px 4px;
+        }
+
+        ul.nav-tabs.affix {
+            top: 30px; /* Set the top position of pinned element */
+        }
+
+        .nav li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" ng-controller="aboutCtrl">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom  active"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+                <script>
+                    $("span.menu").click(function () {
+                        $("ul.nav1").slideToggle(300, function () {
+                            // Animation complete.
+                        });
+                    });
+                    $(function () {
+                        $("#myNav").affix({
+                            offset: {
+                                top: 200
+                            }
+                        });
+                    });
+
+                    $(function () {
+                        $('.sky-carousel').carousel({
+                            itemWidth: 201,
+                            itemHeight: 351,
+                            distance: -10,
+                            selectedItemDistance: 35,
+                            selectedItemZoomFactor: 0.9,
+                            unselectedItemZoomFactor: 0.6,
+                            unselectedItemAlpha: 0.6,
+                            motionStartDistance: 140,
+                            topMargin: 30,
+                            gradientStartPoint: 0.36,
+                            gradientOverlayColor: "#f5f5f5",
+                            gradientOverlaySize: 190,
+                            selectByClick: true
+                        });
+                    })
+                </script>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div class="container" style="position: relative">
+        <div class="row">
+            <div class="col-sm-2 hidden-xs" id="myScrollspy">
+                <ul class="nav nav-tabs nav-stacked" id="myNav">
+                    <li class="active" style="position: relative">
+                        <a href="#section-1">关于帮帮</a>
+                        <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                           ng-click="goto('section-1')">
+                        </p>
+                    </li>
+                    <li style="position: relative">
+                        <a href="#section-2">帮帮团队</a>
+                        <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                           ng-click="goto('section-2')">
+                        </p>
+                    </li>
+                    <li style="position: relative">
+                        <a href="#section-3">新闻中心</a>
+                        <p style="position: absolute; top: 0px; width: 130px; height: 38px"
+                           ng-click="goto('section-3')">
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <div id="section-1">
+                    <h2 class="text-primary">关于帮帮</h2>
+                    <blockquote>
+                        <p>帮帮是</p>
+                        <p>中国首家集法务经纪、法务咨询、法务投融资于一体的综合型法务机构。</p>
+                    </blockquote>
+                    <img src="images/company.jpeg" class="img-responsive"/>
+                    <br/>
+                    <blockquote>
+                        <p>帮帮有</p>
+                        <p>国内500万以上标的额的大型商事诉讼及仲裁类优质案源存储海量、专业分析、精准推荐律师的帮帮大数据库无缝协同，轻松办案的帮帮云助理完全参照真实的法庭/仲裁庭进行布置的原装模拟法庭。
+                        </p>
+                    </blockquote>
+                    <img src="images/meeting.jpg" class="img-responsive"/>
+                    <br/>
+                    <blockquote>
+                        <p>
+                            帮帮能
+                        </p>
+                        <p>
+                            以无需偿还的方式为客户支付律师费等所有前期费用免费为客户选律师、督管律师、提供咨询意见为律师提供优质诉讼案源。
+                        </p>
+                    </blockquote>
+                    <img src="images/company3.jpg" class="img-responsive"/>
+                    <br/>
+                </div>
+                <div id="section-2">
+                    <br/>
+                    <h2 class="text-primary">帮帮团队</h2>
+                    <blockquote>
+                        <p>
+                            帮帮团队由在诉讼领域具有丰富经验的资深律师、资深原法官，顶级专家顾问，以及公司法务、财务专家、人力资源专家、IT工程师等组成。
+                        </p>
+                    </blockquote>
+                    <img src="images/team.jpg" class="img-responsive"/>
+                    <br/>
+                    <blockquote>
+                        作为一家年轻的“互联网+法务”创新公司，用专业实力为客户选择合适案件的诉讼律师，以高效和优质的服务产品，寻求法律服务的规范化。
+                    </blockquote>
+
+                    <div class="sixteen columns" id="sixteen">
+                        <div class="project">
+                            <div class="sky-carousel">
+                                <div class="sky-carousel-wrapper">
+                                    <ul class="sky-carousel-container">
+                                        <li>
+                                            <img src="images/赵晓红.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>赵晓红</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/郑玲玲.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>郑玲玲</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--<img src="images/赵楠.jpg" alt=""/>-->
+                                        <!--<div class="sc-content">-->
+                                        <!--<h2>赵楠</h2>-->
+                                        <!--<p></p>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/张旭超.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2 style="margin-left: 40px;">张旭超</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/冯永梅.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>冯永梅</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/李剑.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>李剑</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--<img src="images/韩增辉.jpg" alt=""/>-->
+                                        <!--<div class="sc-content">-->
+                                        <!--<h2>韩增辉</h2>-->
+                                        <!--<p></p>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/郑晓丽.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>郑晓丽</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--<img src="images/龚伟平.jpg" alt=""/>-->
+                                        <!--<div class="sc-content">-->
+                                        <!--<h2>龚伟平</h2>-->
+                                        <!--<p></p>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/武茜.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>武茜</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/陈昱竹.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>陈昱竹</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--&lt;!&ndash;<img src="images/凌龙.jpg" alt=""/>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<div class="sc-content">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<h2>凌龙</h2>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<p></p>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/唐样样.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>唐样样</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/吴小燕.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>吴小燕</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/徐永飞.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>徐永飞</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/江诗伟.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>江诗伟</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/廖鸿程.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>廖鸿程</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/张昭华.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>张昭华</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/马天轶.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>马天轶</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/杨耀坤.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>杨耀坤</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/王燕.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>王燕</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/唐晓阳.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>唐晓阳</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/李丽琴.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>李丽琴</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/刘春桂.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>刘春桂</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/黄彩凤.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>黄彩凤</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--<img src="images/刘思乐.jpg" alt=""/>-->
+                                        <!--<div class="sc-content">-->
+                                        <!--<h2>刘思乐</h2>-->
+                                        <!--<p></p>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/苗壮.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>苗壮</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/申政.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>申政</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/宋晓庆.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>宋晓庆</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <img src="images/王铁男.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>王铁男</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                        <!--<li>-->
+                                        <!--<img src="images/张亮亮.jpg" alt=""/>-->
+                                        <!--<div class="sc-content">-->
+                                        <!--<h2>张亮亮</h2>-->
+                                        <!--<p></p>-->
+                                        <!--</div>-->
+                                        <!--</li>-->
+                                        <li>
+                                            <img src="images/张溪.jpg" alt=""/>
+                                            <div class="sc-content">
+                                                <h2>张溪</h2>
+                                                <p></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+                <br/>
+                <div id="section-3" ng-controller="newCtrl">
+                    <h2 class="text-primary">新闻中心</h2>
+                    <blockquote>
+                        <p>关注帮帮微信公众号, 获取最新资讯。</p>
+                    </blockquote>
+
+                    <p class="text-center">
+                        <img src="images/beywx.jpg" width="200"/>
+                    </p>
+
+                    <!--&lt;!&ndash;hover为自定义的angularjs属性 为鼠标经过效果&ndash;&gt;-->
+                    <!--<ul class="nav newlist">-->
+                    <!--<li hover ng-repeat="info in data">-->
+                    <!--<div>-->
+                    <!--<a href="{{info.a_url}}"-->
+                    <!--target="_blank">-->
+                    <!--<p style="color: #777"><span>帮帮新闻</span><span class="pull-right">{{info.create_time}}</span>-->
+                    <!--</p>-->
+                    <!--<h3>{{info.title}}</h3>-->
+                    <!--<p style="color: #999">-->
+                    <!--{{info.abstract}}-->
+                    <!--</p>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<br/>-->
+                    <!--<a href="javascript:;" class="moreInfo">查看更多>></a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'footer.html'"></div>
+<script type="text/javascript">
+    $(function () {
+        var page = 1;
+        $(document).on("click", ".moreInfo", function () {
+            page++;
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: url + "enter/news",
+                data: {page: page},
+                success: function (data) {
+                    //console.log(data);
+                    $.each(data, function (key, val) {
+                        if (page > (val.maxPage)) {
+                            alert("没有更多新闻了");
+                            return false;
+                        }
+                        else {
+                            $.each(val, function (akey, aval) {
+                                console.log(aval);
+                                $.each(aval, function (bkey, bval) {
+                                    $(".newlist").append(
+                                            '<li hover>' +
+                                            '<div>' +
+                                            '<a href="' + bval.a_url + '" target="_blank">' +
+                                            '<p style="color: #777"><span>帮帮新闻</span><span class="pull-right">' + bval.create_time + '</span>' +
+                                            '</p>' +
+                                            '<h3>' + bval.title + '</h3>' +
+                                            '<p style="color: #999">' + bval.abstract +
+                                            '</p>' +
+                                            '</a>' +
+                                            '</div>' +
+                                            '</li>'
+                                    );
+                                })
+                            });
+                        }
+                    });
+                }
+            })
+        });
+
+        $(document).on("mouseover", ".newlist li", function () {
+            $(this).css("background", "#eee");
+            $(this).siblings().css("background", "#fff");
+        })
+    })
+</script>
+</body>
+</html>

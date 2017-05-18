@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>云助理-商务经理端</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../common/images/favicon1.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <!--bootstrap图标扩展库-->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/font-awesome.min.css"/>
+    <!--界面中公用的css 例如: class="red" 警告文字的颜色-->
+    <link rel="stylesheet" href="../common/css/common.css"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <!--一些公用的js方法, 统一的url, 处理url地址等方法-->
+    <script src="../common/js/common.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.5.8.js"></script>
+    <!--路由插件-->
+    <script src="../vendor/angularJS/ui-router.js"></script>
+    <!--md5-->
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <!--文件上传插件-->
+    <script src="../vendor/angularJS/ng-file-upload-shim.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <!--分页插件-->
+    <script src="../vendor/angularJS/ui-bootstrap.js"></script>
+    <!--qiniu upload-->
+    <script src="../vendor/plupload/js/plupload.full.min.js"></script>
+    <script src="../vendor/qiniu/qiniu.min.js"></script>
+    <!--Boostrap Datepicker-->
+    <script src="../node_modules/moment/min/moment.min.js"></script>
+    <script src="../node_modules/moment/min/locales.min.js"></script>
+    <script src="../node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <script src="../node_modules/angular-eonasdan-datetimepicker/dist/angular-eonasdan-datetimepicker.min.js"></script>
+
+    <!--公共的 服务 指令 过滤-->
+    <script src="../common/js/mix.service.js"></script>
+    <script src="../common/js/mix.directive.js"></script>
+    <script src="../common/js/mix.filter.js"></script>
+    <script src="../common/js/user.service.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 控制市场端的路由,控制器 -->
+    <script src="js/myApp.js"></script>
+    <!--低版本浏览器支持h5的一些特性-->
+    <!--[if lt IE 9]
+    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    <!--<![endif]-->
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script src="../vendor/res/echarts.js"></script>
+    <script src="../vendor/res/china.js"></script>
+    <!--alert界面优化-->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <!--项目服务-->
+    <script src="../common/js/project.service.js"></script>
+    <script src="../common/js/user.service.js"></script>
+    <!--组件-->
+    <script src="../components/by_component.module.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+
+    <!--angular loading bar-->
+    <link rel="stylesheet" href="../vendor/angular-loading-bar/loading-bar.css">
+    <script src="../vendor/angular-loading-bar/loading-bar.js"></script>
+
+    <script src="../components/ad-user-lawyer-add/ad-user-lawyer-add.component.js"></script>
+    <script src="../components/ad-user-lawyer-add-excel/ad-user-lawyer-add-excel.component.js"></script>
+    <script src="../components/ad-user-lawyer-add-input/ad-user-lawyer-add-input.component.js"></script>
+    <script src="../components/ad-user-lawyer-all/ad-user-lawyer-all.component.js"></script>
+    <script src="../components/ad-user-lawyer-gw/ad-user-lawyer-gw.component.js"></script>
+    <script src="../components/ad-user-lawyer-archive/ad-user-lawyer-archive.component.js"></script>
+    <script src="../components/ad-user-lawyer-collect/ad-user-lawyer-collect.component.js"></script>
+    <script src="../components/ad-user-lawyer-match/ad-user-lawyer-match.component.js"></script>
+    <script src="../components/ad-user-lawyer-match-result/ad-user-lawyer-match-result.component.js"></script>
+    <script src="../components/ad-user-person/ad-user-person.component.js"></script>
+    <script src="../components/ad-user-person-info/ad-user-person-info.component.js"></script>
+    <script src="../components/lawyer-account/lawyer-account.component.js"></script>
+    <script src="../components/lawyer-cooperation/lawyer-cooperation.component.js"></script>
+    <script src="../components/project-speed/project-speed.component.js"></script>
+    <script src="../components/project-file/project-file.component.js"></script>
+    <script src="../components/project-file-list/project-file-list.component.js"></script>
+    <script src="../components/project-info/project-info.component.js"></script>
+    <script src="../components/project-person/project-person.component.js"></script>
+    <script src="../components/project-evaluate/project-evaluate.component.js"></script>
+    <script src="../components/project-detail/project-detail.component.js"></script>
+    <script src="../components/upload-progress/upload-progress.component.js"></script>
+    <script src="../components/elegant-menu/elegant-menu.component.js"></script>
+    <script src="../components/top-menu/top-menu.component.js"></script>
+    <script src="../components/project-list/project-list.component.js"></script>
+    <script src="../components/project-evaluate-analyst/project-evaluate-analyst.component.js"></script>
+    <script src="../components/project-evaluate-wcd/project-evaluate-wcd.component.js"></script>
+    <script src="../components/project-evaluate-wcm/project-evaluate-wcm.component.js"></script>
+    <script src="../components/update-password/update-password.component.js"></script>
+    <script src="../components/user-feedback/user-feedback.component.js"></script>
+
+</head>
+<body ng-app="myApp">
+<!-- 头部 -->
+<nav style="padding: 0" class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/" ng-click="selectedItem(0)"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse" ng-controller="adminCtrl">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="javascript:;" class="dropdown-toggle navSelected" data-toggle="dropdown">{{userName}}<span
+                            style="font-size: 10px;"> ▼</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header" data-toggle="modal" data-target="#updatePasswordModal" data-dismiss="modal"
+                            style="cursor: pointer" ng-click="modify()">修改密码
+                        </li>
+                    </ul>
+                </li>
+                <li style="cursor: pointer;line-height: 50px" ng-click="signOut()">| 退出</li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- /内容 -->
+<div class="mainContent" ng-controller="menuController">
+    <div class="col-xs-2 col-sm-2 left">
+        <elegant-menu options="menuOptions"></elegant-menu>
+    </div>
+    <div class="col-xs-10 col-sm-10 right">
+        <ui-view>
+        </ui-view>
+    </div>
+</div>
+<update-password></update-password>
+</body>
+</html>

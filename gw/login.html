@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <title>帮帮 | 登陆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <!-- 富文本框编辑器 -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/trix/dist/trix.css">
+    <script src="../node_modules/trix/dist/trix.js"></script>
+    <script src="../node_modules/angular-trix/dist/angular-trix.js"></script>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+    <style>
+        /*登陆tab页样式*/
+        .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.42857143;
+            border: none;
+            border-radius: 0;
+        }
+
+        .nav-tabs li a:hover {
+            background: none;
+        }
+
+        .nav-tabs > li > a {
+            margin-right: 2px;
+            line-height: 1.42857143;
+            border: 0;
+            border-radius: 0;
+            text-align: center;
+        }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+            color: #555;
+            cursor: default;
+            border: none;
+            border-bottom: 3px solid #156cbb;
+        }
+
+        a {
+            color: #333;
+        }
+    </style>
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="common/js/service.js"></script>
+    <!--表单验证插件-->
+    <script src="../vendor/angularJS/angular-validator.js"></script>
+    <script src="js/myRoute.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <script src="../common/js/common.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css"/>
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css"/>
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" ng-controller="loginCtrl">
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<div class="banner a-banner">
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom active"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="about-top">
+    <div class="container" style="position: relative">
+        <div id="contain">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 col-xs-4">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active col-sm-6">
+                            <a href="#wechat" data-toggle="tab">
+                                <b>微信登陆</b>
+                            </a>
+                        </li>
+                        <li class="col-sm-6">
+                            <a href="#account" data-toggle="tab">
+                                <b>账号登陆</b>
+                            </a>
+                        </li>
+                    </ul>
+                    <br/>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade in active text-center" id="wechat">
+                            <p id="login_container"></p>
+                            <div>
+                                <p>请使用微信扫描二维码登录</p>
+                                <p>"帮帮盘古系统"</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account">
+                            <form name="form">
+                                <!--<label>用户名</label>-->
+                                <p>
+                                    <input type="text" class="form-control" placeholder="手机号" name="phone"
+                                           ng-model="phone" required ng-pattern="/^1[3|4|5|7|8]\d{9}$/" ng-blur="loginPhone()" maxlength="11" />
+                                </p>
+                                <p ng-show="form.phone.$dirty && form.phone.$invalid && loginP" class="red">手机号码格式不正确</p>
+                                <!--<label>密码</label>-->
+                                <p>
+                                    <input type="password" class="form-control" placeholder="密码" name="password"
+                                           ng-model="password" required/>
+                                </p>
+                                <p ng-show="form.password.$dirty && form.password.$invalid" class="red">密码不正确</p>
+                                <p>
+                                    <input type="checkbox" style="color: #777" ng-click="clickRememberCheckBox(remember)" ng-true-value="'1'" ng-false-value="'0'"
+                                           ng-model="remember"/> 记住我
+                                    <a href="editPass.html" class="pull-right" style="color: #777">忘记密码</a>
+                                </p>
+                                <p>
+                                    <input type="button" value="登陆" class="btn btn-primary btn-block"
+                                            ng-click="login()"/>
+                                </p>
+                                <p class="red">{{warning}}</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'footer.html'"></div>
+<!--摸态窗口-->
+<button class="btn btn-default dialogBtn" data-toggle="modal" data-target="#myModal"  style="display: none;"></button>
+<div class="modal" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="updatePass.html" class="close">
+                    &times;
+                </a>
+                <h4 class="modal-title" id="myModalLabel">
+                    绑定微信
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div id="register_container"></div>
+                <div>
+                    <p>请使用微信扫描二维码登录</p>
+                    <p>绑定"帮帮盘古系统"</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="text-right"><a style="color: #999; position: relative; right: 20px"
+                                         href="updatePass.html">以后</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        if ($(window).width() > 500) {
+            var height = $(window).height() - 452;
+            $("#contain").css("min-height", height);
+        }
+        else {
+            var height = $(window).height();
+            $("#contain").css("min-height", height - 309);
+        }
+    })
+</script>
+
+<!-- 微信登陆js -->
+<!-- ① 先加载微信js -->
+<script src="../vendor/wechat/wxLogin.js"></script>
+<script>
+    // ② 配置微信js参数
+    // 验证,生成一个随机数,然后从到session里面,到第二个几面url中的state对比,相同登陆获取信息, 不相同失败,返回重新登陆
+    var state = Math.ceil(Math.random() * 1000);
+    localStorage.setItem("state", state);
+
+    var wxLogin = new WxLogin({
+        // id="login_container" 微信会使用innerHtml函数插入到dom节点
+        id: "login_container",
+        // 申请微信公众号,生成唯一的appid
+        appid: "wx48e15d9c512a19a1",
+        scope: "snsapi_login",
+        // 回调地址, 验证code, 然后返回在url地址中, 需要encodeURIComponent
+        redirect_uri: encodeURIComponent(WebBaseURL+"gw/checkLogin.html"),
+        // 随机数, 验证
+        state: state,
+        // 生成微信文字的颜色
+        style: "black",
+        // 链接地址加载自定义css样式,覆盖微信默认样式, 这个css必须是网上地址,而且是https开头的 本地测试无效
+        href: "https://www.beyondwinlaw.com/mix/gw/css/style.css"
+    });
+    /* ③ 扫描二维码以后 回调函数地址里面会配置 code/state check.html界面 */
+
+    var wxRegister = new WxLogin({
+        // id="login_container" 微信会使用innerHtml函数插入到dom节点
+        id: "register_container",
+        // 申请微信公众号,生成唯一的appid
+        appid: "wx48e15d9c512a19a1",
+        scope: "snsapi_login",
+        // 回调地址, 验证code, 然后返回在url地址中, 需要encodeURIComponent
+        redirect_uri: encodeURIComponent(WebBaseURL+"gw/checkRegister.html"),
+        // 随机数, 验证
+        state: state,
+        // 生成微信文字的颜色
+        style: "black",
+        // 链接地址加载自定义css样式,覆盖微信默认样式, 这个css必须是网上地址,而且是https开头的 本地测试无效
+        href: "https://www.beyondwinlaw.com/mix/gw/css/style.css"
+    });
+    /* ③ 扫描二维码以后 回调函数地址里面会配置 code/state check.html界面 */
+</script>
+</body>
+</html>

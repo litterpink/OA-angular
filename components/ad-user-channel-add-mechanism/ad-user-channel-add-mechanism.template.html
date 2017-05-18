@@ -1,0 +1,241 @@
+<section class="content">
+    <div class="row oneBox">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-1">
+            <blockquote class="text-center text-primary">添加基本信息</blockquote>
+            <div class="row">
+                <form class="form-horizontal" role="form" novalidate="novalidate" name="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">机构名称<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <input type="text" class="form-control" placeholder="机构名称不能为空" name="mechanism"
+                                   ng-model="name" required/>
+                            <div class="error"
+                                 ng-show="form.mechanism.$dirty && form.mechanism.$invalid">
+                                <small class="error red"
+                                       ng-show="form.mechanism.$error.required">
+                                    机构名称不能为空
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">联系人姓名<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <input type="text" class="form-control" placeholder="请输入联系人姓名" name="name" ng-model="contact_name"
+                                   required/>
+                            <div class="error"
+                                 ng-show="form.name.$dirty && form.name.$invalid">
+                                <small class="error red"
+                                       ng-show="form.name.$error.required">
+                                    联系人姓名不能为空
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">联系人手机<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <input type="text" class="form-control" placeholder="请输入手机号码" name="phone"
+                                   ng-model="contact_phone" phone-limit ng-pattern="/\d{11}/" required/>
+                            <div class="error"
+                                 ng-show="form.phone.$dirty && form.phone.$invalid">
+                                <small class="error red"
+                                       ng-show="form.phone.$error.required">
+                                    手机号码不能为空
+                                </small>
+                                <small class="error red"
+                                       ng-show="form.phone.$error.minlength">
+                                    手机号码为11位数字
+                                </small>
+                                <small class="error red"
+                                       ng-show="form.phone.$error.maxlength">
+                                    手机号码为11位数字
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">省份<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <select ng-model="vm.entity.province" class="form-control" ng-change="provinceChange()">
+                                <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">市<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <select ng-model="vm.entity.city" class="form-control">
+                                <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">联系地址<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <input type="text" class="form-control" placeholder="请输入联系地址" name="address"
+                                   ng-model="address" required/>
+                            <div class="error"
+                                 ng-show="form.address.$dirty && form.address.$invalid">
+                                <small class="error red"
+                                       ng-show="form.address.$error.required">
+                                    地址不能为空
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">协议书编号<span class="red">*</span></label>
+                        <div class="col-sm-10 col-xs-12">
+                            <input type="text" class="form-control" placeholder="请输入协议书编号" name="number" ng-model="contract_num"
+                                   required/>
+                            <div class="error"
+                                 ng-show="formTwo.number.$dirty && formTwo.number.$invalid">
+                                <small class="error red"
+                                       ng-show="formTwo.number.$error.required">
+                                    协议书编号不能为空
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-12 control-label">备注</label>
+                        <div class="col-sm-10 col-xs-12">
+                            <textarea class="form-control" placeholder="备注" ng-model="remarks"></textarea>
+                            <br/>
+                            <br/>
+                            <p>
+                                <span class="red pull-left">带*号为必填字段</span>
+                                <input type="submit" class="btn btn-primary pull-right" value="下一步"
+                                       ng-disabled="form.$invalid" ng-click="oneNext()"/>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row twoBox">
+        <blockquote class="text-center text-primary">添加协议信息</blockquote>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-1">
+            <form class="form-horizontal" role="form" novalidate="novalidate" name="formTwo">
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-12 control-label">协议电子版<span class="red">*</span></label>
+                    <div class="col-sm-10 col-xs-12">
+                        <div class="btn btn-default" ngf-select ng-model="file" ngf-max-size="20MB" required>请选择文件</div>
+                        <span style="margin-right: 20px;">{{file.name}}</span>
+                        <br/>
+                        <p></p>
+                        <p class="text-primary progress-striped" style="display: none;">正在上传请稍后......</p>
+                        <p class="text-right">
+                            <button class="btn btn-primary" type="submit" ng-disabled="formTwo.$invalid" ng-click="twoNext()">下一步</button>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row threeBox">
+        <blockquote class="text-center text-primary">添加案源情况</blockquote>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <p class="text-right text-primary">
+                <span class="glyphicon glyphicon-plus" style="cursor: pointer" ng-click="addSource()"></span>
+                <span class="glyphicon glyphicon-remove" style="cursor: pointer" ng-click="removeSource()"></span>
+            </p>
+            <form class="form-horizontal" role="form" novalidate="novalidate" name="formThree">
+                <div ng-repeat="info in source">
+                    <div class="well">
+                        <span class="pull-right badge"
+                              style="background: #468dcc; margin-bottom: 5px;">{{$index+1}}</span>
+                        <div style="clear: both"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-xs-12 control-label">案源名称</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control sourceName" placeholder="请输入案源名称" name="source" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-xs-12 control-label">案源标的</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="number" class="form-control sourceMoney" placeholder="请输入案源标的(单位: 万元)" name="money" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-primary" type="submit" ng-click="threeNext()">下一步</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="row fourBox">
+        <blockquote class="text-center text-primary">添加互动情况</blockquote>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <p class="text-right text-primary">
+                <span class="glyphicon glyphicon-plus" style="cursor: pointer" ng-click="addInteration()"></span>
+                <span class="glyphicon glyphicon-remove" style="cursor: pointer" ng-click="removeInteration()"></span>
+            </p>
+            <form class="form-horizontal" role="form" novalidate="novalidate" name="formFour">
+                <div ng-repeat="info in interation">
+                    <div class="well">
+                        <span class="pull-right badge"
+                              style="background: #468dcc; margin-bottom: 5px;">{{$index+1}}</span>
+                        <div style="clear: both"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-xs-12 control-label">互动详情</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <textarea class="form-control interactionMore" placeholder="请输入互动详情"
+                                          name="interactionMore"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-xs-12 control-label">互动日期</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="date" class="form-control interactionTime" placeholder="请选择互动日期"
+                                       name="interactionTime"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-right">
+                    <button class="btn btn-primary" type="submit" ng-click="fourNext()">
+                        下一步
+                    </button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div class="row fiveBox">
+        <blockquote class="text-center text-primary">上传头像</blockquote>
+        <div class="col-sm-8 col-sm-offset-2 col-xs-10 col-xs-1">
+            <form class="form-horizontal" role="form" novalidate="novalidate" name="formFive">
+                <div class="form-group">
+                    <div class="text-center">
+                        <p>
+                            <img src="../common/images/male.jpg" class="img-circle" ngf-select ng-model="imgfile"
+                                 ng-change="uploadUser()"
+                                 ngf-max-size="20MB"
+                                 style="position: relative; width: 100px; height: 100px; border: 2px solid #eee;" required />
+                        </p>
+                        <p class="showWarn text-primary" style="display: none;">正在上传请稍后......</p>
+                        <p style="margin-bottom: 0px">{{fileImg.name}}</p>
+                        <p style="margin-bottom: 0px">单击选择上传图片</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+    .twoBox,
+    .threeBox,
+    .fourBox,
+    .fiveBox {
+        display: none;
+    }
+</style>

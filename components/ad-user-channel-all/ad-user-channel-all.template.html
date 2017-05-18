@@ -1,0 +1,55 @@
+<br/>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-4 col-xs-12">
+            <p>
+                <input type="input" class="form-control" ng-model="name" placeholder="输入姓名或机构名进行搜索"/>
+            </p>
+        </div>
+    </div>
+    <p ng-if="infos.length == 0" class="no-data">暂无信息</p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4" ng-repeat="info in infos">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p class="text-right" style="margin: 0"></p>
+                    <a href="{{parentHref}}/{{info.user_id}}/info">
+                        <div class="row">
+                            <div class="col-xs-6"></div>
+                            <div class="col-xs-6">
+                                <p ng-show="info.type != '机构渠道'" class="borderBottom" style="text-align: right;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span style="font-size: 20px;"> {{info.name}}</span></p>
+                                <p ng-show="info.type == '机构渠道' && (info.firm != '' || info.firm != undefined)" class="borderBottom" style="text-align: right;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span style="font-size: 20px;"> {{info.firm}}</span></p>
+
+                                <p ng-show="info.type != '机构渠道' && (info.firm != '' || info.firm != undefined)" style="text-align: right;margin-top: -10px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.firm}}</p>
+                                <p ng-show="(info.firm =='' || info.firm == undefined) && info.type != '机构渠道'" style="visibility: hidden;margin-top: -10px;">占位符</p>
+
+                                <p ng-show="info.type == '机构渠道'" style="text-align: right;margin-top: -10px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"> {{info.name}}</p>
+                                <p ng-show="(info.name=='' || info.name==undefined)&&info.type == '机构渠道'" style="visibility: hidden;margin-top: -10px;">占位符</p>
+
+                                <p style="text-align: right;margin-top: 30px"> {{info.phone}}</p>
+                                <p style="text-align: right;margin-top: 30px" ng-show="info.phone=='' || info.phone== undefined" style="text-align: right;visibility: hidden">占位符</p>
+                            </div>
+                        </div>
+
+                        <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                             style="width: 105px; position: absolute; left: 25px; top: 18px; border: 1px solid #ddd"/>
+                    </a>
+                </div>
+                <!-- 功能按钮 -->
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <!--分页-->
+            <div class="page">
+                <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                                class="pagination-sm pull-left"
+                                ng-change="pageChanged(bigCurrentPage,name,type,province)" boundary-links="true"
+                                boundary-links-numbers="true"
+                                rotate="false"></uib-pagination>
+        </div>
+        </div>
+    </div>
+</section>

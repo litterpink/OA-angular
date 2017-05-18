@@ -1,0 +1,178 @@
+<style>
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        padding: 20px;
+        padding-right: 0;
+    }
+    .bottom-box {
+        padding: 20px;
+        padding-right: 0;
+    }
+    .left_gap {
+        margin-left: 50px;
+    }
+    .spacing {
+        letter-spacing: 1px;
+    }
+    .spacing-5 {
+        letter-spacing: 5px;
+    }
+    .spacing-8_8 {
+        letter-spacing: 8.8px;
+    }
+    .spacing-10 {
+        letter-spacing: 10px;
+    }
+    .spacing-11_5 {
+        letter-spacing: 11.5px;
+    }
+    .spacing-14_5 {
+        letter-spacing: 14.5px;
+    }
+    .spacing-18 {
+        letter-spacing: 18px;
+    }
+    .spacing-24 {
+        letter-spacing: 24px;
+    }
+    .spacing-43 {
+        letter-spacing: 43px;
+    }
+    .align-top {
+        vertical-align: top
+    }
+    /*富文本样式*/
+    .rich-text div {
+        margin-left: 130px;
+        padding-right: 20px;
+    }
+    .rich-text div:first-child {
+        margin-top: -20px;
+    }
+    .rich-text ul, ol {
+        margin-left: 130px;
+        padding-left: 30px;
+        padding-right: 40px;
+    }
+    .gap-left {
+        margin-left: 3px;
+    }
+    .content-block {
+        display: inline-block;
+        width: 700px;
+    }
+</style>
+
+<!--风控经理评估模板-->
+<div ng-show="controller == undefined && type != '93'">
+    <p class="no-data">暂无信息</p>
+</div>
+<div style="margin-right: 10px" class="text-right" ng-show="status ==4 && type == '93'">
+    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#assessment" ng-click="assessment()">评估</button>
+</div>
+
+
+<div ng-show="controller">
+    <div class="info_box">
+        <p><b class="spacing-5">实际争议标的</b><b class="spacing-18">:</b>{{controller.money | formatMoney}}</p>
+        <p><b class="spacing-8_8">风险点归纳</b><b class="spacing-18">:</b><span class="rich-text" ng-bind-html="controller.risk | toHtml"></span></p>
+        <p><b class="spacing-5 align-top">有效财产线索</b><b class="spacing-18 align-top">:</b><span class="content-block">{{controller.property}}</span></p>
+        <p><b class="spacing-5">客户履约能力</b><b class="spacing-18">:</b><span class="rich-text" ng-bind-html="controller.client_ability | toHtml"></span></p>
+        <p><b>律师团队构建建议</b><b class="spacing-18 gap-left">:</b><span class="rich-text" ng-bind-html="controller.lawyers | toHtml"></span></p>
+    </div>
+
+    <div class="info_box">
+        <p><b class="spacing-8_8">律师费预计</b><b class="spacing-18">:</b>{{controller.lawyer_fee | formatMoney}}</p>
+        <p><b class="spacing-14_5">官费预计</b><b class="spacing-18">:</b>{{controller.official_fee | formatMoney}}</p>
+        <p><b class="spacing-8_8">差旅费预计</b><b class="spacing-18">:</b>{{controller.travel_expense | formatMoney}}</p>
+        <p><b class="spacing-5">回报周期预计</b><b class="spacing-18">:</b>{{controller.payment_time}}</p>
+        <p><b class="spacing-5">回款数额预计</b><b class="spacing-18">:</b>{{controller.payment_money}}</p>
+        <p><b class="spacing-14_5">司法环境</b><b class="spacing-18">:</b>{{controller.judicial}}</p>
+    </div>
+    <div class="info_box">
+        <p>
+            <b class="spacing-43">建议</b><b class="spacing-18">:</b>
+            <input type="checkbox" disabled="disabled" ng-checked="controller.result == 1" /> 收项
+            <input type="checkbox" disabled="disabled" ng-checked="controller.result == 2" /> 拒项
+        </p>
+        <p><b class="spacing-14_5">综合意见</b><b class="spacing-18">:</b><span class="rich-text" ng-bind-html="controller.suggestion | toHtml"></span></p>
+
+    </div>
+    <div class="bottom-box">
+        <p><b class="spacing-18">风控经理</b><b class="spacing-18">:</b>{{controller.controller}}</p>
+        <p><b class="spacing-18">评估时间</b><b class="spacing-18">:</b>{{controller.time}}</p>
+    </div>
+</div>
+
+
+<!-- 模态框（Modal） 评估 -->
+<div class="modal fade" id="assessment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="signLabel">风控经理评估意见</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal w5c-form demo-form" role="form"
+                      w5c-form-validate="vm.validateOptions" novalidate name="validateForm">
+                    <p>
+                        <input ng-model="money" name="money" ng-required="true" type="number" class="form-control" placeholder="实际争议标的(单位:万元)" maxlength="11">
+                    </p>
+                    <!--<p>
+                        <textarea ng-model="risk" name="" rows="5" class="form-control" placeholder="风险点归纳" maxlength="1000"></textarea>
+                    </p>-->
+                    <p>
+                        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="risk" placeholder="风险点归纳" count-num="30000"></trix-editor>
+                    </p>
+                    <p>
+                        <input ng-model="property" type="text" class="form-control" placeholder="有效财产线索" maxlength="1000">
+                    </p>
+                    <p>
+                        <!--<input ng-model="client_ability" type="text" class="form-control" placeholder="客户履约能力" maxlength="1000">-->
+                        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="client_ability" placeholder="客户履约能力" count-num></trix-editor>
+                    </p>
+                    <!--<p>
+                        <textarea ng-model="lawyers" name="" rows="5" class="form-control" placeholder="律师团队构成建议" maxlength="1000"></textarea>
+                    </p>-->
+                    <p>
+                        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="lawyers" placeholder="律师团队构成建议" count-num></trix-editor>
+                    </p>
+                    <p>
+                        <input ng-model="lawyer_fee" type="number" class="form-control" placeholder="律师费预计(单位:万元)" maxlength="10">
+                    </p>
+                    <p>
+                        <input ng-model="official_fee" type="number" class="form-control" placeholder="官费预计(单位:万元)" maxlength="10">
+                    </p>
+                    <p>
+                        <input ng-model="travel_expense" type="number" class="form-control" placeholder="差旅费预计(单位:万元)" maxlength="10">
+                    </p>
+                    <p>
+                        <input ng-model="payment_money" type="text" class="form-control" placeholder="回款数额预计(单位:万元)" maxlength="11">
+                    </p>
+                    <p>
+                        <input ng-model="payment_time" type="text" class="form-control" placeholder="回款周期预计" maxlength="100">
+                    </p>
+                    <p>
+                        <input ng-model="judicial" type="text" class="form-control" placeholder="司法环境" maxlength="100">
+                    </p>
+                    <p id="result" style="border: 1px solid #fff">
+                        建议: <input ng-model="result" value="1" ng-required="true" type="radio" name="result">&nbsp;收项
+                        <input ng-model="result" value="2" ng-required="true" type="radio" name="result" style="margin-left: 10px;"> 拒项
+                    </p>
+                    <!--<p>
+                        <textarea ng-model="suggestion" ng-required="true" name="suggestion" rows="5" class="form-control" placeholder="综合意见如下" maxlength="1000"></textarea>
+                    </p>-->
+                    <p id="suggestionColor" style="border: 1px solid #fff">
+                        <trix-editor angular-trix trix-change="trixChange(editor)" ng-model="suggestion" placeholder="综合意见如下" required count-num></trix-editor>
+                    </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveDraft(money,risk,property,client_ability,lawyers,lawyer_fee,official_fee,travel_expense,payment_time,payment_money,judicial,result,suggestion)">保存为草稿</button>
+                        <button type="button" class="btn btn-primary" ng-click="changeColor()" w5c-form-submit="submitAssessment(money,risk,property,client_ability,lawyers,lawyer_fee,official_fee,travel_expense,payment_time,payment_money,judicial,result,suggestion)">完成评估,提交</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal） 退回补充材料 -->

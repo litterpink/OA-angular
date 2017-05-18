@@ -1,0 +1,36 @@
+<style>
+    p {
+        margin: 0;
+        line-height: 20px;
+        height: 30px;
+        vertical-align: top;
+    }
+</style>
+<!-- 实际情况中, 根据 ng-if="$index == $last" 判断添加红色-->
+<br/>
+<br/>
+<br/>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <b style="display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">案件编号</b>
+            </div>
+        </div>
+        <div class="panel-body">
+            <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+            <p>标的额: 2000万 </p>
+            <p>状态: <span class="text-primary">待签约</span></p>
+            <p>预计收益: 28.3万</p>
+            <p>销售经理: 张三&nbsp;&nbsp;13912341234</p>
+        </div>
+    </div>
+
+<br/>
+<br/>
+
+<p style="border-left: 1px dotted #aaa"><span style="margin-left: -5px;">●</span><span style="margin-left: 15px;">2016-09-09 12:11:22</span><span style="margin-left: 20px">案件提交</span></p>
+<p style="border-left: 1px dotted #aaa"><span style="margin-left: -5px;">●</span><span style="margin-left: 15px;">2016-09-09 12:11:22</span><span style="margin-left: 20px">案件提交评估</span></p>
+<p style="border-left: 1px dotted #aaa"><span style="margin-left: -5px;">●</span><span style="margin-left: 15px;">2016-09-09 12:11:22</span><span style="margin-left: 20px">评估通过,开始签约</span></p>
+<p style="border-left: 1px dotted #aaa"><span style="margin-left: -5px;">●</span><span style="margin-left: 15px;">2016-09-09 12:11:22</span><span style="margin-left: 20px">风控部门审核不通过, 打回补充材料, 请登录后台系统查看</span></p>
+<p style="border-left: 1px dotted #aaa"><span style="margin-left: -5px;">●</span><span style="margin-left: 15px;">2016-09-09 12:11:22</span><span style="margin-left: 20px">律师遴选完成, 请登录后台系统查看</span></p>
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>帮帮法务机构</title>
+    <!--seo优化部分-->
+    <meta name="keywords" content="帮帮、帮帮法务、大数据、诉讼融资、法务投融资、法务经纪、法务咨询、云助理、律师匹配"/>
+    <meta name="description"
+          content="帮帮法务机构-帮帮法务机构系国内首家集法务投资、法务经纪与法务咨询于一体的综合型法务平台。帮帮利用自身强大的专业团队，以充足的资本为支持，结合先进的互联网技术，追求法律服务的标准化、规范化，致力于为客户及律师双方的法律事务提供专项资金支持及法务项目总包式管理服务。"/>
+    <meta name="author" content="帮帮法务机构，让您坐享一流法律服务"/>
+    <!--/seo优化部分-->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!--全屏-->
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- QQ应用模式 -->
+
+    <meta name="x5-page-mode" content="app">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
+    <link rel="BOOKMARK" href="images/favicon.ico" type="image/x-icon"/>
+
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link type="text/css" rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all"/>
+    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all"/>
+
+    <script src="../vendor/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendor/angularJS/angular-1.4.8.js"></script>
+    <script src="../vendor/angularJS/angular-route.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload.min.js"></script>
+    <script src="../vendor/angularJS/ng-file-upload-shim.min.js"></script>
+    <script src="../vendor/angularJS/angular_md5.js"></script>
+    <!-- ngDialog css -->
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="../vendor/angularJS/ngDialog/css/ngDialog-theme-default.css" />
+    <!-- ngDialog js -->
+    <script src="../vendor/angularJS/ngDialog/js/ngDialog.js"></script>
+    <script src="../common/js/common.js"></script>
+    <script src="common/js/service.js"></script>
+    <script src="js/myRoute.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <script>
+        new WOW().init();
+        $(function () {
+            $(".banner").css({"height": $(window).height(), overflow: "hidden"});
+        });
+    </script>
+</head>
+<body>
+<div style='margin:0 auto;display:none;'>
+    <img src="images/wechat.png" width="700"/>
+</div>
+<!-- banner -->
+<div class="banner">
+    <!-- container -->
+    <div class="container">
+        <div class="header">
+            <div class="head-logo">
+                <a href="index.html"><img src="images/logo2.png" alt="" style="width: 150px;"/></a>
+            </div>
+            <div class="top-nav">
+                <span class="menu"><img src="images/menu.png" alt=""></span>
+                <ul class="nav1">
+                    <li class="hvr-sweep-to-bottom active"><a href="index.html">首页<i>Home</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="beyond.html">帮帮法务<i>What We Do?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="about.html">关于我们<i>Who We Are?</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="cooperation.html">合作入口<i>Cooperation</i></a></li>
+                    <li class="hvr-sweep-to-bottom"><a href="login.html">登陆<i>Login</i></a></li>
+                </ul>
+                <!--<a href="#" style="color: #fff; position: relative; top: 105px; right: 0;"><i class="glyphicon glyphicon-user"></i> 登陆</a>-->
+                <!-- script-for-menu -->
+                <script>
+                    $("span.menu").click(function () {
+                        $("ul.nav1").slideToggle(300, function () {
+                            // Animation complete.
+                        });
+                    });
+                </script>
+                <!-- /script-for-menu -->
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- //container -->
+    <div class="container" style="width: 100%; margin: 0px; padding: 0px;">
+        <script src="js/responsiveslides.min.js"></script>
+        <script>
+            // You can also use "$(window).load(function() {"
+            $(function () {
+                // Slideshow 4
+                $("#slider3").responsiveSlides({
+                    auto: true,
+                    pager: true,
+                    nav: false,
+                    speed: 500,
+                    namespace: "callbacks",
+                    before: function () {
+                        $('.events').append("<li>before event fired.</li>");
+                    },
+                    after: function () {
+                        $('.events').append("<li>after event fired.</li>");
+                    }
+                });
+
+            });
+        </script>
+        <div id="top" class="callbacks_container">
+            <ul class="rslides" id="slider3">
+                <li>
+                    <div class="banner-info">
+                        <h2>帮帮，替您出钱打官司、帮您找靠谱律师</h2>
+                        <div class="line"></div>
+                        <p><a href="beyond.html" class="moreBtn">了解更多</a></p>
+                        <p style="height: 10px"></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner-info">
+                        <h2>包含情怀的创新，起点即高峰</h2>
+                        <div class="line"></div>
+                        <p><a href="about.html" class="moreBtn">关于我们</a></p>
+                        <p style="height: 10px"></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="banner-info">
+                        <h2>为律师提供优质案源、替客户向律师支付前期费用</h2>
+                        <div class="line"></div>
+                        <p class="line"><a href="lawyerRegister.html" class="moreBtn">律师入驻</a></p>
+                        <p style="height: 10px"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0px; right: 10px;">
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1258092881'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1258092881%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+    </div>
+</div>
+</body>
+</html>

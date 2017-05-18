@@ -1,0 +1,47 @@
+<style>
+    .info_box {
+        border-bottom: 1px solid #d0d0d0;
+        margin: 0;
+        margin-left: 20px;
+        padding: 20px 20px 20px 20px;
+        vertical-align: bottom;
+        text-align: left;
+    }
+    .box_content {
+        margin-top: 50px;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+    .name_content {
+        text-align: left;
+        vertical-align: bottom;
+        margin: 0;
+        padding: 10px 0;
+    }
+    .button_content {
+        text-align: right;
+    }
+</style>
+<div>
+    <div class="row info_box" ng-repeat="info in infoList">
+        <div class="col-sm-11 name_content">{{info.name}}&nbsp;&nbsp;&nbsp;&nbsp;{{info.create_time}}</div>
+        <div class="col-sm-1 button_content" ng-if="info.is_solve == 0">
+            <button class="btn btn-primary" ng-click="clickButton(info)"><span>解决</span></button>
+        </div>
+        <div class="box_content">{{info.feedback_info}}</div>
+    </div>
+    <div class="col-xs-12">
+        <!--分页-->
+        <div class="page">
+            <uib-pagination total-items="totalItems"
+                            ng-model="currentPage"
+                            max-size="maxSize"
+                            items-per-page="pageSize"
+                            class="pagination-sm pull-left"
+                            ng-change="pageChanged(currentPage)"
+                            boundary-links="true"
+                            boundary-links-numbers="true"
+                            rotate="false"></uib-pagination>
+        </div>
+    </div>
+</div>

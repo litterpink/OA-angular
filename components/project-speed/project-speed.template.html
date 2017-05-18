@@ -1,0 +1,49 @@
+<style>
+    .contentContainer {
+        background: #FFFFFF;
+        margin: 10px 40px;
+        font-size: 12px;
+    }
+    .itemContainer {
+        background: #fff;
+        border-left: 1px solid #aaa;
+        padding: 5px
+    }
+    .itemCircle {
+        margin-left: -24px;
+        margin-right: 15px
+    }
+</style>
+<div class="contentContainer">
+    <p ng-if="showNodata == true" class="no-data">
+        暂无信息
+    </p>
+    <div class="row" style="margin-top: 5px">
+        <div class="col-xs-12 col-sm-12 itemContainer" ng-repeat="operate in operateList">
+            <div class="col-xs-2 col-sm-2">
+                <span class="itemCircle">●</span>
+                <span>{{operate.time}}</span>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <span>{{operate.type}}</span>
+            </div>
+            <div class="col-xs-4 col-sm-4">
+                <span>操作人: {{operate.name}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <div class="col-xs-12 col-sm-12 itemContainer" ng-repeat="record in recordList">
+            <div class="col-xs-2 col-sm-2">
+                <span class="itemCircle">●</span>
+                <span>{{record.time}}</span>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <span>{{record.content}}</span>
+            </div>
+            <div class="col-xs-4 col-sm-4">
+                <span>操作人: {{record.name}}</span>
+            </div>
+        </div>
+    </div>
+</div>

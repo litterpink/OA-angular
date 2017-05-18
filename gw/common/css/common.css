@@ -1,0 +1,185 @@
+.resultList {
+    margin-top: -35px;
+    display: none;
+    background: #fff;
+    z-index: 999;
+    position: relative;
+}
+.resultList ul {
+    max-height: 200px;
+    overflow: auto;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+}
+.resultList ul li {
+    padding: 5px;
+}
+.resultList ul li:hover {
+    background: #eee;
+}
+.resultList ul li a {
+    color: #333;
+}
+.circle {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    border-radius: 50%;
+    background: #aaa;
+}
+
+.pie_left, .pie_right {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.left, .right {
+    display: block;
+    width: 80px;
+    height: 80px;
+    background: #156cbb;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.pie_right, .left {
+    clip: rect(0, auto, auto, 50px);
+}
+
+.pie_left, .right {
+    clip: rect(0, 50px, auto, 0);
+}
+
+.mask {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    left: 5px;
+    top: 5px;
+    background: #FFF;
+    position: absolute;
+    text-align: center;
+    line-height: 70px;
+    font-size: 16px;
+}
+.mask {
+    color: #156cbb;
+}
+.red {
+    color: red;
+}
+
+/*修改富文本拥有angular-trix的元素*/
+*[angular-trix] {
+    border-radius: 0;
+}
+trix-editor{
+    padding: 2px 20px;
+    min-height: 100px;
+}
+trix-toolbar{
+    margin-bottom: -9px;
+}
+/*富文本隐藏相关按钮*/
+trix-toolbar button.strike,
+trix-toolbar button.link,
+trix-toolbar button.quote,
+trix-toolbar button.code,
+trix-toolbar button.block-level {
+    display: none;
+}
+/*富文本圆角*/
+trix-toolbar span.button_group {
+    border-radius: 0;
+}
+
+/*标题样式*/
+ul,ol{
+    margin: 0;
+}
+.ulEle{
+    position: relative;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    /*margin-left: 17.1%;*/
+    margin-bottom: 20px;
+    width: 100%;
+}
+.liEle{
+    float: left;
+    height: 50px;
+    line-height: 30px;
+    text-align: center;
+    width: 20%;
+    position: relative;
+    color: #ccc;
+}
+.liEle1{
+    color: #3085f1;
+}
+.spanEle{
+    margin: 0 auto;
+    color: white;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ccc;
+}
+.spanEle1{
+    background-color: #3085f1;
+}
+.blueSolid{
+    position: absolute;
+    width: 12%;
+    height: 8px;
+    background-color: #ccc;
+}
+.blueSolid1{
+    left: 14%;
+    top: 10px;
+}
+.blueSolid2{
+    left: 34%;
+    top: 10px;
+}
+.blueSolid3{
+    left: 54%;
+    top: 10px;
+}
+.blueSolid4{
+    left: 74%;
+    top: 10px;
+}
+.add-lawyer{
+    padding: 30px 30px;
+}
+.btn{
+    border-radius: 0;
+}
+select:not([multiple]){
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background-position:right 50%;
+    background-repeat:no-repeat;
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZFNDEwNjlGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZFNDEwNkFGNzFEMTFFMkJEQ0VDRTM1N0RCMzMyMkIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkU0MTA2N0Y3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkU0MTA2OEY3MUQxMUUyQkRDRUNFMzU3REIzMzIyQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGsgwQAAAA5SURBVHjaYvz//z8DOYCJgUxAf42MQIzTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=);
+    padding: .5em;
+    padding-right:1.5em;
+    border-radius:0;
+}
+.error{
+    border-color: red;
+}
+.secondPage{
+    background-color: white;
+    margin-top: -20px;
+}

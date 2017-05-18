@@ -1,0 +1,166 @@
+<ui-view>
+    <style>
+        .resultList {
+            margin-top: -35px;
+            display: none;
+            background: #fff;
+            z-index: 999;
+            position: relative;
+        }
+
+        .resultList ul {
+            max-height: 200px;
+            overflow: auto;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .resultList ul li {
+            padding: 5px;
+        }
+
+        .resultList ul li:hover {
+            background: #eee;
+        }
+
+        .resultList ul li a {
+            color: #333;
+        }
+    </style>
+    <br/>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-4 col-xs-12">
+                <p>
+                    <input type="text" class="form-control" placeholder="姓名" ng-model="$parent.lawyer.name"/>
+                </p>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="form-group">
+                    <p>
+                        <select ng-model="lawyer.province" class="form-control" name="province" required ng-change="provinceChange()">
+                            <option value="">请选择省份</option>
+                            <option value="{{item.name}}" ng-repeat="item in province track by $index">{{item.name}}
+                            </option>
+                        </select>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="form-group">
+                    <p>
+                        <select ng-model="lawyer.city" class="form-control">
+                            <option value="">请选择城市</option>
+                            <option value="{{item}}" ng-repeat="item in city track by $index">{{item}}</option>
+                        </select>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <p>
+                    <input type="text" class="form-control" placeholder="所在律所" ng-model="lawyer.firm"/>
+                </p>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="form-group">
+                    <p>
+                        <select class="form-control" ng-model="lawyer.judicial_type">
+                            <option value="">请选择从业信息</option>
+                            <option value="1">法院</option>
+                            <option value="2">检察院</option>
+                            <option value="3">公安</option>
+                            <option value="4">仲裁机构</option>
+                        </select>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12" ng-show="lawyer.judicial_type== '1'">
+                <input type="text" placeholder="法院名称" class="form-control court" ng-model="lawyer.court"
+                       ng-click="showList()" name="court"/>
+                <div class="resultList">
+                    <input type="text" class="form-control search" ng-model="searchVal" select-court placeholder="请输入法院名"/>
+                    <ul style="position: absolute;background-color: white;width: 100%">
+                        <li ng-repeat="item in searchData" ng-click="changeVal(item.name, item.province)"><a
+                                href="javascript:;">{{item.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12" ng-show="lawyer.judicial_type=='2'">
+                <p>
+                    <input type="text" class="form-control" ng-model="lawyer.procuratorate" placeholder="所在检察院">
+                </p>
+            </div>
+            <div class="col-lg-4 col-xs-12" ng-show="lawyer.judicial_type=='3'">
+                <p>
+                    <input type="text" class="form-control" ng-model="lawyer.police" placeholder="单位名称">
+                </p>
+            </div>
+            <div class="col-lg-4 col-xs-12" ng-show="lawyer.judicial_type=='4'">
+                <p>
+                    <input type="text" class="form-control" ng-model="lawyer.organi_name" placeholder="单位名称">
+                </p>
+            </div>
+        </div>
+
+
+        <p ng-if="infos.length==0" class="no-data">暂无信息</p>
+
+
+        <div class="row">
+            <div class="col-xs-4 col-sm-4" ng-repeat="info in infos">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="box-header">
+                            <div class="pull-right box-tools lawyerInfo">
+                                <img ng-show="info.judicial_type=='法院'" src="../common/images/seniorLeft.png" width="50"
+                                     style="position: absolute; left: 17px; top: 5px; z-index: 999999">
+                                <!--单击传递lid-->
+                                <!--判断收藏状态,如果收藏过,那么是显示glyphicon glyphicon-star, 使用ng-if判断显示-->
+                        <span accordion="1" ng-if="info.is_collection != 0">
+                        <i class="fa fa-star" style="cursor: pointer; color: #ffb70a" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                        <span ng-if="info.is_collection == 0">
+                        <i accordion="1" class="fa fa-star-o" style="cursor: pointer;" id="{{info.user_id}}"
+                           collection="{{info.is_collection}}" cancelcollection-or-collection></i>
+                        </span>
+                                <!--<i class="glyphicon glyphicon-remove" ng-click="deleteLawyer(info.lawyer_id)"
+                                   style="cursor: pointer"></i>-->
+                            </div>
+                        </div>
+                        <!-- 这里的1是项目id, 后台返回数据里面获取 $scope.project.id   {{id}} -->
+                        <p class="text-right" style="margin: 0"></p>
+                        <a ui-sref="lawyerInfo({id: info.user_id})">
+                            <p class="borderBottom">
+                                <span style="font-size: 20px;display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{info.name}}</span>
+                            </p>
+                            <p style="display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span
+                                    class="glyphicon glyphicon-home"></span> {{info.firm}}</p>
+                            <p style="display:inline-block;width:150px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><span class="glyphicon glyphicon-phone"></span> {{info.phone}}</p>
+                            <img ng-src="{{info.head_img_url}}" class="img-responsive img-circle"
+                                 style="width: 80px; position: absolute; right: 30px; top: 35px; border: 1px solid #ddd"/>
+                        </a>
+                    </div>
+                    <!-- 功能按钮 -->
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <!--分页-->
+                <div class="page">
+                    <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+                                    class="pagination-sm pull-left"
+                                    ng-change="pageChanged(bigCurrentPage)" boundary-links="true"
+                                    boundary-links-numbers="true"
+                                    rotate="false"></uib-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui-view>
